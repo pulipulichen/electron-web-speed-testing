@@ -15,26 +15,13 @@
         <script src="lib/vue/vue-onsenui.js"></script>
         <script src="lib/vue/httpVueLoader.js"></script>
         
+        <script src="lib/jquery/jquery.min.js"></script>
+        
     </head>
 <body>
-    <div id="my-app">
-      <my-component></my-component>
-    </div>
+    <div id="app"></div>
 
-    <script type="text/javascript">
-      new Vue({
-        el: '#my-app',
-        data: {
-            click_me: "Click me!",
-            click_me_method: function () {
-                ons.notification.alert('Hello World!');
-                alert("a");
-            }
-        },
-        components: {
-          'my-component': httpVueLoader('main-page.vue')
-        },
-      });
-    </script>
+    <script type="text/javascript" src="controllers/vue_data.js"></script>
+    <script type="text/javascript" src="controllers/main.js"></script>
 </body>
 </html>
