@@ -2,20 +2,23 @@
 <v-ons-page>
     <v-ons-toolbar>
         <div class="left">
-
             <ons-toolbar-button>
-                PASSED: 
+                {{ status_percent }}
+                %
+            </ons-toolbar-button>
+            
+            <ons-toolbar-button v-show="status_average_spend_time > 0">
+                <ons-icon icon="md-timer"></ons-icon>
+                {{ status_average_spend_time }}
+            </ons-toolbar-button>
+            
+            <ons-toolbar-button v-show="status_passed_job > 0">
+                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
                 {{ status_passed_job }}
             </ons-toolbar-button>
-            /
-            <ons-toolbar-button>
-                FAILED: 
+            <ons-toolbar-button v-show="status_failed_job > 0">
+                <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
                 {{ status_failed_job }}
-            </ons-toolbar-button>
-            /
-            <ons-toolbar-button>
-                ALL: 
-                {{ status_total_job }}
             </ons-toolbar-button>
         </div>
         <div class="right">
@@ -23,6 +26,7 @@
             <ons-toolbar-button>
                 <ons-icon icon="fa-play-circle" @click="job_run" v-if="status_running === false"></ons-icon>
                 <ons-icon icon="fa-pause" @click="job_stop" v-if="status_running === true"></ons-icon>
+                <ons-icon icon="fa-trash" @click="results_clear" v-show="results.length > 0"></ons-icon>
             </ons-toolbar-button>
         </div>
     </v-ons-toolbar>
@@ -64,8 +68,19 @@
         <ons-list-title>
             Results
         </ons-list-title>
-        <v-ons-list-item v-for="result in results">
-            {{ result.start_time }}
+        <v-ons-list-item v-for="(result, index) in results">
+            <v-ons-col>
+                # {{ index + 1 }}
+            </v-ons-col>
+            <v-ons-col>
+                <ons-icon icon="md-timer"></ons-icon>
+                {{ result.spend_time }}
+            </v-ons-col>
+            <v-ons-col>
+                <ons-icon icon="fa-check-circle" v-show="result.passed" style="color: green"></ons-icon>
+                <ons-icon icon="fa-exclamation-triangle" v-show="result.passed === false" style="color: red"></ons-icon>
+                <span v-show="result.passed === false">{{ result.status }}</span>
+            </v-ons-col>
         </v-ons-list-item>
     </v-ons-list>
 
