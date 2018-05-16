@@ -1,8 +1,8 @@
 # electron-loading-test
 A client loading test webpage tool
 
-# 編譯檔成果下載 (Windows)
-https://drive.google.com/uc?export=download&id=0B5UXWzdIPpm0SWEzcDFFZFdpSXM
+# 編譯檔成果下載 (Windows x64)
+https://drive.google.com/open?id=1w_fEdw5w5etIYKPDI4PcGn3tYEHipr9e
 
 # 安裝electron相關套件
 * npm install electron-prebuilt --save-dev
@@ -43,9 +43,9 @@ https://github.com/electron/electron/blob/master/docs/api/browser-window.md
 #編譯方法
 1. 先開啟Node.js command prompt：在 開啟 > Node.js > Node.js command prompt
 2. 切換到這個此目錄底下的bin
-3. build.bat
+3. build1.bat
 4. 切換回這個此目錄底下的bin
-5. run.bat
+5. build2.bat
 
 # 感謝
 此程式碼的起點主要來自：QQBoxy-酷酷方盒子
