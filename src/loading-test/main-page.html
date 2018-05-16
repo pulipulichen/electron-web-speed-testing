@@ -1,32 +1,43 @@
 
-<v-ons-page>
+<v-ons-page id="main_page">
     <v-ons-toolbar>
         <div class="left">
-            <ons-toolbar-button>
+            <v-ons-row>
+                <v-ons-col v-show="status_average_spend_time > 0">
+                    <ons-icon icon="md-timer"></ons-icon>
+                    {{ status_average_spend_time }}
+                </v-ons-col>
+                <v-ons-col v-show="status_passed_job > 0">
+                    <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+                    {{ status_passed_job }}
+                </v-ons-col>
+                <v-ons-col v-show="status_failed_job > 0">
+                    <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
+                    {{ status_failed_job }}
+                </v-ons-col>
+            </v-ons-row>
+        </div>
+
+        <div class="center">
+            <v-ons-col v-show="status_percent > 0 && status_percent < 100">
                 {{ status_percent }}
                 %
-            </ons-toolbar-button>
-            
-            <ons-toolbar-button v-show="status_average_spend_time > 0">
-                <ons-icon icon="md-timer"></ons-icon>
-                {{ status_average_spend_time }}
-            </ons-toolbar-button>
-            
-            <ons-toolbar-button v-show="status_passed_job > 0">
-                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
-                {{ status_passed_job }}
-            </ons-toolbar-button>
-            <ons-toolbar-button v-show="status_failed_job > 0">
-                <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
-                {{ status_failed_job }}
-            </ons-toolbar-button>
+            </v-ons-col>
+            <v-ons-col v-show="status_percent === 0 || status_percent === 100">
+                <h1>{{ title }}</h1>
+            </v-ons-col>
         </div>
-        <div class="right">
 
-            <ons-toolbar-button>
-                <ons-icon icon="fa-play-circle" @click="job_run" v-if="status_running === false"></ons-icon>
-                <ons-icon icon="fa-pause" @click="job_stop" v-if="status_running === true"></ons-icon>
-                <ons-icon icon="fa-trash" @click="results_clear" v-show="results.length > 0"></ons-icon>
+
+        <div class="right">
+            <ons-toolbar-button v-if="status_running === false" @click="job_run">
+                <ons-icon icon="fa-play-circle"></ons-icon>
+            </ons-toolbar-button>
+            <ons-toolbar-button @click="job_stop" v-if="status_running === true">
+                <ons-icon icon="fa-pause"></ons-icon>
+            </ons-toolbar-button>
+            <ons-toolbar-button @click="results_clear" v-show="results.length > 0">
+                <ons-icon icon="fa-trash"></ons-icon>
             </ons-toolbar-button>
         </div>
     </v-ons-toolbar>
@@ -36,7 +47,7 @@
 
     <v-ons-list modifier="inset">
         <ons-list-title>
-            Loading Test Configuration
+            Configuration
         </ons-list-title>
         <v-ons-list-header>
             Test URL
@@ -64,6 +75,8 @@
         </v-ons-list-item>
     </v-ons-list>
 
+    <hr v-show="results.length" />
+    
     <v-ons-list modifier="inset" v-show="results.length">
         <ons-list-title>
             Results

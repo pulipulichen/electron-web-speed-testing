@@ -1,4 +1,5 @@
 vue_data = {
+    title: "LOADING TEST",
     status_running: false,
     status_passed_job: 0,
     status_failed_job: 0,
@@ -38,6 +39,7 @@ vue_data = {
                 vm.results.push(_result);
                 vm.status_percent = Math.floor( (vm.status_passed_job + vm.status_failed_job) / vm.status_total_job * 100 );
                 vm.stat_average_spend_time();
+                vm.update_title();
                 
                 _completed_jobs++;
                 if (_completed_jobs === _total_job) {
@@ -54,6 +56,7 @@ vue_data = {
         vm.status_passed_job = 0;
         vm.status_failed_job = 0;
         vm.status_percent = 0;
+        vm.status_average_spend_time = 0;
     },
     
     // ----------------------------------
@@ -109,6 +112,16 @@ vue_data = {
         }
         var _avg = Math.floor((_total / vm.results.length) * 1000) / 1000;
         vm.status_average_spend_time = _avg;
+    },
+    
+    update_title: function () {
+        var _title = vm.title;
+        
+        if (vm.status_percent > 0) {
+            _title = vm.status_percent + "% (" + vm.status_average_spend_time + "s)";
+        }
+        
+        document.title = _title;
     },
 };
 
