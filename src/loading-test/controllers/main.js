@@ -3,6 +3,7 @@ $.get("main-page.html", function (_template) {
         el: '#app',
         template: _template,
         data: vue_data,
+        created: vue_create
     });
 });
     

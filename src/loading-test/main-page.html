@@ -1,8 +1,8 @@
 
-        <v-ons-page>
-            <v-ons-toolbar>
-                <div class="left">
-                    
+<v-ons-page>
+    <v-ons-toolbar>
+        <div class="left">
+
             <ons-toolbar-button>
                 PASSED: 
                 {{ status_passed_job }}
@@ -17,46 +17,61 @@
                 ALL: 
                 {{ status_total_job }}
             </ons-toolbar-button>
-                </div>
-                <div class="right">
-                    
-                    <ons-toolbar-button>
-                            <ons-icon icon="fa-play-circle" @click="job_run" v-if="status_running === false"></ons-icon>
-                            <ons-icon icon="fa-pause" @click="job_stop" v-if="status_running === true"></ons-icon>
-                    </ons-toolbar-button>
-                </div>
-            </v-ons-toolbar>
+        </div>
+        <div class="right">
 
-            <!-- ---------------------------------------------- -->
-            <!-- Configuration -->
-            
-            <v-ons-list>
-                <v-ons-list-item>
-                    Test URL:
-                        <v-ons-input placeholder="Test URL" float v-model="config_base_url"></v-ons-input>
-                </v-ons-list-item>
-                <v-ons-list-item>
-                    <label>Job count:</label>
-                        <v-ons-input placeholder="Job count" float v-model="status_total_job" type="number"></v-ons-input>
-                </v-ons-list-item>
-                <v-ons-list-item v-if="status_running === false" @click="job_run">
-                    <v-ons-button modifier="large">
-                        <ons-icon icon="fa-play-circle"></ons-icon>
-                        RUN
-                    </v-ons-button>
-                </v-ons-list-item>
-                <v-ons-list-item v-if="status_running === true" @click="job_stop">
-                    <v-ons-button modifier="large">
-                        <ons-icon icon="fa-pause"></ons-icon>
-                        STOP
-                    </v-ons-button>
-                </v-ons-list-item>
-            </v-ons-list>
-            
-            
-            <!-- ---------------------------------------------- -->
-            <!-- Result -->
-            
-            
-            
-        </v-ons-page>
+            <ons-toolbar-button>
+                <ons-icon icon="fa-play-circle" @click="job_run" v-if="status_running === false"></ons-icon>
+                <ons-icon icon="fa-pause" @click="job_stop" v-if="status_running === true"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+    </v-ons-toolbar>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Configuration -->
+
+    <v-ons-list modifier="inset">
+        <ons-list-title>
+            Loading Test Configuration
+        </ons-list-title>
+        <v-ons-list-header>
+            Test URL
+        </v-ons-list-header>
+        <v-ons-list-item>
+            <v-ons-input placeholder="Test URL" float v-model="config_base_url"></v-ons-input>
+        </v-ons-list-item>
+        <v-ons-list-header>
+            Job count
+        </v-ons-list-header>
+        <v-ons-list-item>
+            <v-ons-input placeholder="Job count" float v-model="status_total_job" type="number"></v-ons-input>
+        </v-ons-list-item>
+        <v-ons-list-item v-if="status_running === false" @click="job_run">
+            <v-ons-button modifier="large">
+                <ons-icon icon="fa-play-circle"></ons-icon>
+                RUN
+            </v-ons-button>
+        </v-ons-list-item>
+        <v-ons-list-item v-if="status_running === true" @click="job_stop">
+            <v-ons-button modifier="large">
+                <ons-icon icon="fa-pause"></ons-icon>
+                STOP
+            </v-ons-button>
+        </v-ons-list-item>
+    </v-ons-list>
+
+    <v-ons-list modifier="inset" v-show="results.length">
+        <ons-list-title>
+            Results
+        </ons-list-title>
+        <v-ons-list-item v-for="result in results">
+            {{ result.start_time }}
+        </v-ons-list-item>
+    </v-ons-list>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Result -->
+
+
+
+</v-ons-page>
