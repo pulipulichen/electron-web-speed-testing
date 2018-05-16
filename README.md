@@ -50,3 +50,6 @@ https://github.com/electron/electron/blob/master/docs/api/browser-window.md
 # 感謝
 此程式碼的起點主要來自：QQBoxy-酷酷方盒子
 http://qqboxy.blogspot.com/2016/06/electron-javascript-windows.html
+
+# Reference
+- Icon http://www.iconninja.com/hourglass-time-timer-icon-5949
