@@ -19,6 +19,7 @@
         </div>
 
         <div class="center">
+            <v-ons-row>
             <v-ons-col v-show="status_percent > 0 && status_percent < 100">
                 {{ status_percent }}
                 %
@@ -26,10 +27,14 @@
             <v-ons-col v-show="status_percent === 0 || status_percent === 100">
                 <h1>{{ title }}</h1>
             </v-ons-col>
+                </v-ons-row>
         </div>
 
 
         <div class="right">
+            <ons-toolbar-button @click="jump_to_config" v-show="results.length > 0">
+                <ons-icon icon="fa-cog"></ons-icon>
+            </ons-toolbar-button>
             <ons-toolbar-button v-if="status_running === false" @click="job_run">
                 <ons-icon icon="fa-play-circle"></ons-icon>
             </ons-toolbar-button>
@@ -45,7 +50,7 @@
     <!-- ---------------------------------------------- -->
     <!-- Configuration -->
 
-    <v-ons-list modifier="inset">
+    <v-ons-list modifier="inset" id="panel_configuration" class="panel">
         <ons-list-title>
             Configuration
         </ons-list-title>
@@ -53,7 +58,7 @@
             Test URL
         </v-ons-list-header>
         <v-ons-list-item>
-            <v-ons-input placeholder="Test URL" float v-model="config_base_url"></v-ons-input>
+            <v-ons-input placeholder="Test URL" float v-model="config_base_url" id="base_url"></v-ons-input>
         </v-ons-list-item>
         <v-ons-list-header>
             Job count
@@ -77,7 +82,7 @@
 
     <hr v-show="results.length" />
     
-    <v-ons-list modifier="inset" v-show="results.length">
+    <v-ons-list modifier="inset" v-show="results.length" class="panel" id="panel_results">
         <ons-list-title>
             Results
         </ons-list-title>

@@ -123,6 +123,12 @@ vue_data = {
         
         document.title = _title;
     },
+    
+    jump_to_config: function () {
+        document.getElementById('panel_configuration').scrollIntoView({
+            behavior: 'smooth'
+          });
+    },
 };
 
 vue_create = function () {

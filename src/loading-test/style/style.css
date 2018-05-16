@@ -7,3 +7,15 @@
 #main_page .toolbar__left {
     padding-left: 10px;
 }
+
+#main_page #base_url {
+    width: 100%;
+}
+
+#main_page ons-toolbar-button {
+    cursor: pointer;
+}
+
+#main_page .panel {
+    margin-top: 0.5em;
+}
