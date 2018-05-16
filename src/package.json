@@ -1,0 +1,21 @@
+{
+  "name": "webapp-wrapper",
+  "version": "0.0.1",
+  "description": "Web APP Wrapper",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . webapp-wrapper --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=1.0.2",
+    "package": "asar pack webapp-wrapper-win32-x64/resources/app webapp-wrapper-win32-x64/resources/app.asar && rm -rf webapp-wrapper-win32-x64/resources/app"
+  },
+  "dependencies": {
+    "electron-debug": "^1.1.0",
+    "electron-google-oauth": "^2.0.0",
+    "file-exists": "^2.0.0",
+    "os-tmpdir": "^1.0.2"
+  },
+  "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron-prebuilt": "^1.4.13"
+  }
+}
