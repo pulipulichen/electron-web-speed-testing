@@ -52,4 +52,7 @@ https://github.com/electron/electron/blob/master/docs/api/browser-window.md
 http://qqboxy.blogspot.com/2016/06/electron-javascript-windows.html
 
 # Reference
-- Icon http://www.iconninja.com/hourglass-time-timer-icon-5949
+- Hourglass Icon http://www.iconninja.com/hourglass-time-timer-icon-5949
+- fa https://fontawesome.com/icons?d=gallery
+- ion http://ionicons.com/
+- md http://zavoloklom.github.io/material-design-iconic-font/icons.html

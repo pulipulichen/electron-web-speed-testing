@@ -8,8 +8,10 @@ vue_data = {
     status_average_spend_time: 0,
 
     config_base_url: "http://localhost/",
-
-    results: [{start_time:1}],
+    //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    config_execute_mode: "simultaneously",
+    
+    results: [],
 
     // --------------------------
     
@@ -35,12 +37,12 @@ vue_data = {
                 else {
                     vm.status_failed_job++;
                 }
-                
+
                 vm.results.push(_result);
                 vm.status_percent = Math.floor( (vm.status_passed_job + vm.status_failed_job) / vm.status_total_job * 100 );
                 vm.stat_average_spend_time();
                 vm.update_title();
-                
+
                 _completed_jobs++;
                 if (_completed_jobs === _total_job) {
                     vm.job_stop();
@@ -74,10 +76,20 @@ vue_data = {
             var _end_time = vm.get_current_second();
             var _spend_time = Math.floor(_end_time - _start_time) / 1000;
             
+            var _uri = PULI_UTILS.parse_uri(_url);
+            if (_uri.length < 10) {
+                _uri = _url;
+            }
+            else if (_uri.length > 30) {
+                _uri = _uri.substr(0, 30) + "...";
+            }
+            
             var _result = {
                 spend_time: _spend_time,
                 status: _status,
-                passed: _passed
+                passed: _passed,
+                url: _url,
+                uri: _uri
             };
             
             if (vm.status_running === true) {
@@ -133,6 +145,15 @@ vue_data = {
 
 vue_create = function () {
     setTimeout(function () {
-        vm.results_clear();
-    });
+        vm.status_total_job = 10;
+        vm.job_run();
+    }, 1000);
 };
+
+/**
+ * 給IDE用的標示
+ * @type type
+ */
+if (false) {
+    vm = vue_data;
+}
