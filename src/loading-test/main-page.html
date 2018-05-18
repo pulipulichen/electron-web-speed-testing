@@ -79,9 +79,9 @@
         <v-ons-list-header>
             Request URL Configuration
         </v-ons-list-header>
-        <v-ons-list-item>
+        <v-ons-list-item v-for="(request_job, index) in request_jobs">
             <v-ons-col>
-                <v-ons-input placeholder="Test URL" float v-model="config_base_url" id="base_url"></v-ons-input>
+                <v-ons-input placeholder="Test URL" float v-model="request_job.url" id="base_url"></v-ons-input>
             </v-ons-col>
             <v-ons-col class="text-right">
                 <v-ons-button modifier="quiet">

@@ -7,7 +7,14 @@ vue_data = {
     status_percent: 0,
     status_average_spend_time: 0,
 
-    config_base_url: "http://localhost/",
+    request_jobs: [
+        {
+            "url": "http://localhost/",
+            "method": "get",
+            "content_type" : "text/plain", //  application/json , text/html
+            "data": {}
+        },
+    ],
     //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     config_execute_mode: "simultaneously",
     
@@ -28,7 +35,10 @@ vue_data = {
         
         for (var _i = 0; _i < _total_job; _i++) {
             var _config = {
-                base_url: _url
+                "url": _url,
+                "method": "get",
+                "content_type" : "text/plain", //  application/json , text/html
+                "data": {}
             };
             vm.single_test_run(_config, function (_result) {
                 if (_result.passed === true) {
@@ -50,9 +60,11 @@ vue_data = {
             });
         }
     },
+    
     job_stop: function () {
         vm.status_running = false;
     },
+    
     results_clear: function () {
         vm.results = [];
         vm.status_passed_job = 0;
@@ -69,7 +81,8 @@ vue_data = {
         }
         
         var _start_time = null;
-        var _url = _config.base_url;
+        var _url = _config.url;
+        var _url = _config.url;
         
         var _ajax_callback = function (_status) {
             var _passed = (_status === 200);
@@ -146,7 +159,7 @@ vue_data = {
 vue_create = function () {
     setTimeout(function () {
         vm.status_total_job = 10;
-        vm.job_run();
+        //vm.job_run();
     }, 1000);
 };
 
