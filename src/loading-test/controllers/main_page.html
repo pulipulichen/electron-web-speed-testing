@@ -137,7 +137,9 @@
         <v-ons-list-header>
             Results
         </v-ons-list-header>
-        <v-ons-list-item v-for="(result, index) in main_page.data.results" class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}">
+        <v-ons-list-item v-for="(result, index) in main_page.data.results" 
+            class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
+             @click="nav_result_detail(index)">
             <v-ons-col width="4rem">
                 # {{ index + 1 }}
             </v-ons-col>
@@ -153,7 +155,7 @@
             <v-ons-col v-bind:title="result.url">
                 {{ result.uri }}
             </v-ons-col>
-            <v-ons-col class="text-center" width="2rem" @click="nav_result_detail(index)">
+            <v-ons-col class="text-center" width="2rem">
                 <v-ons-button modifier="quiet">
                     <ons-icon icon="fa-angle-right"></ons-icon>
                 </v-ons-button>

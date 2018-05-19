@@ -3,20 +3,54 @@
       <div class="left">
         <v-ons-back-button>Back</v-ons-back-button>
       </div>
-      <div class="center">
-          <h1> #{{ result_data.data.result_id }} Result Data</h1>
+      <div class="center" v-bind:title="result_data.data.url">
+          <h1> #{{ result_data.data.result_id }} {{ result_data.data.uri }}</h1>
       </div>
     </v-ons-toolbar>
     
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
         <v-ons-list-item>
-            <label class="center" for="result_data">
-                Data ({{ result_data.data.data_type }})
+            <label class="center">
+                Method
             </label>
             <div class="right">
-                <textarea class="textarea textarea--transparent" id="result_data" 
-                    v-model="result_data.data.data"
-                    placeholder="Result Data" readonly></textarea>
+                {{ result_data.data.method }}
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center">
+                Send Data
+            </label>
+            <div class="right selectable">
+                {{ result_data.data.send_data }}
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center">
+                Data Type
+            </label>
+            <div class="right">
+                {{ result_data.data.data_type }}
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center">
+                Status
+            </label>
+            <div class="right">
+                {{ result_data.data.status }} {{ status_code(result_data.data.status) }} 
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center">
+                Response
+            </label>
+            <div class="right selectable">
+                {{ result_data.data.response }}
             </div>
         </v-ons-list-item>
     </v-ons-list>

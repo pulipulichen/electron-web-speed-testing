@@ -3,7 +3,6 @@ var _controllers_list = [
     "request_config",
     "result_list",
     "result_data",
-    //"page2"
 ];
 
 // ---------------------------

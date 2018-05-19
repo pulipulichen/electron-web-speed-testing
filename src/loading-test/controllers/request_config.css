@@ -3,7 +3,7 @@
     display: inline-block;
 }
 
-#request_config_data {
+#request_config_send_data {
     width: 100%;
     height: calc(100vh - 15.5rem);
 }

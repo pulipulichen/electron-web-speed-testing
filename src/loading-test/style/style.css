@@ -20,3 +20,8 @@ ons-toolbar h1 {
 .panel_results ons-list-item.failed .button--quiet {
     color: white;
 }
+
+.selectable {
+    -webkit-user-select: auto !important;
+    cursor: auto !important;
+}

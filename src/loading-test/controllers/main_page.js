@@ -14,13 +14,14 @@ main_page = {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
                 "data_type" : "text", //  application/json , text/html
-                "data": '{d:3}'
+                "send_data": '{d:3}'
             },
             {
-                "url": "http://localhost/a",
+                "url": "http://www.google.com.tw",
+                //"url": "http://localhost",
                 "method": "POST",
                 "data_type" : "text", //  application/json , text/html
-                "data": "{}"
+                "send_data": "{q: 'test'}"
             },
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -163,7 +164,7 @@ main_page = {
             //console.log(_config);
             try {
                 //_data = JSON.parse(_config.data);
-                eval("_data = " + _config.data);
+                eval("_data = " + _config.send_data);
                 //console.log(_data);
                 if (typeof(_data) !== "object") {
                     _data = undefined;
@@ -223,7 +224,8 @@ main_page = {
                 complete: function (_xhr, _textStatus) {
                     _ajax_complete(_xhr.status);
                 },
-                cache: false
+                cache: false,
+                crossDomain: true
             };
 
             $.ajax(_ajax_setting).always(_ajax_always);

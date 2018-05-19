@@ -7,7 +7,7 @@ request_config = {
             "url": "http://localhost",
             "method": "get",
             "data_type": "text", //  application/json , text/html
-            "data": "{}"
+            "send_data": "{}"
         }
     }
 };
