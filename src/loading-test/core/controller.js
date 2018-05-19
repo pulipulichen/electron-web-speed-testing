@@ -2,6 +2,7 @@ var _controllers_list = [
     "main_page",
     "request_config",
     "result_list",
+    "result_data",
     //"page2"
 ];
 

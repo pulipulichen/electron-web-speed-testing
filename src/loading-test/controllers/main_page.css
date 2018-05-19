@@ -16,13 +16,6 @@
     cursor: pointer;
 }
 
-#main_page #panel_results ons-list-item.failed {
-    background-color: #F3969A;
-    color: white;
-}
-#main_page #panel_results ons-list-item.failed .button--quiet {
-    color: white;
-}
 
 /* --------------------------------------- */
 

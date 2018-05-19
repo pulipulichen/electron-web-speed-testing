@@ -17,7 +17,7 @@ main_page = {
                 "data": '{d:3}'
             },
             {
-                "url": "http://localhost/",
+                "url": "http://localhost/a",
                 "method": "POST",
                 "data_type" : "text", //  application/json , text/html
                 "data": "{}"
@@ -176,12 +176,17 @@ main_page = {
                 _status = _s;
             };
             
-            var _ajax_done = function( _url_return ) {
+            var _ajax_always = function( _url_return ) {
                 if (_status === undefined) {
                     setTimeout(function () {
-                        _ajax_done(_url_return);
+                        _ajax_always(_url_return);
                     },0);
                     return;
+                }
+                
+                if (typeof(_url_return) === "object" 
+                        && typeof(_url_return.responseText) === "string") {
+                    _url_return = _url_return.responseText;
                 }
                 
                 var _passed = (_status === 200);
@@ -213,7 +218,7 @@ main_page = {
                     _start_time = PULI_UTILS.get_current_second();
                 },
                 //success: function (_data, _textStatus, _xhr) {
-                //    _ajax_callback(_xhr.status);
+                //    _ajax_complete(_xhr.status);
                 //},
                 complete: function (_xhr, _textStatus) {
                     _ajax_complete(_xhr.status);
@@ -221,7 +226,7 @@ main_page = {
                 cache: false
             };
 
-            $.ajax(_ajax_setting).done(_ajax_done);
+            $.ajax(_ajax_setting).always(_ajax_always);
         },
         
         shrink_uri: function (_url) {
@@ -299,7 +304,7 @@ main_page = {
         nav_result_detail: function (_result_id) {
             //console.log(_index);
             result_list.data.request_id = _result_id;
-            result_list.data.jobs_result = main_page.data.results[_result_id];
+            result_list.data.jobs_result = main_page.data.results[_result_id].jobs_result;
             
             this.$emit('push-page', result_list);
         },

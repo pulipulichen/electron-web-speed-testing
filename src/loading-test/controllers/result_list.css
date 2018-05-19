@@ -1,0 +1,13 @@
+#result_list div.right {
+    width: calc(100% - 9rem);
+}
+
+#result_list label {
+    vertical-align: top;
+    display: inline-block;
+}
+
+#result_list textarea {
+    width: 100%;
+    height: calc(100vh - 5.5rem);
+}
