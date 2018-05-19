@@ -12,7 +12,7 @@
         "webSecurity": false,
         "allowDisplayingInsecureContent": true,
         "allowRunningInsecureContent": true,
-        "nodeIntegration": false 
+        "nodeIntegration": false
     },
-    "openDevTools": false
+    "openDevTools": true
 }

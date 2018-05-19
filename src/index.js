@@ -22,7 +22,7 @@ function createWindow () {
         return;
     }
 
-    var config = JSON.parse(fs.readFileSync(config_file, 'utf-8'))
+    var config = JSON.parse(fs.readFileSync(config_file, 'utf-8'));
 
     var url = config.URL;
 
@@ -115,6 +115,10 @@ function createWindow () {
 
     mainWindow.on('blur', function () {
         globalShortcut.unregisterAll();
+    });
+    
+    mainWindow.on('custom_func', function () {
+        app.quit();
     });
 }
 
