@@ -138,6 +138,11 @@ app.on('activate', function () {
 // ---------------------------------------------
 
 
+/**
+ * @deprecated 20180520 測試用
+ */
+if (false) {
+    
 ipcMain.on('open-second-window', (event, arg)=> {
     //dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: JSON.stringify(arg)}
     //    , function (buttonIndex) {});
@@ -165,3 +170,5 @@ ipcMain.on('open-second-window', (event, arg)=> {
         
     });
 });
+
+}   // if (false) {
