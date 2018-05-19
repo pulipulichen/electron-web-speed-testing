@@ -4,12 +4,11 @@ vue_create_event = function () {
     // ------------------
     // 以下是測試
     
-    /*
     setTimeout(function () {
-        vm.status_total_job = 10;
+        //vm.status_total_job = 10;
         //vm.job_run();
+        main_page.methods.job_run();
     }, 1000);
-    */
 
     setTimeout(function () {
         //var _url = "https://stackoverflow.com/questions/4149890/how-get-iframe-body-after-load";

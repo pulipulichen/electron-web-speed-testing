@@ -34,7 +34,10 @@
     text-align: center;
 }
 
-
-#main_page .cursor-pointer, #main_page ons-button {
-    cursor: pointer;
+#main_page.wait, 
+#main_page.wait ons-toolbar, 
+#main_page.wait ons-list-header, 
+#main_page.wait ons-list-item,
+#main_page.wait ons-list-item label {
+    cursor: wait;
 }

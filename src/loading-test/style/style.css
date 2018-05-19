@@ -7,3 +7,7 @@ ons-toolbar h1 {
 .panel {
     margin-top: 0.5em !important;
 }
+
+.cursor-pointer, ons-button {
+    cursor: pointer !important;
+}
