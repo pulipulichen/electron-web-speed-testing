@@ -5,7 +5,10 @@ var _controllers_list = [
 
 // ---------------------------
 
-Vue.use(VueI18n);
+i18n.set({
+  'lang': 'zh-tw', //e.g. en-us, zh-tw. Default is auto detect from browser.
+  'path': 'locale' // Default is empty (same level as i18n.js)
+});
 
 var _vue_ready = function () {
     var _first_controller_name = _controllers_list[0];
@@ -33,6 +36,8 @@ var _vue_ready = function () {
         },
         created: vue_create_event,
     });
+    
+    //document.title = i18n.t("Hello World");
 };
 
 // ---------------------------

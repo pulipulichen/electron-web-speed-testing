@@ -1,3 +1,3 @@
 CONFIG = {
-    locate: "zh_TW"
+    locate: "zh-tw"
 };
