@@ -96,17 +96,20 @@
             Request URL Configuration
         </v-ons-list-header>
         <v-ons-list-item v-for="(request_job, index) in main_page.data.request_jobs">
+            <v-ons-col width="3rem">
+                # {{ index+1 }}
+            </v-ons-col>
             <v-ons-col>
                 <v-ons-input placeholder="Test URL" float v-model="request_job.url" id="base_url"></v-ons-input>
             </v-ons-col>
             <v-ons-col class="text-right">
-                <v-ons-button modifier="quiet">
+                <v-ons-button modifier="quiet" @click="add_request_job(index)">
                     <ons-icon icon="md-plus-circle"></ons-icon>
                 </v-ons-button>
-                <v-ons-button modifier="quiet">
+                <v-ons-button modifier="quiet" @click="remove_request_job(index)">
                     <ons-icon icon="md-minus-circle"></ons-icon>
                 </v-ons-button>
-                <v-ons-button modifier="quiet" @click="nav_request_config">
+                <v-ons-button modifier="quiet" @click="nav_request_config(index)">
                     <ons-icon icon="fa-cog"></ons-icon>
                 </v-ons-button>
             </v-ons-col>

@@ -9,12 +9,19 @@ main_page = {
         status_percent: 0,
         status_average_spend_time: 0,
 
+        request_job_template: {
+            "url": "http://localhost/",
+            "method": "get",
+            "content_type" : "text/plain", //  application/json , text/html
+            "data": "{}"
+        },
+
         request_jobs: [
             {
                 "url": "http://localhost/",
                 "method": "get",
                 "content_type" : "text/plain", //  application/json , text/html
-                "data": ""
+                "data": "{}"
             },
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -158,9 +165,36 @@ main_page = {
         
         // ---------------
         
-        nav_request_config: function () {
-            console.log("nav_request_config");
+        nav_request_config: function (_request_id) {
+            //console.log("nav_request_config" + _request_id);
+            request_config.data.request_id = _request_id;
+            request_config.data.request_config = main_page.data.request_jobs[_request_id];
+            
             this.$emit('push-page', request_config);
+        },
+        
+        add_request_job: function (_index) {
+            //console.log(_index);
+            
+            var _jobs = main_page.data.request_jobs;
+            //var _template = main_page.data.request_job_template;
+            var _template = _jobs[_index];
+            _template = JSON.parse(JSON.stringify(_template));
+            _jobs.splice(_index+1, 0, _template);
+        },
+        
+        remove_request_job: function (_index) {
+            //console.log(_index);
+            
+            var _jobs = main_page.data.request_jobs;
+            if (_jobs.length < 2 || _index >= _jobs.length || _index < 0) {
+                return false;
+            }
+            else {
+                if (window.confirm("您確定要刪除嗎？")) {
+                    _jobs.splice(_index, 1);
+                }
+            }
         },
         
         // ---------------
