@@ -10,9 +10,5 @@
     "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     "longDays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     
-    
-    "title": "LOADING TEST",
-    "Hello World": "Hello World",
-    "Nice to meet you, %1": "Nice to meet you, %1",
-    "My name is %1, I'm %2 years old": "My name is %1, I'm %2 years old"
+    "LOADING TEST": "LOADING TEST",
 }

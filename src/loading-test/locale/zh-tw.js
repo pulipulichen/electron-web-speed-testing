@@ -10,9 +10,5 @@
     "shortDays": ["日", "一", "二", "三", "四", "五", "六"],
     "longDays": ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
     
-    "title": "LOADING TEST",
-    
-    "Hello World": "哈囉! 世界",
-    //"Nice to meet you, %1": "很高興認識你，%1",
-    //"My name is %1, I'm %2 years old": "我的名字是 %1，我今年 %2 歲"
+    "LOADING TEST": "網站負載測試器"
 }
