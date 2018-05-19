@@ -1,9 +1,11 @@
 <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">Page 1</div>
+        <div class="center">Page 1</div>
     </v-ons-toolbar>
     <p style="text-align: center">
-      This is the first page
-      <v-ons-button @click="page1_vm.push">Push Page 2</v-ons-button>
+        This is the first page 
+        {{ page1_vm.data.result.a }}
     </p>
-  </v-ons-page>
+    <v-ons-button @click="push">Push Page 2</v-ons-button>
+
+</v-ons-page>
