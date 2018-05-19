@@ -134,6 +134,9 @@ app.on('activate', function () {
     }
 });
 
+// ---------------------------------------------
+
+/*
 ipcMain.on('open-second-window', (event, arg)=> {
     //dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: JSON.stringify(arg)}
     //    , function (buttonIndex) {});
@@ -142,3 +145,4 @@ ipcMain.on('open-second-window', (event, arg)=> {
     //event.returnValue = "aaa";
     event.sender.send('asynchronous-reply', 'unrecognized arg');
 });
+*/
