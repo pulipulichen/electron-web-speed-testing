@@ -1,9 +1,9 @@
-.request_config_content_type_list_item label {
+.request_config_data_list_item label {
     vertical-align: top;
     display: inline-block;
 }
 
-.request_config_content_type_list_item #request_config_data {
+#request_config_data {
     width: 100%;
     height: calc(100vh - 15.5rem);
 }

@@ -4,9 +4,9 @@ request_config = {
         title: "Request Configuration",
         request_id: 0,
         request_config: {
-            url: "http://www.google.com.tw",
+            "url": "http://localhost",
             "method": "get",
-            "content_type": "text/html", //  application/json , text/html
+            "data_type": "text", //  application/json , text/html
             "data": "{}"
         }
     }

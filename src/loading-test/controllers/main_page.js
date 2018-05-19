@@ -9,24 +9,17 @@ main_page = {
         status_percent: 0,
         status_average_spend_time: 0,
 
-        request_job_template: {
-            "url": "http://localhost/",
-            "method": "get",
-            "content_type" : "text/plain", //  application/json , text/html
-            "data": "{}"
-        },
-
         request_jobs: [
             {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
-                "method": "get",
-                "content_type" : "text/plain", //  application/json , text/html
-                "data": "{}"
+                "method": "POST",
+                "data_type" : "text", //  application/json , text/html
+                "data": '{d:3}'
             },
             {
                 "url": "http://localhost/",
-                "method": "get",
-                "content_type" : "text/plain", //  application/json , text/html
+                "method": "POST",
+                "data_type" : "text", //  application/json , text/html
                 "data": "{}"
             },
         ],
@@ -165,7 +158,18 @@ main_page = {
 
             var _start_time = null;
             var _url = _config.url;
-            var _url = _config.url;
+            var _method = _config.method;
+            var _data = undefined;
+            //console.log(_config);
+            try {
+                //_data = JSON.parse(_config.data);
+                eval("_data = " + _config.data);
+                //console.log(_data);
+                if (typeof(_data) !== "object") {
+                    _data = undefined;
+                }
+            }
+            catch (_e) {};
 
             var _ajax_callback = function (_status) {
                 var _passed = (_status === 200);
@@ -186,9 +190,11 @@ main_page = {
                     _callback(_result);
                 }
             };
-
-            $.ajax({
+            
+            var _ajax_setting = {
                 url: _url,
+                method: _method,
+                data: _data,
                 beforeSend: function () {
                     _start_time = PULI_UTILS.get_current_second();
                 },
@@ -199,7 +205,9 @@ main_page = {
                     _ajax_callback(_xhr.status);
                 },
                 cache: false
-            });
+            };
+
+            $.ajax(_ajax_setting);
         },
         
         shrink_uri: function (_url) {

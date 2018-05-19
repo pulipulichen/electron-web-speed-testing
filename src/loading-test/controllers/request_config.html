@@ -25,26 +25,26 @@
             </label>
             <div class="right">
                 <v-ons-select v-model="request_config.data.request_config.method" id="request_config_method">
-                    <option value="get">GET</option>
-                    <option value="post">POST</option>
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center" for="request_config_content_type">
-                Content Type
+            <label class="center" for="request_config_data_type">
+                Data Type
             </label>
             <div class="right">
-                <v-ons-select v-model="request_config.data.request_config.content_type" id="request_config_content_type">
-                    <option value="text/plain">Text (text/plain)</option>
-                    <option value="application/json">JSON (application/json)</option>
-                    <option value="text/html">Web Page (text/html)</option>
+                <v-ons-select v-model="request_config.data.request_config.data_type" id="request_config_data_type">
+                    <option value="text">Text</option>
+                    <option value="json">JSON</option>
+                    <option value="webpage">Web Page</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>
         
-        <v-ons-list-item class="request_config_content_type_list_item" >
+        <v-ons-list-item class="request_config_data_list_item" >
             <label class="center" for="request_config_data">
                 Data
             </label>
