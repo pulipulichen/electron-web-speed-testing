@@ -42,6 +42,7 @@ var _controllers = {};
 var _loop = function (_i) {
     if (_i < _controllers_list.length) {
         var _name = _controllers_list[_i];
+        PULI_UTILS.load_css("controllers/" + _name + ".css");
         $.getScript("controllers/" + _name + ".js", function () {
             $.get("controllers/" + _name + ".html", function (_template) {
                 /*

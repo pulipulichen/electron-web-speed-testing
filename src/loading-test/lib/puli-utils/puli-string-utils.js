@@ -1,4 +1,6 @@
-PULI_UTILS = {};
+if (typeof(PULI_UTILS) === "undefined") {
+    PULI_UTILS = {};
+}
 
 /**
 var l = getLocation("http://example.com/path");
