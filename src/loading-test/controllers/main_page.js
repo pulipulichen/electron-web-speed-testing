@@ -1,4 +1,4 @@
-vue_data = {
+main_page_data = {
     title: "LOADING TEST",
     status_running: false,
     status_passed_job: 0,
@@ -25,12 +25,12 @@ vue_data = {
     job_run: function () {
         //console.log("run");
         //console.log(vm);
-        vm.results_clear();
+        main_page_vm.results_clear();
         
-        vm.status_running = true;
+        main_page_vm.status_running = true;
         
-        var _url = vm.config_base_url;
-        var _total_job = vm.status_total_job;
+        var _url = main_page_vm.config_base_url;
+        var _total_job = main_page_vm.status_total_job;
         var _completed_jobs = 0;
         
         for (var _i = 0; _i < _total_job; _i++) {
@@ -40,43 +40,43 @@ vue_data = {
                 "content_type" : "text/plain", //  application/json , text/html
                 "data": {}
             };
-            vm.single_test_run(_config, function (_result) {
+            main_page_vm.single_test_run(_config, function (_result) {
                 if (_result.passed === true) {
-                    vm.status_passed_job++;
+                    main_page_vm.status_passed_job++;
                 }
                 else {
-                    vm.status_failed_job++;
+                    main_page_vm.status_failed_job++;
                 }
 
-                vm.results.push(_result);
-                vm.status_percent = Math.floor( (vm.status_passed_job + vm.status_failed_job) / vm.status_total_job * 100 );
-                vm.stat_average_spend_time();
-                vm.update_title();
+                main_page_vm.results.push(_result);
+                main_page_vm.status_percent = Math.floor( (main_page_vm.status_passed_job + main_page_vm.status_failed_job) / main_page_vm.status_total_job * 100 );
+                main_page_vm.stat_average_spend_time();
+                main_page_vm.update_title();
 
                 _completed_jobs++;
                 if (_completed_jobs === _total_job) {
-                    vm.job_stop();
+                    main_page_vm.job_stop();
                 }
             });
         }
     },
     
     job_stop: function () {
-        vm.status_running = false;
+        main_page_vm.status_running = false;
     },
     
     results_clear: function () {
-        vm.results = [];
-        vm.status_passed_job = 0;
-        vm.status_failed_job = 0;
-        vm.status_percent = 0;
-        vm.status_average_spend_time = 0;
+        main_page_vm.results = [];
+        main_page_vm.status_passed_job = 0;
+        main_page_vm.status_failed_job = 0;
+        main_page_vm.status_percent = 0;
+        main_page_vm.status_average_spend_time = 0;
     },
     
     // ----------------------------------
     
     single_test_run: function (_config, _callback) {
-        if (typeof(_callback) !== "function" || vm.status_running === false) {
+        if (typeof(_callback) !== "function" || main_page_vm.status_running === false) {
             return;
         }
         
@@ -86,7 +86,7 @@ vue_data = {
         
         var _ajax_callback = function (_status) {
             var _passed = (_status === 200);
-            var _end_time = vm.get_current_second();
+            var _end_time = main_page_vm.get_current_second();
             var _spend_time = Math.floor(_end_time - _start_time) / 1000;
             
             var _uri = PULI_UTILS.parse_uri(_url);
@@ -105,7 +105,7 @@ vue_data = {
                 uri: _uri
             };
             
-            if (vm.status_running === true) {
+            if (main_page_vm.status_running === true) {
                 _callback(_result);
             }
         };
@@ -113,7 +113,7 @@ vue_data = {
         $.ajax({
             url: _url,
             beforeSend: function () {
-                _start_time = vm.get_current_second();
+                _start_time = main_page_vm.get_current_second();
             },
             success: function (_data, _textStatus, _xhr) {
                 _ajax_callback(_xhr.status);
@@ -132,18 +132,18 @@ vue_data = {
     
     stat_average_spend_time: function () {
         var _total = 0;
-        for (var _i in vm.results) {
-            _total = _total + vm.results[_i].spend_time;
+        for (var _i in main_page_vm.results) {
+            _total = _total + main_page_vm.results[_i].spend_time;
         }
-        var _avg = Math.floor((_total / vm.results.length) * 1000) / 1000;
-        vm.status_average_spend_time = _avg;
+        var _avg = Math.floor((_total / main_page_vm.results.length) * 1000) / 1000;
+        main_page_vm.status_average_spend_time = _avg;
     },
     
     update_title: function () {
-        var _title = vm.title;
+        var _title = main_page_vm.title;
         
-        if (vm.status_percent > 0) {
-            _title = vm.status_percent + "% (" + vm.status_average_spend_time + "s)";
+        if (main_page_vm.status_percent > 0) {
+            _title = main_page_vm.status_percent + "% (" + main_page_vm.status_average_spend_time + "s)";
         }
         
         document.title = _title;
@@ -154,13 +154,16 @@ vue_data = {
             behavior: 'smooth'
           });
     },
+    
+    // ------------------------
+    
 };
 
-vue_create = function () {
-    setTimeout(function () {
-        vm.status_total_job = 10;
-        //vm.job_run();
-    }, 1000);
+main_page_methods = {
+    nav_request_config: function () {
+        $ons.$emit('push-page', request_config_vm);
+        console.log("nav");
+    },
 };
 
 /**
@@ -168,5 +171,13 @@ vue_create = function () {
  * @type type
  */
 if (false) {
-    vm = vue_data;
+    main_page_vm = main_page_data;
 }
+
+const page2 = {
+  key: 'page2',
+  template: '#page2',
+  data: {
+      a: 2
+  }
+};

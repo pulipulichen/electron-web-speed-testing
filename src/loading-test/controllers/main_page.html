@@ -3,45 +3,45 @@
     <v-ons-toolbar>
         <div class="left">
             <v-ons-row>
-                <v-ons-col v-show="status_average_spend_time > 0">
+                <v-ons-col v-show="main_page_vm.status_average_spend_time > 0">
                     <ons-icon icon="md-timer"></ons-icon>
-                    {{ status_average_spend_time }}
+                    {{ main_page_vm.status_average_spend_time }}
                 </v-ons-col>
-                <v-ons-col v-show="status_passed_job > 0">
+                <v-ons-col v-show="main_page_vm.status_passed_job > 0">
                     <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
-                    {{ status_passed_job }}
+                    {{ main_page_vm.status_passed_job }}
                 </v-ons-col>
-                <v-ons-col v-show="status_failed_job > 0">
+                <v-ons-col v-show="main_page_vm.status_failed_job > 0">
                     <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
-                    {{ status_failed_job }}
+                    {{ main_page_vm.status_failed_job }}
                 </v-ons-col>
             </v-ons-row>
         </div>
 
         <div class="center">
             <v-ons-row>
-            <v-ons-col v-show="status_percent > 0 && status_percent < 100">
-                {{ status_percent }}
+            <v-ons-col v-show="main_page_vm.status_percent > 0 && main_page_vm.status_percent < 100">
+                {{ main_page_vm.status_percent }}
                 %
             </v-ons-col>
-            <v-ons-col v-show="status_percent === 0 || status_percent === 100">
-                <h1>{{ title }}</h1>
+            <v-ons-col v-show="main_page_vm.status_percent === 0 || main_page_vm.status_percent === 100">
+                <h1>{{ main_page_vm.title }}</h1>
             </v-ons-col>
                 </v-ons-row>
         </div>
 
 
         <div class="right">
-            <ons-toolbar-button @click="jump_to_config" v-show="results.length > 0">
+            <ons-toolbar-button @click="main_page_vm.jump_to_config" v-show="main_page_vm.results.length > 0">
                 <ons-icon icon="fa-cog"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button v-if="status_running === false" @click="job_run">
+            <ons-toolbar-button v-if="main_page_vm.status_running === false" @click="main_page_vm.job_run">
                 <ons-icon icon="fa-play-circle"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button @click="job_stop" v-if="status_running === true">
+            <ons-toolbar-button @click="main_page_vm.job_stop" v-if="main_page_vm.status_running === true">
                 <ons-icon icon="fa-pause"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button @click="results_clear" v-show="results.length > 0">
+            <ons-toolbar-button @click="main_page_vm.results_clear" v-show="main_page_vm.results.length > 0">
                 <ons-icon icon="fa-trash"></ons-icon>
             </ons-toolbar-button>
         </div>
@@ -60,7 +60,7 @@
             Mock user number
             </label>
             <div class="right">
-                <v-ons-input placeholder="Job count" float v-model="status_total_job" type="number" class="text-right"></v-ons-input>
+                <v-ons-input placeholder="Job count" float v-model="main_page_vm.status_total_job" type="number" class="text-right"></v-ons-input>
             </div>
         </v-ons-list-item>
         
@@ -69,7 +69,7 @@
             Execute mode
         </label>
         <div class="right">
-            <v-ons-select v-model="config_execute_mode">
+            <v-ons-select v-model="main_page_vm.config_execute_mode">
                 <option value="simultaneously">Simultaneously</option>
                 <option value="queue">queue</option>
           </v-ons-select>
@@ -79,7 +79,7 @@
         <v-ons-list-header>
             Request URL Configuration
         </v-ons-list-header>
-        <v-ons-list-item v-for="(request_job, index) in request_jobs">
+        <v-ons-list-item v-for="(request_job, index) in main_page_vm.request_jobs">
             <v-ons-col>
                 <v-ons-input placeholder="Test URL" float v-model="request_job.url" id="base_url"></v-ons-input>
             </v-ons-col>
@@ -90,7 +90,7 @@
                 <v-ons-button modifier="quiet">
                     <ons-icon icon="md-minus-circle"></ons-icon>
                 </v-ons-button>
-                <v-ons-button modifier="quiet">
+                <v-ons-button modifier="quiet" @click="main_page_vm.nav_request_config">
                     <ons-icon icon="fa-cog"></ons-icon>
                 </v-ons-button>
             </v-ons-col>
@@ -98,13 +98,13 @@
         
         
         
-        <v-ons-list-item v-if="status_running === false" @click="job_run">
+        <v-ons-list-item v-if="main_page_vm.status_running === false" @click="main_page_vm.job_run">
             <v-ons-button modifier="large">
                 <ons-icon icon="fa-play-circle"></ons-icon>
                 RUN
             </v-ons-button>
         </v-ons-list-item>
-        <v-ons-list-item v-if="status_running === true" @click="job_stop">
+        <v-ons-list-item v-if="main_page_vm.status_running === true" @click="main_page_vm.job_stop">
             <v-ons-button modifier="large">
                 <ons-icon icon="fa-pause"></ons-icon>
                 STOP
@@ -112,13 +112,13 @@
         </v-ons-list-item>
     </v-ons-list>
 
-    <hr v-show="results.length" />
+    <hr v-show="main_page_vm.results.length" />
     
-    <v-ons-list modifier="inset" v-show="results.length" class="panel" id="panel_results">
+    <v-ons-list modifier="inset" v-show="main_page_vm.results.length" class="panel" id="panel_results">
         <v-ons-list-header>
             Results
         </v-ons-list-header>
-        <v-ons-list-item v-for="(result, index) in results" class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}">
+        <v-ons-list-item v-for="(result, index) in main_page_vm.results" class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}">
             <v-ons-col width="4rem">
                 # {{ index + 1 }}
             </v-ons-col>

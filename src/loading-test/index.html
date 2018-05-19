@@ -15,15 +15,22 @@
         
         <script src="lib/vue/vue.min.js"></script>
         <script src="lib/vue/vue-onsenui.js"></script>
-        <script src="lib/vue/httpVueLoader.js"></script>
+        <script src="controllers/vue_create_event.js"></script>
         
         <script src="lib/jquery/jquery.min.js"></script>
         <script src="lib/puli-utils/puli-string-utils.js"></script>
     </head>
 <body>
+    
+    <template id="main">
+        <v-ons-navigator swipeable
+                         :page-stack="pageStack"
+                         @push-page="pageStack.push($event)"
+                         ></v-ons-navigator>
+    </template>
+    
     <div id="app"></div>
 
-    <script type="text/javascript" src="controllers/vue_data.js"></script>
     <script type="text/javascript" src="controllers/main.js"></script>
 </body>
 </html>
