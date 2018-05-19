@@ -1,14 +1,18 @@
 var _controllers_list = [
-    "page1",
-    "page2"
+    "main_page",
+    //"page2"
 ];
 
 // ---------------------------
 
+Vue.use(VueI18n);
+
 var _vue_ready = function () {
     var _first_controller_name = _controllers_list[0];
     var _first_controller = _controllers[_first_controller_name];
+    //console.log(_first_controller);
     
+    /*
     for (var _name in _controllers) {
         var _controller = _controllers[_name];
         eval(_name + "_vm = _controller");
@@ -16,6 +20,8 @@ var _vue_ready = function () {
         //console.log("const " + _name + "_vm = new Vue(_controller)");
         //eval("const " + _name + "_vm = new Vue(_controller)");
     }
+    */
+    
     
     vm = new Vue({
         el: '#app',
@@ -38,6 +44,7 @@ var _loop = function (_i) {
         var _name = _controllers_list[_i];
         $.getScript("controllers/" + _name + ".js", function () {
             $.get("controllers/" + _name + ".html", function (_template) {
+                /*
                 var _data = {};
                 try {
                     eval("var _data = " + _name + "_data");
@@ -56,6 +63,17 @@ var _loop = function (_i) {
                     data: _data,
                     methods: _methods
                 };
+                */
+                var _vm = {};
+                try {
+                    eval("var _vm = " + _name);
+                }
+                catch (_e) {
+                    _vm.key = _name;
+                }
+                _vm.template = _template;
+                
+                _controllers[_name] = _vm;
                 _i++;
                 _loop(_i);
             });
@@ -65,4 +83,5 @@ var _loop = function (_i) {
         _vue_ready();
     }
 };
+
 _loop(0);
