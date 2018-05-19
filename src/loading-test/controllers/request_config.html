@@ -39,7 +39,7 @@
                 <v-ons-select v-model="request_config.data.request_config.data_type" id="request_config_data_type">
                     <option value="text">Text</option>
                     <option value="json">JSON</option>
-                    <option value="webpage">Web Page</option>
+                    <option value="webpage" v-show="ELECTRON_ENABLE">Web Page</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>

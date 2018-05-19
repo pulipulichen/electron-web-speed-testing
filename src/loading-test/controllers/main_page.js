@@ -125,7 +125,7 @@ main_page = {
                 //console.log(_j);
                 if (_j < _jobs_count) {
                     var _config = _jobs[_j];
-                    main_page.methods.single_test_run(_config, function (_result) {
+                    main_page.methods.run_text_job(_config, function (_result) {
                         _results.job_result.push(_result);
                         //console.log(_result);
                         if (_result.passed === true) {
@@ -150,7 +150,7 @@ main_page = {
             _loop(0);
         },
 
-        single_test_run: function (_config, _callback) {
+        run_text_job: function (_config, _callback) {
             if (typeof(_callback) !== "function" 
                     || main_page.data.status_running === false) {
                 return;
@@ -171,7 +171,19 @@ main_page = {
             }
             catch (_e) {};
 
-            var _ajax_callback = function (_status) {
+            var _status;
+            var _ajax_complete = function (_s) {
+                _status = _s;
+            };
+            
+            var _ajax_done = function( _url_return ) {
+                if (_status === undefined) {
+                    setTimeout(function () {
+                        _ajax_done(_url_return);
+                    },0);
+                    return;
+                }
+                
                 var _passed = (_status === 200);
                 var _end_time = PULI_UTILS.get_current_second();
                 var _spend_time = Math.floor(_end_time - _start_time) / 1000;
@@ -183,13 +195,15 @@ main_page = {
                     status: _status,
                     passed: _passed,
                     url: _url,
-                    uri: _uri
+                    uri: _uri,
+                    data: _url_return
                 };
 
                 if (main_page.data.status_running === true) {
                     _callback(_result);
                 }
             };
+            
             
             var _ajax_setting = {
                 url: _url,
@@ -202,12 +216,12 @@ main_page = {
                 //    _ajax_callback(_xhr.status);
                 //},
                 complete: function (_xhr, _textStatus) {
-                    _ajax_callback(_xhr.status);
+                    _ajax_complete(_xhr.status);
                 },
                 cache: false
             };
 
-            $.ajax(_ajax_setting);
+            $.ajax(_ajax_setting).done(_ajax_done);
         },
         
         shrink_uri: function (_url) {
