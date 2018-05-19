@@ -3,3 +3,7 @@ ons-toolbar h1 {
     margin: 0;
     font-weight: bold;
 }
+
+.panel {
+    margin-top: 0.5em !important;
+}

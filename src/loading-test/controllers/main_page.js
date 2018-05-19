@@ -14,7 +14,7 @@ main_page = {
                 "url": "http://localhost/",
                 "method": "get",
                 "content_type" : "text/plain", //  application/json , text/html
-                "data": {}
+                "data": ""
             },
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",

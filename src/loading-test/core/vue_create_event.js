@@ -35,6 +35,7 @@ vue_create_event = function () {
            'beforeSend': function(xhr) {xhr.setRequestHeader("referer", "http://www.google.com.tw/")}
        });
         */
+       
     }, 1000);
         
 };

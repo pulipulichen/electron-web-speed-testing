@@ -16,10 +16,6 @@
     cursor: pointer;
 }
 
-#main_page .panel {
-    margin-top: 0.5em;
-}
-
 #main_page #panel_results ons-list-item.failed {
     background-color: #F3969A;
     color: white;

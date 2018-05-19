@@ -7,5 +7,58 @@
           <h1>{{ request_config.data.title }}</h1>
       </div>
     </v-ons-toolbar>
-    <p style="text-align: center">This is the second page</p>
+    
+    <v-ons-list modifier="inset" id="request_configuration" class="panel">
+        <v-ons-list-item>
+            <label class="center" for="request_config_url">
+                Request URL
+            </label>
+            <div class="right">
+                <v-ons-input placeholder="Request URL" float 
+                             v-model="request_config.data.request_config.url" class="text-right" id="request_config_url"></v-ons-input>
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center" for="request_config_method">
+                Method
+            </label>
+            <div class="right">
+                <v-ons-select v-model="request_config.data.request_config.method" id="request_config_method">
+                    <option value="get">GET</option>
+                    <option value="post">POST</option>
+                </v-ons-select>
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center" for="request_config_content_type">
+                Content Type
+            </label>
+            <div class="right">
+                <v-ons-select v-model="request_config.data.request_config.content_type" id="request_config_content_type">
+                    <option value="text/plain">Text (text/plain)</option>
+                    <option value="application/json">JSON (application/json)</option>
+                    <option value="text/html">Web Page (text/html)</option>
+                </v-ons-select>
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item class="request_config_content_type_list_item" >
+            <label class="center" for="request_config_data">
+                Data
+            </label>
+            <div class="right">
+                <textarea class="textarea textarea--transparent" id="request_config_data" 
+                    v-model="request_config.data.request_config.data"
+                    placeholder="Request Data"></textarea>
+            </div>
+        </v-ons-list-item>
+    </v-ons-list>
+    
+    
+    
+    
+    
+    
 </v-ons-page>

@@ -53,27 +53,44 @@
         <v-ons-list-header>
             Job Configuration
         </v-ons-list-header>
+        
         <v-ons-list-item>
-            <label class="center" for="switch1">
-            Mock user number
+            <v-ons-col>
+                <v-ons-button modifier="large">
+                    <ons-icon icon="fa-folder-open"></ons-icon>
+                    LOAD CONFIG
+                </v-ons-button>
+            </v-ons-col>
+            <v-ons-col width="10px"></v-ons-col>
+            <v-ons-col>
+                <v-ons-button modifier="large">
+                    <ons-icon icon="fa-save"></ons-icon>
+                    SAVE CONFIG
+                </v-ons-button>
+            </v-ons-col>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="center" for="status_total_job">
+                Mock user number
             </label>
             <div class="right">
                 <v-ons-input placeholder="Job count" float 
-                             v-model="main_page.data.status_total_job" type="number" class="text-right"></v-ons-input>
+                             v-model="main_page.data.status_total_job" type="number" class="text-right" id="status_total_job"></v-ons-input>
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-        <label class="center" for="switch_config_execute_mode">
-            Execute mode
-        </label>
-        <div class="right">
-            <v-ons-select v-model="main_page.config_execute_mode">
-                <option value="simultaneously">Simultaneously</option>
-                <option value="queue">queue</option>
-          </v-ons-select>
-        </div>
-            </v-ons-list-item>
+            <label class="center" for="switch_config_execute_mode">
+                Execute mode
+            </label>
+            <div class="right">
+                <v-ons-select v-model="main_page.config_execute_mode" id="switch_config_execute_mode">
+                    <option value="simultaneously">Simultaneously</option>
+                    <option value="queue">queue</option>
+                </v-ons-select>
+            </div>
+        </v-ons-list-item>
         
         <v-ons-list-header>
             Request URL Configuration

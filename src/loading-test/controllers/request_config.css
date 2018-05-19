@@ -1,0 +1,18 @@
+.request_config_content_type_list_item label {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.request_config_content_type_list_item #request_config_data {
+    width: 100%;
+    height: calc(100vh - 15.5rem);
+}
+
+#request_configuration ons-list-item div.right {
+    width: calc(100% - 9rem);
+}
+
+#request_configuration ons-list-item div.right ons-select,
+#request_configuration ons-list-item div.right ons-input {
+    width: 100%;
+}
