@@ -1,10 +1,9 @@
-const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut} = require('electron');
+const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain} = require('electron');
 let fs = require('fs');
 const osTmpdir = require('os-tmpdir');
 let mainWindow;
 
 function createWindow () {
-    var buttons = ['OK'];
     if (process.argv.length < 2) {
         dialog.showMessageBox({ type: 'info', buttons: buttons, message: "Lost Configuration JSON file Parameter" }
             , function (buttonIndex) {
@@ -15,7 +14,7 @@ function createWindow () {
 
     var config_file = process.argv[1];
     if (fs.existsSync(config_file) === false) {
-        dialog.showMessageBox({ type: 'info', buttons: buttons, message: "Cannot found file: \n" + config_file }
+        dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: "Cannot found file: \n" + config_file }
             , function (buttonIndex) {
                 app.quit();
             });
@@ -34,6 +33,7 @@ function createWindow () {
 
     mainWindow = new BrowserWindow(config);
     //mainWindow.loadURL(url);
+    mainWindow.$ = mainWindow.jQuery = require("./lib/jquery/jquery.min.js");
     mainWindow.loadURL('file://' + __dirname + '/loading-test/index.html');
     
     mainWindow.on('closed', function () {
@@ -117,9 +117,7 @@ function createWindow () {
         globalShortcut.unregisterAll();
     });
     
-    mainWindow.on('custom_func', function () {
-        app.quit();
-    });
+    
 }
 
 app.on('ready', createWindow);
@@ -134,4 +132,13 @@ app.on('activate', function () {
     if(mainWindow === null) {
         createWindow();
     }
+});
+
+ipcMain.on('open-second-window', (event, arg)=> {
+    //dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: JSON.stringify(arg)}
+    //    , function (buttonIndex) {});
+    //return "aaa";
+    //mainWindow.webContents.ttt(arg);
+    //event.returnValue = "aaa";
+    event.sender.send('asynchronous-reply', 'unrecognized arg');
 });
