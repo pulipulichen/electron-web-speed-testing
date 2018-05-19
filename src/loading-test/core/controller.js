@@ -1,6 +1,7 @@
 var _controllers_list = [
     "main_page",
-    "request_config"
+    "request_config",
+    "result_list",
     //"page2"
 ];
 

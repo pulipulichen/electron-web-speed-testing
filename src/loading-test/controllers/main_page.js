@@ -118,7 +118,7 @@ main_page = {
                 "spend_time": -1,
                 "passed": false,
                 "passed_count": 0,
-                "job_result": [],
+                "jobs_result": [],
             };
             
             var _loop = function (_j) {
@@ -126,7 +126,7 @@ main_page = {
                 if (_j < _jobs_count) {
                     var _config = _jobs[_j];
                     main_page.methods.run_text_job(_config, function (_result) {
-                        _results.job_result.push(_result);
+                        _results.jobs_result.push(_result);
                         //console.log(_result);
                         if (_result.passed === true) {
                             _results.passed_count++;
@@ -140,7 +140,7 @@ main_page = {
                     _results.spend_time = _spend_time;
                     _results.passed = (_results.passed_count === _jobs_count);
                     
-                    var _first_result = _results.job_result[0];
+                    var _first_result = _results.jobs_result[0];
                     _results.uri = _first_result.uri;
                     _results.url = _first_result.url;
                     
@@ -296,8 +296,12 @@ main_page = {
         
         // ---------------
         
-        nav_result_detail: function () {
-            console.log("nav_result_detail");
+        nav_result_detail: function (_result_id) {
+            //console.log(_index);
+            result_list.data.request_id = _result_id;
+            result_list.data.jobs_result = main_page.data.results[_result_id];
+            
+            this.$emit('push-page', result_list);
         },
     }
 };

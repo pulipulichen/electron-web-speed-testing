@@ -153,7 +153,7 @@
             <v-ons-col v-bind:title="result.url">
                 {{ result.uri }}
             </v-ons-col>
-            <v-ons-col class="text-center" width="2rem">
+            <v-ons-col class="text-center" width="2rem" @click="nav_result_detail(index)">
                 <v-ons-button modifier="quiet">
                     <ons-icon icon="fa-angle-right"></ons-icon>
                 </v-ons-button>
