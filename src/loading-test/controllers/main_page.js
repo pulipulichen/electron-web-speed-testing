@@ -155,9 +155,18 @@ main_page = {
                 behavior: 'smooth'
               });
         },
+        
+        // ---------------
+        
         nav_request_config: function () {
-            this.$emit('push-page', request_config_vm);
-            console.log("nav");
+            console.log("nav_request_config");
+            this.$emit('push-page', request_config);
+        },
+        
+        // ---------------
+        
+        nav_result_detail: function () {
+            console.log("nav_result_detail");
         },
     }
 };

@@ -31,16 +31,16 @@
 
 
         <div class="right">
-            <ons-toolbar-button @click="main_page.jump_to_config" v-show="main_page.data.results.length > 0">
+            <ons-toolbar-button @click="jump_to_config" v-show="main_page.data.results.length > 0">
                 <ons-icon icon="fa-cog"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button v-if="main_page.data.status_running === false" @click="main_page.job_run">
+            <ons-toolbar-button v-if="main_page.data.status_running === false" @click="job_run">
                 <ons-icon icon="fa-play-circle"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button @click="main_page.job_stop" v-if="main_page.data.status_running === true">
+            <ons-toolbar-button @click="job_stop" v-if="main_page.data.status_running === true">
                 <ons-icon icon="fa-pause"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button @click="main_page.data.results_clear" v-show="main_page.data.results.length > 0">
+            <ons-toolbar-button @click="results_clear" v-show="main_page.data.results.length > 0">
                 <ons-icon icon="fa-trash"></ons-icon>
             </ons-toolbar-button>
         </div>
@@ -59,7 +59,8 @@
             Mock user number
             </label>
             <div class="right">
-                <v-ons-input placeholder="Job count" float v-model="main_page.data.status_total_job" type="number" class="text-right"></v-ons-input>
+                <v-ons-input placeholder="Job count" float 
+                             v-model="main_page.data.status_total_job" type="number" class="text-right"></v-ons-input>
             </div>
         </v-ons-list-item>
         
@@ -89,7 +90,7 @@
                 <v-ons-button modifier="quiet">
                     <ons-icon icon="md-minus-circle"></ons-icon>
                 </v-ons-button>
-                <v-ons-button modifier="quiet" @click="main_page.nav_request_config">
+                <v-ons-button modifier="quiet" @click="nav_request_config">
                     <ons-icon icon="fa-cog"></ons-icon>
                 </v-ons-button>
             </v-ons-col>

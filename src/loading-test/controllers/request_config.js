@@ -1,3 +1,6 @@
-request_config_data = {
-    a: 1
+request_config = {
+    key: "request_config",
+    data: {
+        request_config: 1
+    }
 };
