@@ -1,4 +1,4 @@
-const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain} = require('electron');
+const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain, session} = require('electron');
 let fs = require('fs');
 const osTmpdir = require('os-tmpdir');
 let mainWindow;
@@ -38,6 +38,7 @@ function createWindow () {
     
     mainWindow.on('closed', function () {
         mainWindow = null;
+        app.quit();
     });
     
     // Tray
@@ -136,13 +137,31 @@ app.on('activate', function () {
 
 // ---------------------------------------------
 
-/*
+
 ipcMain.on('open-second-window', (event, arg)=> {
     //dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: JSON.stringify(arg)}
     //    , function (buttonIndex) {});
     //return "aaa";
     //mainWindow.webContents.ttt(arg);
     //event.returnValue = "aaa";
-    event.sender.send('asynchronous-reply', 'unrecognized arg');
+    
+    var _win = new BrowserWindow({show: false});
+    _win.loadURL(arg, {
+        //extraHeaders: 'Referer: http://www.google.com.twaaaaaa/'
+    });
+    _win.webContents.once('did-finish-load', function () {
+        //_win.show();
+        
+        /*
+        _win.webContents.executeJavaScript('resp = function () {return "AAA"}', true, function (result) {
+          //console.log(result) // 會是 fetch 執行結果的 JSON 物件
+          event.sender.send('asynchronous-reply', result);
+        })
+        */
+       _win.webContents.executeJavaScript('document.body.innerHTML', true, result => {
+      console.log('callback result', result);
+      event.sender.send('asynchronous-reply', result);
+    })
+        
+    });
 });
-*/

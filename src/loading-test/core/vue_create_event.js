@@ -39,13 +39,18 @@ vue_create_event = function () {
         
 };
 
-/*
+
 const {ipcRenderer} = require('electron')
 
+//ipcRenderer.send('open-second-window', "http://localhost/nodejs-projects/electron-loading-test/[test]/referer.php")
+ipcRenderer.send('open-second-window', "https://stackoverflow.com/questions/4149890/how-get-iframe-body-after-load")
+ipcRenderer.on('asynchronous-reply', function (event, result){
+    console.log("r1 " + result);
+});
+
+/*
 r1 = ipcRenderer;
 r2 = ipcRenderer;
-//ipcRenderer.send('open-second-window', 'an-argument')
-
 r1.send('open-second-window', "aa");
 r1.on('asynchronous-reply', function (event, result){
     console.log("r1 " + result);
