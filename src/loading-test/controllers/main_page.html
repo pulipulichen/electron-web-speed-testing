@@ -40,9 +40,11 @@
             <ons-toolbar-button @click="job_stop" v-if="main_page.data.status_running === true">
                 <ons-icon icon="fa-pause"></ons-icon>
             </ons-toolbar-button>
+            <!--
             <ons-toolbar-button @click="results_clear" v-show="main_page.data.results.length > 0">
                 <ons-icon icon="fa-trash"></ons-icon>
             </ons-toolbar-button>
+            -->
         </div>
     </v-ons-toolbar>
 
@@ -93,9 +95,11 @@
         </v-ons-list-item>
         
         <v-ons-list-header>
-            Request URL Configuration
+            Request Job Configuration
         </v-ons-list-header>
-        <v-ons-list-item v-for="(request_job, index) in main_page.data.request_jobs">
+        <v-ons-list-item 
+            v-for="(request_job, index) in main_page.data.request_jobs"
+            v-bind:class="{ failed: (PULI_UTILS.is_json(request_job.send_data, false) === false)}">
             <v-ons-col width="3rem">
                 # {{ index+1 }}
             </v-ons-col>

@@ -13,11 +13,12 @@ ons-toolbar h1 {
 }
 
 
-.panel_results ons-list-item.failed {
+ons-list-item.failed {
     background-color: #F3969A;
     color: white;
 }
-.panel_results ons-list-item.failed .button--quiet {
+ons-list-item.failed .button--quiet,
+ons-list-item.failed input {
     color: white;
 }
 
