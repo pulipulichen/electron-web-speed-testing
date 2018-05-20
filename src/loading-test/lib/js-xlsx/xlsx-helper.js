@@ -35,7 +35,12 @@ var xlsx_helper_download = function (type, filename, data) {
     }
     
     //XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'})
-    XLSX.writeFile(wb, filename || ('test.' + (type || 'xlsx')));
+    if (typeof(ELECTRON_ENABLE) === 'undefined' || ELECTRON_ENABLE === false) {
+        XLSX.writeFile(wb, filename || ('test.' + (type || 'xlsx')));
+    }
+    else {
+        console.log(XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'}));
+    }
 };
 
 
