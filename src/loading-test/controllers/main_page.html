@@ -1,4 +1,3 @@
-
 <v-ons-page id="main_page" v-bind:class="{ wait: (main_page.data.status_running)}">
     <v-ons-toolbar>
         <div class="left">
@@ -162,8 +161,6 @@
             </v-ons-button>
         </v-ons-list-item>
     </v-ons-list>
-
-    <hr v-show="main_page.data.results.length" />
     
     <v-ons-list modifier="inset" v-show="main_page.data.results.length" class="panel panel_results" id="panel_results">
         <v-ons-list-header id="panel_results_header">
@@ -195,10 +192,4 @@
                 
         </v-ons-list-item>
     </v-ons-list>
-
-    <!-- ---------------------------------------------- -->
-    <!-- Result -->
-
-
-
 </v-ons-page>

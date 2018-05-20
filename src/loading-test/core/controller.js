@@ -3,14 +3,55 @@ var _controllers_list = [
     "request_config",
     "result_list",
     "result_data",
+    "sliding_menu",
 ];
 
 // ---------------------------
 
+var _load_controller_template = function (_callback) {
+    $.get('core/controller.html', function (_controller_template) {
+        $.get('controllers/sliding_menu.html', function (_sliding_menu_template) {
+            _controller_template = _controller_template.replace('<v-ons-splitter-side />', _sliding_menu_template);
+            _callback(_controller_template);
+        });
+    });
+};
 
-var _vue_ready = function () {
+var _build_vue_setting = function (_callback) {
     var _first_controller_name = _controllers_list[0];
     var _first_controller = _controllers[_first_controller_name];
+    
+    var _vue_setting = {
+        el: '#app',
+        data: {
+            pageStack: [_first_controller]
+        },
+        created: _vue_create
+    };
+    
+    _load_controller_template(function (_template) {
+        _vue_setting.template = _template;
+        _callback(_vue_setting);
+    });
+};
+
+var _vue_create = function () {
+    $(function () {
+                // 先把每個controller的ready做完
+                for (var _name in _controllers) {
+                    var _controller = _controllers[_name];
+                    if (typeof(_controller.methods) === "object" 
+                            && typeof(_controller.methods.ready) === "function" ) {
+                        _controller.methods.ready();
+                    }
+                }
+
+                vue_create_event();
+            });
+};
+
+var _vue_ready = function (_vue_setting) {
+    
     //console.log(_first_controller);
     
     /*
@@ -23,29 +64,6 @@ var _vue_ready = function () {
     }
     */
     
-    var _vue_setting = {
-        el: '#app',
-        //template: _first_controller.template,
-        //data: _first_controller.data,
-        template: '#controller',
-        data: {
-            pageStack: [_first_controller]
-        },
-        created: function () {
-            $(function () {
-                // 先把每個controller的ready做完
-                for (var _name in _controllers) {
-                    var _controller = _controllers[_name];
-                    if (typeof(_controller.methods) === "object" 
-                            && typeof(_controller.methods.ready) === "function" ) {
-                        _controller.methods.ready();
-                    }
-                }
-
-                vue_create_event();
-            });
-        }
-    };
     
     vm = new Vue(_vue_setting);
 };
@@ -96,7 +114,9 @@ var _loop = function (_i) {
         });
     }
     else {
-        _vue_ready();
+        _build_vue_setting(function (_vue_setting) {
+            _vue_ready(_vue_setting);
+        });
     }
 };
 
