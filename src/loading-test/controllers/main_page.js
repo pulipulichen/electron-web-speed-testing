@@ -15,7 +15,7 @@ main_page = {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
                 "data_type" : "text", //  text, json , web
-                "send_data": '{d:3'
+                "send_data": '{d:3}'
             },
             /*
             {

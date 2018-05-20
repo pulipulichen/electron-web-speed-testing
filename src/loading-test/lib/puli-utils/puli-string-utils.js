@@ -2,32 +2,6 @@ if (typeof(PULI_UTILS) === "undefined") {
     PULI_UTILS = {};
 }
 
-/**
-var l = getLocation("http://example.com/path");
-console.debug(l.hostname)
->> "example.com"
-console.debug(l.pathname)
->> "/path"
- * @param {type} _url
- * @returns {Element|PULI_UTILS.parse_url._a}
- */
-PULI_UTILS.parse_url = function (_url) {
-    var _a = document.createElement("a");
-    _a.href = _url;
-    return _a;
-};
-
-PULI_UTILS.parse_uri = function (_url) {
-    var _a = this.parse_url(_url);
-    var _uri = _a.pathname;
-    if (typeof(_a.search) === "string") {
-        _uri = _uri + _a.search;
-    }
-    if (typeof(_a.hash) === "string") {
-        _uri = _uri + _a.hash;
-    }
-    return _uri;
-};
 
 PULI_UTILS.is_json = function (_json_string, _strict) {
     if (typeof(_json_string) !== "string") {
@@ -60,4 +34,11 @@ PULI_UTILS.is_json = function (_json_string, _strict) {
 
 PULI_UTILS.trim = function (_str) {
     return _str.trim();
+};
+
+PULI_UTILS._uuid_counter = 0;
+PULI_UTILS.create_uuid = function () {
+    var _uuid = "puli_uuid_" + PULI_UTILS._uuid_counter;
+    PULI_UTILS._uuid_counter++;
+    return _uuid;
 };
