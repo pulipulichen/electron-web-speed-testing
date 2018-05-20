@@ -38,6 +38,10 @@ var xlsx_helper_download = function (type, filename, data) {
     XLSX.writeFile(wb, filename || ('test.' + (type || 'xlsx')));
 };
 
+var xlsx_helper_open = function (_callback) {
+    
+};
+
 /*
 setTimeout(function () {
     //var data = [{name:"Sheet", age: 12}, {name:"JS", age: 24}]
