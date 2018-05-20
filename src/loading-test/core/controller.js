@@ -24,7 +24,8 @@ var _build_vue_setting = function (_callback) {
     var _vue_setting = {
         el: '#app',
         data: {
-            pageStack: [_first_controller]
+            pageStack: [_first_controller],
+            sliding_menu: sliding_menu
         },
         created: _vue_create
     };
@@ -37,17 +38,17 @@ var _build_vue_setting = function (_callback) {
 
 var _vue_create = function () {
     $(function () {
-                // 先把每個controller的ready做完
-                for (var _name in _controllers) {
-                    var _controller = _controllers[_name];
-                    if (typeof(_controller.methods) === "object" 
-                            && typeof(_controller.methods.ready) === "function" ) {
-                        _controller.methods.ready();
-                    }
-                }
+        // 先把每個controller的ready做完
+        for (var _name in _controllers) {
+            var _controller = _controllers[_name];
+            if (typeof (_controller.methods) === "object"
+                    && typeof (_controller.methods.ready) === "function") {
+                _controller.methods.ready();
+            }
+        }
 
-                vue_create_event();
-            });
+        vue_create_event();
+    });
 };
 
 var _vue_ready = function (_vue_setting) {
