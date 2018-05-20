@@ -10,20 +10,20 @@
     
     <v-ons-list modifier="inset" id="request_configuration" class="panel">
         <v-ons-list-item>
-            <label class="center" for="request_config_url">
+            <label class="left" for="request_config_url">
                 Request URL
             </label>
-            <div class="right">
+            <div class="center">
                 <v-ons-input placeholder="Request URL" float 
                              v-model="request_config.data.request_config.url" class="text-right" id="request_config_url"></v-ons-input>
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center" for="request_config_method">
+            <label class="left" for="request_config_method">
                 Method
             </label>
-            <div class="right">
+            <div class="center">
                 <v-ons-select v-model="request_config.data.request_config.method" id="request_config_method">
                     <option value="GET">GET</option>
                     <option value="POST">POST</option>
@@ -32,10 +32,10 @@
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center" for="request_config_data_type">
+            <label class="left" for="request_config_data_type">
                 Data Type
             </label>
-            <div class="right">
+            <div class="center">
                 <v-ons-select v-model="request_config.data.request_config.data_type" id="request_config_data_type">
                     <option value="text">Text</option>
                     <option value="json">JSON</option>
@@ -45,13 +45,30 @@
         </v-ons-list-item>
         
         <v-ons-list-item class="request_config_data_list_item" >
-            <label class="center" for="request_config_send_data">
+            <label class="left" for="request_config_send_data">
                 Send Data
             </label>
-            <div class="right">
-                <textarea class="textarea textarea--transparent" id="request_config_send_data" 
+            <div class="center ui form">
+                
+                <span class="list-item__title" 
+                      v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false) === false">
+                    <a class="ui pointing below red basic label" target="_blank" v-bind:href="'https://jsonlint.com/?json='+ request_config.data.request_config.send_data">
+                        Send data should be valid JSON format. Check it!
+                    </a>
+                </span>
+                <span class="list-item__title" 
+                      v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false)">
+                    <span class="ui pointing below basic label">
+                        Send data is valid JSON format.
+                    </span>
+                </span>
+                <div class="list-item__subtitle ui form">
+                    <textarea id="request_config_send_data" 
                     v-model="request_config.data.request_config.send_data"
                     placeholder="Request Data"></textarea>
+                </div>
+                
+                
             </div>
         </v-ons-list-item>
     </v-ons-list>
