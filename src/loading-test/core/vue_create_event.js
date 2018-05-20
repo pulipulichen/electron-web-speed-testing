@@ -67,3 +67,10 @@ r2.on('asynchronous-reply', function (event, result){
     console.log("r2 " + result);
 });
 */
+
+/*
+const {ipcRenderer} = require('electron');
+
+//ipcRenderer.send('open-second-window', "http://localhost/nodejs-projects/electron-loading-test/[test]/referer.php")
+ipcRenderer.send('save-file', "test.txt", "https://stackoverflow.com/questions/4149890/how-get-iframe-body-after-load")
+*/

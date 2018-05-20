@@ -1,5 +1,6 @@
 
 var xlsx_helper_download = function (type, filename, data) {
+    //console.log(filename);
     //var elt = document.getElementById('data-table');
     //var wb = XLSX.utils.table_to_book(elt, {sheet: "Sheet JS"});
     
@@ -39,7 +40,13 @@ var xlsx_helper_download = function (type, filename, data) {
         XLSX.writeFile(wb, filename || ('test.' + (type || 'xlsx')));
     }
     else {
-        console.log(XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'}));
+        var _filters = [
+            {
+                name: "Open Document Spreadsheet",
+                extensions: ["ods"]
+            }
+        ];
+        ipcRenderer.send('save-file', filename, JSON.stringify(_filters), XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'}));
     }
 };
 

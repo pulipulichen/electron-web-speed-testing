@@ -137,6 +137,24 @@ app.on('activate', function () {
 
 // ---------------------------------------------
 
+ipcMain.on('save-file', (event, _filename, _filters, _content) => {
+    //var _filename = arg[0];
+    //var content = arg[1];
+    // You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
+    dialog.showSaveDialog({
+        defaultPath: _filename,
+        filters : JSON.parse(_filters)
+    },(fileName) => {
+        if (fileName === undefined) {
+            console.log("You didn't save the file");
+            return;
+        }
+
+        // fileName is a string that contains the path and filename created in the save file dialog.  
+        fs.writeFile(fileName, _content, 'base64');
+    });
+}); // ipcMain.on('save-file', (event, arg)=> {
+
 
 /**
  * @deprecated 20180520 測試用
