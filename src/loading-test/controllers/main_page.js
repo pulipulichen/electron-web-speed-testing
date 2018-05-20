@@ -266,14 +266,23 @@ main_page = {
                 _total = _total + main_page.data.results[_i].spend_time;
             }
             var _avg = Math.floor((_total / main_page.data.results.length) * 1000) / 1000;
+            
+            /
+            
             main_page.data.status_average_spend_time = _avg;
         },
 
         update_title: function () {
-            var _title = main_page.data.title;
+            var _title = null;
 
-            if (main_page.data.status_percent > 0) {
-                _title = main_page.data.status_percent + "% (" + main_page.data.status_average_spend_time + "s)";
+            if (main_page.data.status_percent > 0 && main_page.data.status_percent < 100) {
+                _title = "(" + main_page.data.status_average_spend_time + "s) " + main_page.data.status_percent + "%";
+            }
+            else if (main_page.data.status_percent === 100) {
+                _title = "(" + main_page.data.status_average_spend_time + "s) " + i18n.t(main_page.data.title);
+            }
+            else {
+                _title = i18n.t(main_page.data.title);
             }
 
             document.title = _title;
