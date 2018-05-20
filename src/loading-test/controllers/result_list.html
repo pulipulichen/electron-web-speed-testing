@@ -16,7 +16,9 @@
     </v-ons-toolbar>
 
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
-        <v-ons-list-item v-show="main_page.data.status_running === false" modifier="nodivider">
+        <v-ons-list-item v-show="main_page.data.status_running === false" 
+                         modifier="nodivider"
+                         @click="save_results_details">
             <v-ons-row>
                 <v-ons-col>
                     <v-ons-button modifier="large" class='ui button'>

@@ -430,7 +430,14 @@ main_page = {
                     };
                     
                     for (var _key in _job_result) {
-                        _row[_key] = _job_result[_key];
+                        if (_key === 'uri') {
+                            continue;
+                        }
+                        var _row_key = _key;
+                        if (_key === "data") {
+                            _row_key = 'response';
+                        }
+                        _row[_row_key] = _job_result[_key];
                     }
                     
                     for (var _key in _config) {
