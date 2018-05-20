@@ -73,14 +73,14 @@
         
         <v-ons-list-item>
             <v-ons-col>
-                <v-ons-button modifier="large">
+                <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-folder-open"></ons-icon>
                     LOAD CONFIG
                 </v-ons-button>
             </v-ons-col>
             <v-ons-col width="10px"></v-ons-col>
             <v-ons-col>
-                <v-ons-button modifier="large">
+                <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-save"></ons-icon>
                     SAVE CONFIG
                 </v-ons-button>
@@ -160,13 +160,13 @@
         
         
         <v-ons-list-item v-if="main_page.data.status_running === false" @click="job_run">
-            <v-ons-button modifier="large">
+            <v-ons-button modifier="large" class='ui primary button'>
                 <ons-icon icon="fa-play-circle"></ons-icon>
                 RUN
             </v-ons-button>
         </v-ons-list-item>
         <v-ons-list-item v-if="main_page.data.status_running === true" @click="job_stop">
-            <v-ons-button modifier="large">
+            <v-ons-button modifier="large" class='ui primary button'>
                 <ons-icon icon="fa-pause"></ons-icon>
                 STOP
             </v-ons-button>
@@ -179,19 +179,21 @@
         </v-ons-list-header>
 
         <v-ons-list-item v-show="main_page.data.status_running === false" modifier="nodivider">
+            <v-ons-row>
             <v-ons-col>
-                <v-ons-button modifier="large">
+                <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-save"></ons-icon>
-                    {{ i18n.t("SAVE RESULTS SUMMARY") }}
+                    {{ i18n.t("SUMMARY") }}
                 </v-ons-button>
             </v-ons-col>
             <v-ons-col width="10px"></v-ons-col>
             <v-ons-col>
-                <v-ons-button modifier="large">
+                <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-save"></ons-icon>
-                    {{ i18n.t("SAVE RESULTS DETAILS") }}
+                    {{ i18n.t("DETAILS") }}
                 </v-ons-button>
             </v-ons-col>
+            </v-ons-row>
         </v-ons-list-item>
 
         <v-ons-list-item v-show="main_page.data.results.length > 0 && main_page.data.status_failed_job > 0">
