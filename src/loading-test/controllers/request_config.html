@@ -52,7 +52,9 @@
                 
                 <span class="list-item__title" 
                       v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false) === false">
-                    <a class="ui pointing below red basic label" target="_blank" v-bind:href="'https://jsonlint.com/?json='+ request_config.data.request_config.send_data">
+                    <a class="ui pointing below red basic label" 
+                       target="_blank" 
+                       v-bind:href="'https://jsonlint.com/?json='+ request_config.data.request_config.send_data">
                         Send data should be valid JSON format. Check it!
                     </a>
                 </span>
