@@ -25,3 +25,12 @@ ons-toolbar h1 {
     -webkit-user-select: auto !important;
     cursor: auto !important;
 }
+
+.vertical-top {
+    vertical-align: top !important;
+}
+
+ons-list-item > .left {
+    border-bottom: 1px solid #ccc;
+    width: 9rem;
+}

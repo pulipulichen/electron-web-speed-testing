@@ -6,8 +6,9 @@ result_data = {
         url: "",
         method: "",
         data_type: "",
-        sned_data: "",
+        send_data: "",
         status: 200,
+        passed: false,
         response: "{}"
     }
 };

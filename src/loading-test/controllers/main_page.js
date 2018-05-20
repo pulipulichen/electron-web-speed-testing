@@ -14,7 +14,7 @@ main_page = {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
                 "data_type" : "json", //  json , web
-                "send_data": '{d:3}'
+                "send_data": '{d:3'
             },
             {
                 //"url": "http://www.google.com.tw",
@@ -196,7 +196,7 @@ main_page = {
                 if (_config.data_type === "json") {
                     if (PULI_UTILS.is_json(_url_return, true) === false) {
                         _passed = false;
-                        _status = "Data type is not JSON";
+                        _status = "Responsed data type is not JSON";
                     }
                 }
                 

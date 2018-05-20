@@ -4,54 +4,81 @@
         <v-ons-back-button>Back</v-ons-back-button>
       </div>
       <div class="center" v-bind:title="result_data.data.url">
-          <h1> #{{ result_data.data.result_id }} {{ result_data.data.uri }}</h1>
+          <h1> 
+            <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
+            <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
+            #{{ result_data.data.result_id }} {{ result_data.data.uri }}
+          </h1>
       </div>
     </v-ons-toolbar>
     
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
         <v-ons-list-item>
-            <label class="center">
+            <label class="left">
+                URL
+            </label>
+            <div class="center">
+                {{ result_data.data.url }}
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="left">
                 Method
             </label>
-            <div class="right">
+            <div class="center">
                 {{ result_data.data.method }}
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center">
+            <label class="left vertical-top">
                 Send Data
             </label>
-            <div class="right selectable">
-                {{ result_data.data.send_data }}
+            <div class="center">
+                <div class="list-item__title ui form">
+                    <textarea readonly="readonly" style="height: 3rem;">{{ result_data.data.send_data }}</textarea>
+                </div>
+                <span class="list-item__subtitle" 
+                      v-show="PULI_UTILS.is_json(result_data.data.send_data) === false">
+                    <span class="ui pointing red basic label">
+                        Send data should be valid JSON format.
+                    </span>
+                </span>
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center">
+            <label class="left">
                 Data Type
             </label>
-            <div class="right">
+            <div class="center">
                 {{ result_data.data.data_type }}
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center">
+            <label class="left">
                 Status
             </label>
-            <div class="right">
-                <div v-show="PULI_UTILS.is_int(result_data.data.status)">{{ result_data.data.status }} <br /></div>
-                <div>{{ status_code(result_data.data.status) }} </div>
+            <div class="center">
+                <div class="list-item__title">
+                    <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
+                    <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
+                    {{ result_data.data.status }}
+                </div>
+                <span class="list-item__subtitle" v-show="PULI_UTILS.is_int(result_data.data.status)">
+                    {{ status_code(result_data.data.status) }}
+                </span>
             </div>
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center">
+            <label class="left">
                 Response
             </label>
-            <div class="right selectable">
-                {{ result_data.data.response }}
+            <div class="center selectable ui form">
+                <textarea readonly="readonly" style="max-height: calc(100vh - 32rem);">{{ result_data.data.response }}</textarea>
             </div>
         </v-ons-list-item>
     </v-ons-list>

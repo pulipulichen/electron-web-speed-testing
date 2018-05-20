@@ -57,3 +57,7 @@ PULI_UTILS.is_json = function (_json_string, _strict) {
     
     return false;
 };
+
+PULI_UTILS.trim = function (_str) {
+    return _str.trim();
+};
