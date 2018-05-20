@@ -10,5 +10,11 @@ result_data = {
         status: 200,
         passed: false,
         response: "{}"
+    },
+    methods: {
+        request_open: function () {
+            var _config = result_data.data;
+            PULI_UTILS.window_popup(_config);
+        }
     }
 };

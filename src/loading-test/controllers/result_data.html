@@ -11,6 +11,10 @@
             </h1>
         </div>
         <div class="right">
+            <ons-toolbar-button @click='request_open'>
+                <ons-icon icon="fa-external-link-square"></ons-icon>
+                {{ i18n.t("Test Open") }}
+            </ons-toolbar-button>
             <ons-toolbar-button>
                 <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#result-detail" target="_blank">
                     <ons-icon icon="fa-question-circle"></ons-icon>
@@ -47,7 +51,7 @@
                     <textarea readonly="readonly" style="height: 3rem;">{{ result_data.data.send_data }}</textarea>
                 </div>
                 <span class="list-item__subtitle" 
-                      v-show="PULI_UTILS.is_json(result_data.data.send_data) === false">
+                      v-show="PULI_UTILS.is_json(result_data.data.send_data, false) === false">
                     <a class="ui pointing red basic label"
                        target="_blank" 
                        v-bind:href="'https://jsonlint.com/?json='+ result_data.data.send_data">
