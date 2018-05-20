@@ -1,17 +1,24 @@
 <v-ons-page>
     <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button>Back</v-ons-back-button>
-      </div>
-      <div class="center">
-          <h1> #{{ result_list.data.result_id+1 }} Results</h1>
-      </div>
+        <div class="left">
+            <v-ons-back-button>Back</v-ons-back-button>
+        </div>
+        <div class="center">
+            <h1> #{{ result_list.data.result_id+1 }} Results</h1>
+        </div>
+        <div class="right">
+            <ons-toolbar-button>
+                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#results-detail-list" target="_blank">
+                    <ons-icon icon="fa-question-circle"></ons-icon>
+                </a>
+            </ons-toolbar-button>
+        </div>
     </v-ons-toolbar>
-    
+
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
         <v-ons-list-item v-for="(result, index) in result_list.data.jobs_result" 
-            class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
-            @click="nav_result_data(result_list.data.result_id, index)">
+                         class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
+                         @click="nav_result_data(result_list.data.result_id, index)">
             <v-ons-col width="4rem">
                 #{{ result_list.data.result_id+1 }}-{{ index + 1 }}
             </v-ons-col>
@@ -32,7 +39,7 @@
                     <ons-icon icon="fa-angle-right"></ons-icon>
                 </v-ons-button>
             </v-ons-col>
-                
+
         </v-ons-list-item>
     </v-ons-list>
 </v-ons-page>
