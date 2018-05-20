@@ -364,5 +364,6 @@ main_page = {
                 main_page.data.ui_sliding_menu_mode = document.getElementById("sliding_menu").mode;
             }
         }
+        
     }
 };

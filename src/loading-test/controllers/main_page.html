@@ -1,38 +1,4 @@
-<v-ons-splitter>
-    <v-ons-splitter-side
-       width="300px" collapse="portrait" side="left"
-       id="sliding_menu"
-       v-bind:class="{opened: main_page.data.ui_sliding_menu_open}"
-       :open.sync="main_page.data.ui_sliding_menu_open">
-      <v-ons-page>
-          <h1>
-              {{ i18n.t("LOADING TEST") }}
-          </h1>
-        <v-ons-list>
-          <v-ons-list-item tappable modifier="chevron" @click="jump_to_config">
-            <div class="center">Job Configuration</div>
-          </v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron" 
-                           @click="jump_to_results"
-                           v-show="main_page.data.results.length">
-            <div class="center">Results</div>
-          </v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
-            <a class="center" href="https://github.com/pulipulichen/electron-loading-test/wiki/Help" target="_blank">
-                Help
-            </a>
-          </v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
-            <a class="center" href="https://github.com/pulipulichen/electron-loading-test" target="_blank">
-                About
-            </a>
-          </v-ons-list-item>
-        </v-ons-list>
-      </v-ons-page>
-    </v-ons-splitter-side>
 
-    
-    <v-ons-splitter-content>
 <v-ons-page id="main_page" v-bind:class="{ wait: (main_page.data.status_running)}">
     <v-ons-toolbar>
         <div class="left">
@@ -236,7 +202,3 @@
 
 
 </v-ons-page>
-    </v-ons-splitter-content>
-    
-    
-</v-ons-splitter>

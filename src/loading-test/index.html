@@ -38,10 +38,28 @@
 <body>
     
     <template id="controller">
-        <v-ons-navigator swipeable
-                         :page-stack="pageStack"
+  <v-ons-splitter>
+    <v-ons-splitter-side
+      width="150px" collapse="" side="left"
+    >
+      <v-ons-page>
+        <v-ons-list>
+          <v-ons-list-item
+            tappable modifier="chevron"
+          >aaa
+          </v-ons-list-item>
+        </v-ons-list>
+      </v-ons-page>
+    </v-ons-splitter-side>
+
+    <v-ons-splitter-content>
+      <v-ons-navigator :page-stack="pageStack"
                          @push-page="pageStack.push($event)"
                          ></v-ons-navigator>
+    </v-ons-splitter-content>
+  </v-ons-splitter>
+        
+        
     </template>
     
     <div id="app"></div>

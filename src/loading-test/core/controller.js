@@ -23,8 +23,7 @@ var _vue_ready = function () {
     }
     */
     
-    
-    vm = new Vue({
+    var _vue_setting = {
         el: '#app',
         //template: _first_controller.template,
         //data: _first_controller.data,
@@ -45,8 +44,10 @@ var _vue_ready = function () {
 
                 vue_create_event();
             });
-        },
-    });
+        }
+    };
+    
+    vm = new Vue(_vue_setting);
 };
 
 // ---------------------------
