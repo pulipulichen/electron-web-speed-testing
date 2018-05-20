@@ -46,7 +46,8 @@
                 <v-ons-select v-model="request_config.data.request_config.data_type" id="request_config_data_type">
                     <option value="text">Text</option>
                     <option value="json">JSON</option>
-                    <option value="web" v-show="ELECTRON_ENABLE">Web</option>
+                    <option value="web" :disabled="ELECTRON_ENABLE === false" 
+                            :title="i18n.t('Only work in Electron or same-domain.')">Web</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>

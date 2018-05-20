@@ -3,6 +3,7 @@ main_page = {
     data: {
         title: "LOADING TEST",
         status_running: false,
+        
         status_passed_job: 0,
         status_failed_job: 0,
         status_total_job: 3,

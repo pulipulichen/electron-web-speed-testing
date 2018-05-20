@@ -12,7 +12,7 @@ ons-toolbar h1 {
     cursor: pointer !important;
 }
 
-.panel ons-list-item .center ons-input {
+ons-list-item ons-input {
     width: 100%;
 }
 
@@ -21,12 +21,17 @@ ons-list-item.failed {
     color: white;
 }
 ons-list-item.failed .button--quiet,
-ons-list-item.failed input {
+ons-list-item.failed input,
+ons-list-item.failed input:disabled {
     color: white;
 }
 
 ons-list-item.failed.list-item--chevron:before {
     border-color: white;
+}
+
+ons-list-item ons-select {
+    width: 100%;
 }
 
 .selectable {

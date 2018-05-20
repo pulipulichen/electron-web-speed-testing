@@ -103,7 +103,10 @@
                 
                 <span class="list-item__title">
                     <v-ons-input placeholder="Job count" float 
-                             v-model="main_page.data.status_total_job" type="number" class="text-right" id="status_total_job"></v-ons-input>
+                             v-model="main_page.data.status_total_job" 
+                             :disabled="main_page.data.status_running"
+                             type="number" 
+                             class="text-right" id="status_total_job"></v-ons-input>
                 </span>
                 <div class="list-item__subtitle align-right" 
                      v-show="main_page.data.status_total_job > CONFIG.max_mock_user_number">
@@ -121,7 +124,9 @@
                 Execute mode
             </label>
             <div class="center">
-                <v-ons-select v-model="main_page.config_execute_mode" id="switch_config_execute_mode">
+                <v-ons-select v-model="main_page.config_execute_mode" 
+                              id="switch_config_execute_mode"
+                              :disabled="main_page.data.status_running">
                     <option value="simultaneously">Simultaneously</option>
                     <option value="queue">queue</option>
                 </v-ons-select>
@@ -137,10 +142,14 @@
             <v-ons-col width="3rem">
                 # {{ index+1 }}
             </v-ons-col>
-            <v-ons-col>
-                <v-ons-input placeholder="Test URL" float v-model="request_job.url" id="base_url"></v-ons-input>
+            <v-ons-col class='base-url'>
+                <v-ons-input placeholder="Test URL" float 
+                             v-model="request_job.url" id="base_url"
+                             :disabled="main_page.data.status_running"></v-ons-input>
             </v-ons-col>
-            <v-ons-col class="text-right">
+            <v-ons-col class="text-right" 
+                       width="8rem"
+                       v-show="main_page.data.status_running === false">
                 <v-ons-button modifier="quiet" @click="add_request_job(index)">
                     <ons-icon icon="md-plus-circle"></ons-icon>
                 </v-ons-button>
