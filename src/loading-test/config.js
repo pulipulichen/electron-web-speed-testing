@@ -1,3 +1,4 @@
 CONFIG = {
-    locate: "zh-tw"
+    locate: "zh-tw",
+    max_request: 2
 };

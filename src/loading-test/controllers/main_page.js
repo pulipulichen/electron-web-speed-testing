@@ -5,7 +5,7 @@ main_page = {
         status_running: false,
         status_passed_job: 0,
         status_failed_job: 0,
-        status_total_job: 3,
+        status_total_job: 5,
         status_percent: 0,
         status_average_spend_time: 0,
 
@@ -16,6 +16,7 @@ main_page = {
                 "data_type" : "json", //  json , web
                 "send_data": '{d:3'
             },
+            /*
             {
                 //"url": "http://www.google.com.tw",
                 "url": "http://localhost",
@@ -23,6 +24,7 @@ main_page = {
                 "data_type" : "text", //  application/json , text/html
                 "send_data": "{q: 'test'}"
             },
+            */
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         
