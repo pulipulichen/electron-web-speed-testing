@@ -36,6 +36,13 @@
 }
 
 /* ------------------------------------ */
+#sliding_menu {
+    border-right: 1px solid #ccc;
+}
+#sliding_menu.opened {
+    box-shadow: 2px 0px 5px 0px #333;
+}
+
 #sliding_menu h1 {
     padding-left: 10px;
     padding-top: 10px;

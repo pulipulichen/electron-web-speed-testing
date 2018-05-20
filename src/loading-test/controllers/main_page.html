@@ -1,7 +1,8 @@
 <v-ons-splitter>
     <v-ons-splitter-side
-       width="300px" collapse="" side="left"
+       width="300px" collapse="portrait" side="left"
        id="sliding_menu"
+       v-bind:class="{opened: main_page.data.ui_sliding_menu_open}"
        :open.sync="main_page.data.ui_sliding_menu_open">
       <v-ons-page>
           <h1>
@@ -36,7 +37,7 @@
     <v-ons-toolbar>
         <div class="left">
             <v-ons-row>
-                <v-ons-col @click='open_sliding_menu()'>
+                <v-ons-col @click='open_sliding_menu()' v-show="main_page.data.ui_sliding_menu_mode === 'collapse'">
                     <ons-toolbar-button>
                         <v-ons-icon icon="fa-navicon"></v-ons-icon>
                     </ons-toolbar-button>

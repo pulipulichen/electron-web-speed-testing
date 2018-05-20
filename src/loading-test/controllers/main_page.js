@@ -5,7 +5,7 @@ main_page = {
         status_running: false,
         status_passed_job: 0,
         status_failed_job: 0,
-        status_total_job: 5,
+        status_total_job: 3,
         status_percent: 0,
         status_average_spend_time: 0,
 
@@ -30,7 +30,8 @@ main_page = {
         
         //config_execute_mode: "simultaneously",  // simultaneously , queue
         config_execute_mode: "queue",  // simultaneously , queue
-        ui_sliding_menu_open: true,
+        ui_sliding_menu_open: false,
+        ui_sliding_menu_mode: "collpse",
 
         results: [],
     },
@@ -348,6 +349,20 @@ main_page = {
         
         open_sliding_menu: function () {
             main_page.data.ui_sliding_menu_open = true;
+        },
+        
+        // -----------------
+        
+        ready: function () {
+            window.addEventListener('resize', function () {
+                if (document.getElementById("sliding_menu") !== null) {
+                    main_page.data.ui_sliding_menu_mode = document.getElementById("sliding_menu").mode;
+                }
+            });
+            
+            if (document.getElementById("sliding_menu") !== null) {
+                main_page.data.ui_sliding_menu_mode = document.getElementById("sliding_menu").mode;
+            }
         }
     }
 };

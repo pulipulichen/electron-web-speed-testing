@@ -32,7 +32,20 @@ var _vue_ready = function () {
         data: {
             pageStack: [_first_controller]
         },
-        created: vue_create_event,
+        created: function () {
+            $(function () {
+                // 先把每個controller的ready做完
+                for (var _name in _controllers) {
+                    var _controller = _controllers[_name];
+                    if (typeof(_controller.methods) === "object" 
+                            && typeof(_controller.methods.ready) === "function" ) {
+                        _controller.methods.ready();
+                    }
+                }
+
+                vue_create_event();
+            });
+        },
     });
 };
 
