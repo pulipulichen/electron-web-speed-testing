@@ -1,13 +1,20 @@
 <v-ons-page>
     <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button>Back</v-ons-back-button>
-      </div>
-      <div class="center">
-          <h1> #{{ request_config.data.request_id+1 }} Request Configuration</h1>
-      </div>
+        <div class="left">
+            <v-ons-back-button>Back</v-ons-back-button>
+        </div>
+        <div class="center">
+            <h1> #{{ request_config.data.request_id+1 }} Request Configuration</h1>
+        </div>
+        <div class="right">
+            <ons-toolbar-button>
+                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#request-configuration" target="_blank">
+                    <ons-icon icon="fa-question-circle"></ons-icon>
+                </a>
+            </ons-toolbar-button>
+        </div>
     </v-ons-toolbar>
-    
+
     <v-ons-list modifier="inset" id="request_configuration" class="panel">
         <v-ons-list-item>
             <label class="left" for="request_config_url">
@@ -18,7 +25,7 @@
                              v-model="request_config.data.request_config.url" class="text-right" id="request_config_url"></v-ons-input>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left" for="request_config_method">
                 Method
@@ -30,7 +37,7 @@
                 </v-ons-select>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left" for="request_config_data_type">
                 Data Type
@@ -43,13 +50,13 @@
                 </v-ons-select>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item class="request_config_data_list_item" >
             <label class="left" for="request_config_send_data">
                 Send Data
             </label>
             <div class="center ui form">
-                
+
                 <span class="list-item__title" 
                       v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false) === false">
                     <a class="ui pointing below red basic label" 
@@ -66,18 +73,12 @@
                 </span>
                 <div class="list-item__subtitle ui form">
                     <textarea id="request_config_send_data" 
-                    v-model="request_config.data.request_config.send_data"
-                    placeholder="Request Data"></textarea>
+                              v-model="request_config.data.request_config.send_data"
+                              placeholder="Request Data"></textarea>
                 </div>
-                
-                
+
+
             </div>
         </v-ons-list-item>
     </v-ons-list>
-    
-    
-    
-    
-    
-    
 </v-ons-page>

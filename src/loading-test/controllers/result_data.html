@@ -1,17 +1,24 @@
 <v-ons-page>
     <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button>Back</v-ons-back-button>
-      </div>
-      <div class="center" v-bind:title="result_data.data.url">
-          <h1> 
-            <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
-            <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
-            #{{ result_data.data.result_id }} {{ result_data.data.uri }}
-          </h1>
-      </div>
+        <div class="left">
+            <v-ons-back-button>Back</v-ons-back-button>
+        </div>
+        <div class="center" v-bind:title="result_data.data.url">
+            <h1> 
+                <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
+                <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
+                #{{ result_data.data.result_id }} {{ result_data.data.uri }}
+            </h1>
+        </div>
+        <div class="right">
+            <ons-toolbar-button>
+                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#result-detail" target="_blank">
+                    <ons-icon icon="fa-question-circle"></ons-icon>
+                </a>
+            </ons-toolbar-button>
+        </div>
     </v-ons-toolbar>
-    
+
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
         <v-ons-list-item>
             <label class="left">
@@ -21,7 +28,7 @@
                 {{ result_data.data.url }}
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 Method
@@ -30,7 +37,7 @@
                 {{ result_data.data.method }}
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left vertical-top">
                 Send Data
@@ -49,7 +56,7 @@
                 </span>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 Data Type
@@ -58,7 +65,7 @@
                 {{ result_data.data.data_type }}
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 Status
@@ -74,7 +81,7 @@
                 </span>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 Response
