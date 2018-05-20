@@ -30,6 +30,7 @@ main_page = {
         
         //config_execute_mode: "simultaneously",  // simultaneously , queue
         config_execute_mode: "queue",  // simultaneously , queue
+        ui_menu_open: true,
 
         results: [],
     },
@@ -327,5 +328,11 @@ main_page = {
             
             this.$emit('push-page', result_list);
         },
+        
+        // ----------------
+        
+        open_menu: function () {
+            main_page.data.ui_menu_open = true;
+        }
     }
 };
