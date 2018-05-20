@@ -395,5 +395,11 @@ main_page = {
             
             xlsx_helper_download("ods", _filename, _config);
         },
+        
+        load_config: function () {
+            xlsx_helper_open(function (_config) {
+                console.log(_config);
+            });
+        }
     }
 };
