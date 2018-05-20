@@ -12,6 +12,9 @@ ons-toolbar h1 {
     cursor: pointer !important;
 }
 
+.panel ons-list-item .center ons-input {
+    width: 100%;
+}
 
 ons-list-item.failed {
     background-color: #F3969A;
@@ -34,4 +37,8 @@ ons-list-item.failed input {
 ons-list-item > .left {
     border-bottom: 1px solid #ccc;
     width: 9rem;
+}
+
+.align-right {
+    text-align: right;
 }

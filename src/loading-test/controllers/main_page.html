@@ -73,13 +73,24 @@
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center" for="status_total_job">
+            <label class="left" for="status_total_job">
                 Mock user number
             </label>
-            <div class="right">
-                <v-ons-input placeholder="Job count" float 
+            <div class="center">
+                
+                <span class="list-item__title">
+                    <v-ons-input placeholder="Job count" float 
                              v-model="main_page.data.status_total_job" type="number" class="text-right" id="status_total_job"></v-ons-input>
+                </span>
+                <div class="list-item__subtitle align-right" 
+                     v-show="main_page.data.status_total_job > CONFIG.max_mock_user_number">
+                    <span class="ui pointing red basic label">
+                        Max mock user number is {{ CONFIG.max_mock_user_number }}.
+                    </span>
+                </div>
             </div>
+            
+            
         </v-ons-list-item>
         
         <v-ons-list-item>

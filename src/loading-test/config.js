@@ -1,4 +1,4 @@
 CONFIG = {
     locate: "zh-tw",
-    max_request: 2
+    max_mock_user_number: 2
 };
