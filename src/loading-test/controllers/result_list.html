@@ -18,7 +18,8 @@
     <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
         <v-ons-list-item v-for="(result, index) in result_list.data.jobs_result" 
                          class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
-                         @click="nav_result_data(result_list.data.result_id, index)">
+                         @click="nav_result_data(result_list.data.result_id, index)"
+                          modifier="chevron">
             <v-ons-col width="4rem">
                 #{{ result_list.data.result_id+1 }}-{{ index + 1 }}
             </v-ons-col>
@@ -34,12 +35,6 @@
                 {{ result.uri }}
                 <span v-show="result.passed === false"><br />({{ status_code(result.status) }})</span>
             </v-ons-col>
-            <v-ons-col class="text-center" width="2rem">
-                <v-ons-button modifier="quiet">
-                    <ons-icon icon="fa-angle-right"></ons-icon>
-                </v-ons-button>
-            </v-ons-col>
-
         </v-ons-list-item>
     </v-ons-list>
 </v-ons-page>

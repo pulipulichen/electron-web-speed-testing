@@ -8,6 +8,18 @@
           <h1>
               {{ i18n.t("LOADING TEST") }}
           </h1>
+          <v-ons-row>
+              
+              
+              
+          </v-ons-row>
+          <v-ons-row v-show="main_page.data.status_average_spend_time > 0">
+              <v-ons-col>
+                    <ons-icon icon="md-timer"></ons-icon>
+                    {{ i18n.t("Avg. Time Spent: ") }}
+                    {{ main_page.data.status_average_spend_time }}
+            </v-ons-col>
+          </v-ons-row>
         <v-ons-list>
             <!--
           <v-ons-list-item tappable modifier="chevron" @click="jump_to_config">

@@ -6,10 +6,15 @@
 }
 
 #sliding_menu h1 {
-    padding-left: 10px;
+    padding-left: 13px;
     padding-top: 10px;
     margin-bottom: 10px;
 }
+#sliding_menu ons-row {
+    padding-left: 13px;
+    margin-bottom: 10px;
+}
+
 #sliding_menu a {
     color: black;
 }

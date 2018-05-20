@@ -25,6 +25,10 @@ ons-list-item.failed input {
     color: white;
 }
 
+ons-list-item.failed.list-item--chevron:before {
+    border-color: white;
+}
+
 .selectable {
     -webkit-user-select: auto !important;
     cursor: auto !important;
