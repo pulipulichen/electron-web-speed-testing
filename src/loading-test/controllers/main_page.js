@@ -376,7 +376,24 @@ main_page = {
             if (document.getElementById("sliding_menu") !== null) {
                 main_page.data.ui_sliding_menu_mode = document.getElementById("sliding_menu").mode;
             }
-        }
+        },
         
+        // --------------------
+        
+        download_config: function () {
+            var _data = main_page.data;
+            var _config = {
+                "global": {
+                    "version": CONFIG.version,
+                    "mock user number": _data.status_total_job,
+                    "execute mode": _data.config_execute_mode
+                },
+                "request_jobs": _data.request_jobs
+            };
+            
+            var _filename = 'loading_test_config_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
+            
+            xlsx_helper_download("ods", _filename, _config);
+        },
     }
 };
