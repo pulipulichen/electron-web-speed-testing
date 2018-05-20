@@ -2,7 +2,7 @@
     <v-ons-toolbar>
         <div class="left">
             <v-ons-row>
-                <v-ons-col @click='open_sliding_menu()' v-show="main_page.data.ui_sliding_menu_mode === 'collapse'">
+                <v-ons-col @click='sliding_menu.methods.open()' class="sliding-menu-open-button">
                     <ons-toolbar-button>
                         <v-ons-icon icon="fa-navicon"></v-ons-icon>
                     </ons-toolbar-button>

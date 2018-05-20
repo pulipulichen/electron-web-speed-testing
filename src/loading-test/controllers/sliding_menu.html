@@ -1,8 +1,9 @@
 <v-ons-splitter-side
        width="300px" collapse="portrait" side="left"
        id="sliding_menu"
-       v-bind:class="{opened: main_page.data.ui_sliding_menu_open}"
-       :open.sync="main_page.data.ui_sliding_menu_open">
+       v-bind:class="{opened: sliding_menu.data.opened}"
+       @modechange="sliding_menu.methods.modechange(event.mode)"
+       :open.sync="sliding_menu.data.opened">
       <v-ons-page>
           <h1>
               {{ i18n.t("LOADING TEST") }}
