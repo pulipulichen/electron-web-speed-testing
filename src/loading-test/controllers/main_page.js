@@ -358,6 +358,11 @@ main_page = {
             this.$emit('push-page', result_list);
         },
         
+        nav_about: function () {
+            //_vue_setting.data.stacks.$emit('push-page', about);
+            vm.$data.pageStack.push(about);
+        },
+        
         // ----------------
         
         open_sliding_menu: function () {

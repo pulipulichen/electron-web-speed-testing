@@ -1,7 +1,9 @@
 <v-ons-page>
     <v-ons-toolbar>
         <div class="left">
-            <v-ons-back-button>Back</v-ons-back-button>
+            <v-ons-back-button>
+                {{ i18n.t('Back') }}
+            </v-ons-back-button>
         </div>
         <div class="center" v-bind:title="result_data.data.url">
             <h1> 

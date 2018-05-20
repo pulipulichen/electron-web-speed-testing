@@ -21,6 +21,7 @@ sliding_menu = {
         open: function () {
             sliding_menu.data.opened = true;
         },
+        /*
         ready: function () {
             var _mode = $('#sliding_menu').attr('mode');
             if (_mode === undefined) {
@@ -32,6 +33,7 @@ sliding_menu = {
                 sliding_menu.methods.modechange(_mode);
                 //console.log(_mode);
             }
-        }
+        },
+        */
     }
 };

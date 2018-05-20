@@ -4,6 +4,7 @@ var _controllers_list = [
     "result_list",
     "result_data",
     "sliding_menu",
+    "about"
 ];
 
 // ---------------------------
