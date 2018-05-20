@@ -14,12 +14,32 @@
               
           </v-ons-row>
           <v-ons-row v-show="main_page.data.status_average_spend_time > 0">
+              <v-ons-col width='2rem'>
+                <ons-icon icon="md-timer"></ons-icon>
+                </v-ons-col>
               <v-ons-col>
-                    <ons-icon icon="md-timer"></ons-icon>
                     {{ i18n.t("Avg. Time Spent: ") }}
                     {{ main_page.data.status_average_spend_time }}
-            </v-ons-col>
+                    </v-ons-col>
           </v-ons-row>
+          <v-ons-row v-show="main_page.data.status_passed_job > 0">
+              <v-ons-col width='2rem'>
+                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+                </v-ons-col>
+              <v-ons-col>
+                {{ i18n.t("Passed: ") }}
+                {{ main_page.data.status_passed_job }}
+                </v-ons-col>
+            </v-ons-row>
+            <v-ons-row v-show="main_page.data.status_failed_job > 0">
+                <v-ons-col width='2rem'>
+                <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
+                </v-ons-col>
+                <v-ons-col>
+                {{ i18n.t("Failed: ") }}
+                {{ main_page.data.status_failed_job }}
+                </v-ons-col>
+            </v-ons-row>
         <v-ons-list>
             <!--
           <v-ons-list-item tappable modifier="chevron" @click="jump_to_config">
