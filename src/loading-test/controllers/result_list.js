@@ -32,5 +32,9 @@ result_list = {
             
             this.$emit('push-page', result_data);
         },
+        
+        save_results_details: function () {
+            
+        }
     }
 };

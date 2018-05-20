@@ -407,6 +407,16 @@ main_page = {
                 
                 _data.request_jobs = _config.request_jobs;
             });
+        },
+        
+        // ------------------------
+        
+        save_results_summary: function () {
+            
+        },
+        
+        save_results_details: function () {
+            
         }
     }
 };
