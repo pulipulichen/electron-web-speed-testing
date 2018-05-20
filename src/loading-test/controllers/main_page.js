@@ -398,7 +398,14 @@ main_page = {
         
         load_config: function () {
             xlsx_helper_open(function (_config) {
-                console.log(_config);
+                //console.log(_config);
+                var _data = main_page.data;
+                
+                var _global = _config.global;
+                _data.status_total_job = _global["mock user number"];
+                _data.config_execute_mode = _global["execute mode"];
+                
+                _data.request_jobs = _config.request_jobs;
             });
         }
     }

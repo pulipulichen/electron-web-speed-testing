@@ -40,65 +40,55 @@ var xlsx_helper_download = function (type, filename, data) {
 
 
 var process_wb = (function() {
-	var OUT = document.getElementById('out');
-	var HTMLOUT = document.getElementById('htmlout');
-
-	var get_format = (function() {
-		var radios = document.getElementsByName( "format" );
-		return function() {
-			for(var i = 0; i < radios.length; ++i) if(radios[i].checked || radios.length === 1) return radios[i].value;
-		};
-	})();
-
 	var to_json = function to_json(workbook) {
 		var result = {};
 		workbook.SheetNames.forEach(function(sheetName) {
 			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
 			if(roa.length) result[sheetName] = roa;
 		});
-		return JSON.stringify(result, 2, 2);
-	};
+		//return JSON.stringify(result, 2, 2);
+                var _result = {};
+                for (var _sheet_name in result) {
+                    var _sheet_data = result[_sheet_name];
 
-	var to_csv = function to_csv(workbook) {
-		var result = [];
-		workbook.SheetNames.forEach(function(sheetName) {
-			var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
-			if(csv.length){
-				result.push("SHEET: " + sheetName);
-				result.push("");
-				result.push(csv);
-			}
-		});
-		return result.join("\n");
+                    var _data;
+                    //console.log(_sheet_name);
+                    if (_sheet_data[0][0] === 'key' && _sheet_data[0][1] === 'value' && _sheet_data[0].length === 2) {
+                        // key-value模式
+                        //console.log("key-value模式");
+                        _data = {};
+                        for (var _i = 1; _i < _sheet_data.length; _i++) {
+                            var _row = _sheet_data[_i];
+                            _data[_row[0]] = _row[1];
+                        }
+                    }
+                    else {
+                        // 陣列模式
+                        //console.log("陣列模式");
+                        _data = [];
+                        var _key_dict = _sheet_data[0];
+                        for (var _i = 1; _i < _sheet_data.length; _i++) {
+                            var _row = _sheet_data[_i];
+                            var _d = {};
+                            for (var _j = 0; _j < _row.length; _j++) {
+                                var _key = _key_dict[_j];
+                                _d[_key] = _row[_j];
+                            }
+                            _data.push(_d);
+                        }
+                    }
+                    _result[_sheet_name] = _data;
+                }
+                
+                return _result;
 	};
-
-	var to_fmla = function to_fmla(workbook) {
-		var result = [];
-		workbook.SheetNames.forEach(function(sheetName) {
-			var formulae = XLSX.utils.get_formulae(workbook.Sheets[sheetName]);
-			if(formulae.length){
-				result.push("SHEET: " + sheetName);
-				result.push("");
-				result.push(formulae.join("\n"));
-			}
-		});
-		return result.join("\n");
-	};
-
-	var to_html = function to_html(workbook) {
-		HTMLOUT.innerHTML = "";
-		workbook.SheetNames.forEach(function(sheetName) {
-			var htmlstr = XLSX.write(workbook, {sheet:sheetName, type:'string', bookType:'html'});
-			HTMLOUT.innerHTML += htmlstr;
-		});
-		return "";
-	};
-
+        
 	return function process_wb(wb, _callback) {
 		global_wb = wb;
 		var output = "";
                 output = to_json(wb);
                 //console.log(output);
+                
                 _callback(output);
 	};
 })();
@@ -113,13 +103,15 @@ var XW = {
 var do_file = (function() {
     var rABS = true;
                 var use_worker = true;
-	var xw = function xw(data, cb) {
+	var xw = function xw(data, cb, _callback) {
 		var worker = new Worker(XW.worker);
 		worker.onmessage = function(e) {
 			switch(e.data.t) {
 				case 'ready': break;
 				case 'e': console.error(e.data.d); break;
-				case XW.msg: cb(JSON.parse(e.data.d)); break;
+				case XW.msg: 
+                                    cb(JSON.parse(e.data.d), _callback); 
+                                    break;
 			}
 		};
 		worker.postMessage({d:data,b:rABS?'binary':'array'});
@@ -131,11 +123,14 @@ var do_file = (function() {
 		var f = files[0];
 		var reader = new FileReader();
 		reader.onload = function(e) {
-			if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+			if(typeof console !== 'undefined') {
+                            //console.log("onload", new Date(), rABS, use_worker);
+                        }
 			var data = e.target.result;
 			if(!rABS) data = new Uint8Array(data);
-			if(use_worker) xw(data, process_wb);
+			if(use_worker) xw(data, process_wb, _callback);
 			else {
+                            //console.log(typeof(_callback));
                             process_wb(XLSX.read(data, {type: rABS ? 'binary' : 'array'}), _callback);
                         };
 		};
@@ -148,41 +143,7 @@ var xlsx_helper_open = function (_callback) {
     $("#xlsx_helper_open_file").remove();
     var _input = $('<input type="file" name="xlfile" id="xlsx_helper_open_file" />').hide().appendTo('body');
     _input.change(function (e) {
-         do_file(e.target.files, function (_json) {
-             console.log(_json);
-             console.log("aaa");
-             // 要再做處理
-             
-             var _result = {};
-             for (var _sheet_name in _json) {
-                 var _sheet_data = _json[_sheet_name];
-                 var _data;
-                 if (_sheet_data[0][0] === 'key' && _sheet_data[0][1] === 'value' && _sheet_data[0].length === 2) {
-                     // key-value模式
-                     _data = {};
-                     for (var _i = 1; _i < _sheet_data.length; _i++) {
-                         var _row = _sheet_data[_i];
-                         _data[_row[0]] = _row[1];
-                     }
-                 }
-                 else {
-                     // 陣列模式
-                     _data = [];
-                     var _key_dict = _sheet_data[0];
-                     for (var _i = 1; _i < _sheet_data.length; _i++) {
-                         var _row = _sheet_data[_i];
-                         var _d = {};
-                         for (var _j = 0; _j < _row.length; _j++) {
-                             var _key = _key_dict[_j];
-                             _d[_key] = _row[_j];
-                         }
-                         _data.push(_d);
-                     }
-                 }
-                 _json[_sheet_name] = _data;
-             }
-             _callback(_json);
-         });
+         do_file(e.target.files, _callback);
     });
     _input.click();
 };
