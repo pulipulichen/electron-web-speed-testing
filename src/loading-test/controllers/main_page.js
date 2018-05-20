@@ -411,12 +411,42 @@ main_page = {
         
         // ------------------------
         
-        save_results_summary: function () {
-            
-        },
-        
         save_results_details: function () {
+            var _results = main_page.data.results;
+            var _output = {
+                "results": []
+            };
+            for (var _i = 0; _i < _results.length; _i++) {
+                var _request_id = (_i+1);
+                var _jobs_results = _results[_i].jobs_result;
+                
+                for (var _j = 0; _j < _jobs_results.length; _j++) {
+                    var _job_result = _jobs_results[_j];
+                    var _config = main_page.data.request_jobs[_j];
+                    
+                    var _row = {
+                        'request_id': _request_id,
+                        'job_id': (_j+1)
+                    };
+                    
+                    for (var _key in _job_result) {
+                        _row[_key] = _job_result[_key];
+                    }
+                    
+                    for (var _key in _config) {
+                        if (_key === 'uri') {
+                            continue;
+                        }
+                        _row[_key] = _config[_key];
+                    }
+                    _output.results.push(_row);
+                }
+            }
+            //console.log(_output);
             
+            var _filename = 'loading_test_results_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
+            
+            xlsx_helper_download("ods", _filename, _output);
         }
     }
 };

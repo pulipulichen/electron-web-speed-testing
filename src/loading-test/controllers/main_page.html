@@ -178,19 +178,14 @@
             Results
         </v-ons-list-header>
 
-        <v-ons-list-item v-show="main_page.data.status_running === false" modifier="nodivider">
+        <v-ons-list-item v-show="main_page.data.status_running === false" 
+                         modifier="nodivider"
+                         @click="save_results_details">
             <v-ons-row>
                 <v-ons-col>
                     <v-ons-button modifier="large" class='ui button'>
                         <ons-icon icon="fa-save"></ons-icon>
-                        {{ i18n.t("SUMMARY") }}
-                    </v-ons-button>
-                </v-ons-col>
-                <v-ons-col width="10px"></v-ons-col>
-                <v-ons-col>
-                    <v-ons-button modifier="large" class='ui button'>
-                        <ons-icon icon="fa-save"></ons-icon>
-                        {{ i18n.t("DETAILS") }}
+                        {{ i18n.t("SAVE RESULTS") }}
                     </v-ons-button>
                 </v-ons-col>
             </v-ons-row>
