@@ -7,6 +7,10 @@
             <h1> #{{ request_config.data.request_id+1 }} Request Configuration</h1>
         </div>
         <div class="right">
+            <ons-toolbar-button @click='request_open'>
+                <ons-icon icon="fa-external-link-square"></ons-icon>
+                {{ i18n.t("Test Open") }}
+            </ons-toolbar-button>
             <ons-toolbar-button>
                 <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#request-configuration" target="_blank">
                     <ons-icon icon="fa-question-circle"></ons-icon>

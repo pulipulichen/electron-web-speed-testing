@@ -9,3 +9,7 @@ PULI_UTILS.load_css = function (_css_url, _callback) {
     }
     return true;
 };
+
+PULI_UTILS.window_popup = function (_config) {
+    console.log(_config);
+};

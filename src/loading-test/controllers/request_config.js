@@ -9,5 +9,11 @@ request_config = {
             "data_type": "text", //  application/json , text/html
             "send_data": "{}"
         }
+    },
+    methods: {
+        request_open: function () {
+            var _config = request_config.data.request_config;
+            PULI_UTILS.window_popup(_config);
+        }
     }
 };
