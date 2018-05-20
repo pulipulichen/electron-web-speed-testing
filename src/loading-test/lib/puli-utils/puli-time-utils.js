@@ -18,10 +18,10 @@ PULI_UTILS.pad2 = function (n) {  // always returns a string
 PULI_UTILS.get_yyyymmdd_hhmm = function () {
     var date = new Date();
 
-        return date.getFullYear() +
-               PULI_UTILS.pad2(date.getMonth() + 1) + 
-               PULI_UTILS.pad2(date.getDate()) +
-               "_" +
-               PULI_UTILS.pad2(date.getHours()) +
-               PULI_UTILS.pad2(date.getMinutes());
+    return date.getFullYear() +
+            PULI_UTILS.pad2(date.getMonth() + 1) +
+            PULI_UTILS.pad2(date.getDate()) +
+            "_" +
+            PULI_UTILS.pad2(date.getHours()) +
+            PULI_UTILS.pad2(date.getMinutes());
 };
