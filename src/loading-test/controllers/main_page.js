@@ -35,14 +35,20 @@ main_page = {
     },
     methods: {
         job_run: function () {
+            //var _url = main_page_vm.config_base_url;
+            var _total_job = main_page.data.status_total_job;
+            if (_total_job > CONFIG.max_mock_user_number) {
+                vm.$ons.notification.alert(i18n.t('Max mock user number is ') + CONFIG.max_mock_user_number);
+                return;
+            }
+            
             //console.log("run");
             //console.log(vm);
             main_page.methods.results_clear();
             
             main_page.data.status_running = true;
             
-            //var _url = main_page_vm.config_base_url;
-            var _total_job = main_page.data.status_total_job;
+            
             var _completed_jobs = 0;
 
             var _next = function (_results, _callback) {
