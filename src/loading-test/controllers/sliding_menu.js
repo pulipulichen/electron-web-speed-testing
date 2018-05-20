@@ -8,6 +8,7 @@ sliding_menu = {
         modechange: function (_mode) {
             console.log(_mode);
             sliding_menu.data.mode = _mode;
+            /*
             var _main_content = $('ons-splitter-content#main_content');
             if (_mode === 'split') {
                 _main_content.addClass('split');
@@ -15,6 +16,7 @@ sliding_menu = {
             else {
                 _main_content.removeClass('split');
             }
+            */
         },
         open: function () {
             sliding_menu.data.opened = true;
