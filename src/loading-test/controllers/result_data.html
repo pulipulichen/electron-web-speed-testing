@@ -41,7 +41,8 @@
                 Status
             </label>
             <div class="right">
-                {{ result_data.data.status }} {{ status_code(result_data.data.status) }} 
+                <div v-show="PULI_UTILS.is_int(result_data.data.status)">{{ result_data.data.status }} <br /></div>
+                <div>{{ status_code(result_data.data.status) }} </div>
             </div>
         </v-ons-list-item>
         

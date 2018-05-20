@@ -13,12 +13,12 @@ main_page = {
             {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
-                "data_type" : "text", //  application/json , text/html
+                "data_type" : "json", //  json , web
                 "send_data": '{d:3}'
             },
             {
-                "url": "http://www.google.com.tw",
-                //"url": "http://localhost",
+                //"url": "http://www.google.com.tw",
+                "url": "http://localhost",
                 "method": "POST",
                 "data_type" : "text", //  application/json , text/html
                 "send_data": "{q: 'test'}"
@@ -191,6 +191,15 @@ main_page = {
                 }
                 
                 var _passed = (_status === 200);
+                
+                // 如果資料形態是JSON，那就要多一個檢查
+                if (_config.data_type === "json") {
+                    if (PULI_UTILS.is_json(_url_return, true) === false) {
+                        _passed = false;
+                        _status = "Data type is not JSON";
+                    }
+                }
+                
                 var _end_time = PULI_UTILS.get_current_second();
                 var _spend_time = Math.floor(_end_time - _start_time) / 1000;
 
