@@ -30,7 +30,7 @@ main_page = {
         
         //config_execute_mode: "simultaneously",  // simultaneously , queue
         config_execute_mode: "queue",  // simultaneously , queue
-        ui_menu_open: true,
+        ui_sliding_menu_open: true,
 
         results: [],
     },
@@ -280,7 +280,13 @@ main_page = {
         },
 
         jump_to_config: function () {
-            document.getElementById('panel_configuration').scrollIntoView({
+            document.getElementById('panel_configuration_header').scrollIntoView({
+                behavior: 'smooth'
+              });
+        },
+        
+        jump_to_results: function () {
+            document.getElementById('panel_results_header').scrollIntoView({
                 behavior: 'smooth'
               });
         },
@@ -331,8 +337,8 @@ main_page = {
         
         // ----------------
         
-        open_menu: function () {
-            main_page.data.ui_menu_open = true;
+        open_sliding_menu: function () {
+            main_page.data.ui_sliding_menu_open = true;
         }
     }
 };

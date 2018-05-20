@@ -34,3 +34,16 @@
 #main_page.wait ons-list-item label {
     cursor: wait;
 }
+
+/* ------------------------------------ */
+#sliding_menu h1 {
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+#sliding_menu a {
+    color: black;
+}
+#sliding_menu ons-list-item {
+    cursor: pointer;
+}

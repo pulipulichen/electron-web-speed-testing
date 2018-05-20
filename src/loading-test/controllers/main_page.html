@@ -1,23 +1,30 @@
 <v-ons-splitter>
     <v-ons-splitter-side
-       width="150px" collapse="" side="left"
-       :open.sync="main_page.data.ui_menu_open">
+       width="300px" collapse="" side="left"
+       id="sliding_menu"
+       :open.sync="main_page.data.ui_sliding_menu_open">
       <v-ons-page>
           <h1>
               {{ i18n.t("LOADING TEST") }}
           </h1>
         <v-ons-list>
-          <v-ons-list-item tappable modifier="chevron">
+          <v-ons-list-item tappable modifier="chevron" @click="jump_to_config">
             <div class="center">Job Configuration</div>
           </v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
+          <v-ons-list-item tappable modifier="chevron" 
+                           @click="jump_to_results"
+                           v-show="main_page.data.results.length">
             <div class="center">Results</div>
           </v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
-            <div class="center">Help</div>
+            <a class="center" href="https://github.com/pulipulichen/electron-loading-test/wiki/Help" target="_blank">
+                Help
+            </a>
           </v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
-            <a class="center" href="https://github.com/pulipulichen/electron-loading-test" target="_blank">About</a>
+            <a class="center" href="https://github.com/pulipulichen/electron-loading-test" target="_blank">
+                About
+            </a>
           </v-ons-list-item>
         </v-ons-list>
       </v-ons-page>
@@ -29,8 +36,10 @@
     <v-ons-toolbar>
         <div class="left">
             <v-ons-row>
-                <v-ons-col @click='open_menu()'>
-                    <v-ons-icon icon="fa-navicon"></v-ons-icon>
+                <v-ons-col @click='open_sliding_menu()'>
+                    <ons-toolbar-button>
+                        <v-ons-icon icon="fa-navicon"></v-ons-icon>
+                    </ons-toolbar-button>
                 </v-ons-col>
                 
                 <v-ons-col v-show="main_page.data.status_average_spend_time > 0">
@@ -85,7 +94,7 @@
     <!-- Configuration -->
 
     <v-ons-list modifier="inset" id="panel_configuration" class="panel">
-        <v-ons-list-header>
+        <v-ons-list-header id="panel_configuration_header">
             Job Configuration
         </v-ons-list-header>
         
@@ -183,7 +192,7 @@
     <hr v-show="main_page.data.results.length" />
     
     <v-ons-list modifier="inset" v-show="main_page.data.results.length" class="panel panel_results" id="panel_results">
-        <v-ons-list-header>
+        <v-ons-list-header id="panel_results_header">
             Results
         </v-ons-list-header>
         <v-ons-list-item v-for="(result, index) in main_page.data.results" 
