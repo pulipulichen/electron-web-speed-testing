@@ -267,7 +267,7 @@ main_page = {
             }
             var _avg = Math.floor((_total / main_page.data.results.length) * 1000) / 1000;
             
-            /
+            _avg = _avg / main_page.data.request_jobs.length;
             
             main_page.data.status_average_spend_time = _avg;
         },
