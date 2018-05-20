@@ -177,6 +177,53 @@
         <v-ons-list-header id="panel_results_header">
             Results
         </v-ons-list-header>
+
+        <v-ons-list-item v-show="main_page.data.status_running === false" modifier="nodivider">
+            <v-ons-col>
+                <v-ons-button modifier="large">
+                    <ons-icon icon="fa-save"></ons-icon>
+                    {{ i18n.t("SAVE RESULTS SUMMARY") }}
+                </v-ons-button>
+            </v-ons-col>
+            <v-ons-col width="10px"></v-ons-col>
+            <v-ons-col>
+                <v-ons-button modifier="large">
+                    <ons-icon icon="fa-save"></ons-icon>
+                    {{ i18n.t("SAVE RESULTS DETAILS") }}
+                </v-ons-button>
+            </v-ons-col>
+        </v-ons-list-item>
+
+        <v-ons-list-item v-show="main_page.data.results.length > 0 && main_page.data.status_failed_job > 0">
+            <v-ons-row class="ui icon negative message">
+                <ons-icon icon="fa-exclamation-triangle" class="icon"></ons-icon>
+                <v-ons-col>
+                    <v-ons-row class="header">
+                        {{ i18n.t("Failed: ") }}
+                        {{ main_page.data.status_failed_job }}
+                    </v-ons-row>
+                    <v-ons-row>
+                        {{ i18n.t("Opss! Something wrong!") }}
+                    </v-ons-row>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
+        <v-ons-list-item v-show="main_page.data.results.length > 0 && main_page.data.status_failed_job === 0">
+            <v-ons-row class="ui icon message" :class="{'negative': (main_page.data.status_average_spend_time > 10) }">
+                <ons-icon icon="md-timer" class="icon"></ons-icon>
+                <v-ons-col>
+                <v-ons-row class="header">
+                    {{ i18n.t("Avg. Time Spent: ") }}
+                    {{ main_page.data.status_average_spend_time }}
+                </v-ons-row>
+                <v-ons-row>
+                    {{ main_page.data.status_average_spend_time_comment }}
+                </v-ons-row>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+
         <v-ons-list-item v-for="(result, index) in main_page.data.results" 
             class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
              @click="nav_result_detail(index)"

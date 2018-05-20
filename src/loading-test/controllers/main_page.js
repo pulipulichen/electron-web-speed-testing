@@ -14,7 +14,7 @@ main_page = {
             {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
-                "data_type" : "json", //  json , web
+                "data_type" : "text", //  text, json , web
                 "send_data": '{d:3'
             },
             /*
@@ -272,6 +272,18 @@ main_page = {
             _avg = _avg / main_page.data.request_jobs.length;
             
             main_page.data.status_average_spend_time = _avg;
+            
+            var _comment = "Bad. The system is failed to keep the user.";
+            if (_avg <= 0.1) {
+                _comment = "Excellent! The system is reacting instantaneously.";
+            }
+            else if (_avg <= 1) {
+                _comment = "Good! The user's flow of thought still stay uninterrupted.";
+            }
+            else if (_avg <= 10) {
+                _comment = "OK. The user's attention still focused on the system.";
+            }
+            main_page.data.status_average_spend_time_comment = i18n.t(_comment, false);
         },
 
         update_title: function () {

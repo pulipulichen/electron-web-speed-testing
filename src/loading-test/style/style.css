@@ -16,6 +16,14 @@ ons-list-item ons-input {
     width: 100%;
 }
 
+ons-list-item ons-select {
+    text-align: right;
+}
+
+ons-list-item ons-select > select {
+    width: auto;
+}
+
 ons-list-item.failed {
     background-color: #F3969A;
     color: white;

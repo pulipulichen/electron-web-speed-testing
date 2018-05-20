@@ -6,7 +6,7 @@ sliding_menu = {
     },
     methods: {
         modechange: function (_mode) {
-            console.log(_mode);
+            //console.log(_mode);
             sliding_menu.data.mode = _mode;
             /*
             var _main_content = $('ons-splitter-content#main_content');
