@@ -75,6 +75,7 @@
         <v-ons-list-item>
             <label class="left" for="status_total_job">
                 Mock user number
+                <ons-icon icon="fa-question-circle"></ons-icon>
             </label>
             <div class="center">
                 
@@ -94,10 +95,10 @@
         </v-ons-list-item>
         
         <v-ons-list-item>
-            <label class="center" for="switch_config_execute_mode">
+            <label class="left" for="switch_config_execute_mode">
                 Execute mode
             </label>
-            <div class="right">
+            <div class="center">
                 <v-ons-select v-model="main_page.config_execute_mode" id="switch_config_execute_mode">
                     <option value="simultaneously">Simultaneously</option>
                     <option value="queue">queue</option>
