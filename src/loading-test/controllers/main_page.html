@@ -119,6 +119,7 @@
                 {{ i18n.t("Execute mode") }}
             </label>
             <div class="center">
+                <!--
                 <v-ons-select v-model="main_page.config_execute_mode" 
                               id="switch_config_execute_mode"
                               :disabled="main_page.data.status_running"
@@ -126,6 +127,14 @@
                     <option value="parallel">{{ i18n.t("Parallel") }}</option>
                     <option value="queue">{{ i18n.t("Queue") }}</option>
                 </v-ons-select>
+                -->
+                <select class='ui fluid dropdown'
+                        id="switch_config_execute_mode"
+                        v-model="main_page.config_execute_mode"
+                        :disabled="main_page.data.status_running">
+                    <option value="parallel" selected="selected">{{ i18n.t("Parallel") }}</option>
+                    <option value="queue">{{ i18n.t("Queue") }}</option>
+                </select>
             </div>
         </v-ons-list-item>
 
