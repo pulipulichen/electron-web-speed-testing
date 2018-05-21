@@ -18,10 +18,12 @@
             </h1>
         </div>
         <div class="right">
+            <!--
             <ons-toolbar-button @click='open_request'>
                 <ons-icon icon="fa-external-link-square"></ons-icon>
                 {{ i18n.t("Test Open") }}
             </ons-toolbar-button>
+            -->
             <button class="circular ui icon primary button"
                     @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#response-result')">
                 <ons-icon icon="fa-question"></ons-icon>
@@ -30,6 +32,18 @@
     </v-ons-toolbar>
 
     <v-ons-list modifier="inset" id="job_result" class="panel panel_results">
+        <v-ons-list-item modifier="nodivider"
+                         @click="open_request">
+            <v-ons-row>
+                <v-ons-col>
+                    <v-ons-button modifier="large" class='ui primary button'>
+                        <ons-icon icon="fa-external-link-square"></ons-icon>
+                        {{ i18n.t("OPEN REQUEST") }}
+                    </v-ons-button>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
         <v-ons-list-item>
             <label class="left">
                 {{ i18n.t("URL") }}
