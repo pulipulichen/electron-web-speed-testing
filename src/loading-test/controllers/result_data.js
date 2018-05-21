@@ -12,7 +12,7 @@ result_data = {
         response: "{}"
     },
     methods: {
-        request_open: function () {
+        open_request: function () {
             var _config = result_data.data;
             PULI_UTILS.window_popup(_config);
         }

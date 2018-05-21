@@ -12,14 +12,12 @@
             </h1>
         </div>
         <div class="right">
-            <ons-toolbar-button @click='request_open'>
+            <ons-toolbar-button @click='open_request'>
                 <ons-icon icon="fa-external-link-square"></ons-icon>
                 {{ i18n.t("Test Open") }}
             </ons-toolbar-button>
-            <ons-toolbar-button>
-                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#request-configuration" target="_blank">
-                    <ons-icon icon="fa-question-circle"></ons-icon>
-                </a>
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#request-configuration')">
+                <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>
     </v-ons-toolbar>
