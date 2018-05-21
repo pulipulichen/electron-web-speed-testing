@@ -29,7 +29,7 @@
             </v-ons-row>
         </v-ons-list-item>
 
-        <v-ons-list-item v-for="(result, index) in result_list.data.jobs_result" 
+        <v-ons-list-item v-for="(result, index) in result_list.data.request_results" 
                          class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
                          @click="nav_result_data(result_list.data.result_id, index)"
                          modifier="chevron">

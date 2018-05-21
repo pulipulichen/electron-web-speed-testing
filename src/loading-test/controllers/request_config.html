@@ -26,7 +26,7 @@
             </label>
             <div class="center">
                 <v-ons-input placeholder="Request URL" float 
-                             v-model="request_config.data.request_config.url" class="text-right" id="request_config_url"></v-ons-input>
+                             v-model="request_config.data.config_requests.url" class="text-right" id="request_config_url"></v-ons-input>
             </div>
         </v-ons-list-item>
 
@@ -35,7 +35,7 @@
                 Method
             </label>
             <div class="center">
-                <v-ons-select v-model="request_config.data.request_config.method" id="request_config_method">
+                <v-ons-select v-model="request_config.data.config_requests.method" id="request_config_method">
                     <option value="GET">GET</option>
                     <option value="POST">POST</option>
                 </v-ons-select>
@@ -47,7 +47,7 @@
                 Data Type
             </label>
             <div class="center">
-                <v-ons-select v-model="request_config.data.request_config.data_type" id="request_config_data_type">
+                <v-ons-select v-model="request_config.data.config_requests.data_type" id="request_config_data_type">
                     <option value="text">Text</option>
                     <option value="json">JSON</option>
                     <option value="web" :disabled="ELECTRON_ENABLE === false" 
@@ -63,22 +63,22 @@
             <div class="center ui form">
 
                 <span class="list-item__title" 
-                      v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false) === false">
+                      v-show="PULI_UTILS.is_json(request_config.data.config_requests.send_data, false) === false">
                     <a class="ui pointing below red basic label" 
                        target="_blank" 
-                       v-bind:href="'https://jsonlint.com/?json='+ request_config.data.request_config.send_data">
+                       v-bind:href="'https://jsonlint.com/?json='+ request_config.data.config_requests.send_data">
                         Send data should be valid JSON format. Check it!
                     </a>
                 </span>
                 <span class="list-item__title" 
-                      v-show="PULI_UTILS.is_json(request_config.data.request_config.send_data, false)">
+                      v-show="PULI_UTILS.is_json(request_config.data.config_requests.send_data, false)">
                     <span class="ui pointing below basic label">
                         Send data is valid JSON format.
                     </span>
                 </span>
                 <div class="list-item__subtitle ui form">
                     <textarea id="request_config_send_data" 
-                              v-model="request_config.data.request_config.send_data"
+                              v-model="request_config.data.config_requests.send_data"
                               placeholder="Request Data"></textarea>
                 </div>
 

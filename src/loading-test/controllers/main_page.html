@@ -79,7 +79,7 @@
                 </v-ons-button>
             </v-ons-col>
             <v-ons-col width="10px"></v-ons-col>
-            <v-ons-col @click="download_config">
+            <v-ons-col @click="save_config">
                 <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-save"></ons-icon>
                     SAVE CONFIG
@@ -129,26 +129,26 @@
         </v-ons-list-item>
 
         <v-ons-list-header>
-            Request Job Configuration
+            Request Configuration
         </v-ons-list-header>
         <v-ons-list-item 
-            v-for="(request_job, index) in main_page.data.config_jobs"
-            v-bind:class="{ failed: (PULI_UTILS.is_json(request_job.send_data, false) === false)}">
+            v-for="(request, index) in main_page.data.config_requests"
+            v-bind:class="{ failed: (PULI_UTILS.is_json(request.send_data, false) === false)}">
             <v-ons-col width="3rem">
                 # {{ index+1 }}
             </v-ons-col>
             <v-ons-col class='base-url'>
-                <v-ons-input placeholder="Test URL" float 
-                             v-model="request_job.url" id="base_url"
+                <v-ons-input placeholder="http://localhost/" float 
+                             v-model="request.url" id="base_url"
                              :disabled="main_page.data.status_running"></v-ons-input>
             </v-ons-col>
             <v-ons-col class="text-right" 
                        width="8rem"
                        v-show="main_page.data.status_running === false">
-                <v-ons-button modifier="quiet" @click="add_request_job(index)">
+                <v-ons-button modifier="quiet" @click="add_request(index)">
                     <ons-icon icon="md-plus-circle"></ons-icon>
                 </v-ons-button>
-                <v-ons-button modifier="quiet" @click="remove_request_job(index)">
+                <v-ons-button modifier="quiet" @click="remove_request(index)">
                     <ons-icon icon="md-minus-circle"></ons-icon>
                 </v-ons-button>
                 <v-ons-button modifier="quiet" @click="nav_request_config(index)">

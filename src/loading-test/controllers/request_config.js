@@ -12,7 +12,7 @@ request_config = {
     },
     methods: {
         request_open: function () {
-            var _config = request_config.data.request_config;
+            var _config = request_config.data.config_requests;
             PULI_UTILS.window_popup(_config);
         }
     }
