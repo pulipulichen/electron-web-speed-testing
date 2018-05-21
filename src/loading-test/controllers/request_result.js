@@ -17,6 +17,18 @@ request_result = {
         open_request: function () {
             var _config = request_result.data;
             PULI_UTILS.window_popup(_config);
+        },
+        write_response_iframe: function () {
+            var _url = request_result.data.url;
+            var _html = request_result.data.response;
+            
+            // 想辦法加入<base>
+            _html = _html + '<base href="' + _url + '" />';
+            //document.getElementById("response_iframe").content
+            var _doc = document.getElementById('response_iframe').contentWindow.document;
+            //doc.open();
+            _doc.write(_html);
+            //doc.close();
         }
     }
 };

@@ -1,4 +1,4 @@
-<v-ons-page>
+<v-ons-page id="request_result">
     <v-ons-toolbar>
         <div class="left">
             <v-ons-back-button>
@@ -136,7 +136,13 @@
                     </a>
                 </div>
                 <span class="list-item__subtitle ui form">
-                    <textarea readonly="readonly" style="max-height: calc(100vh - 36rem);">{{ request_result.data.response }}</textarea>
+                    <textarea readonly="readonly" 
+                              v-show="request_result.data.data_type === 'text' || request_result.data.data_type === 'json'"
+                              style="max-height: calc(100vh - 36rem);">{{ request_result.data.response }}</textarea>
+                              <iframe id='response_iframe'
+                                      v-show="request_result.data.data_type === 'web'"
+                                      style="max-height: calc(100vh - 36rem);"
+                                      ></iframe>
                 </span>
             </div>
         </v-ons-list-item>

@@ -36,7 +36,12 @@ job_result = {
                 request_result.data.response = JSON.stringify(request_result.data.response);
             }
             
+            
             this.$emit('push-page', request_result);
+            
+            setTimeout(function () {
+                request_result.methods.write_response_iframe();
+            }, 0);
         },
         
         save_job_result: function () {
