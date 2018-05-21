@@ -2,15 +2,18 @@ main_page = {
     key: "main_page",
     data: {
         title: "LOADING TEST",
-        status_running: false,
         
+        config_job_number: 3,
+        config_execute_mode: "queue",  // parallel , queue
+        
+        status_running: false,
         status_passed_job: 0,
         status_failed_job: 0,
-        status_total_job: 3,
+        
         status_percent: 0,
         status_average_spend_time: 0,
 
-        request_jobs: [
+        config_jobs: [
             {
                 "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
@@ -30,24 +33,24 @@ main_page = {
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         
         //config_execute_mode: "simultaneously",  // simultaneously , queue
-        config_execute_mode: "queue",  // simultaneously , queue
-        ui_sliding_menu_open: false,
-        ui_sliding_menu_mode: "collpse",
+        
+        //ui_sliding_menu_open: false,
+        //ui_sliding_menu_mode: "collpse",
 
-        results: [],
+        response_results: [],
     },
     methods: {
-        job_run: function () {
+        start_test: function () {
             //var _url = main_page_vm.config_base_url;
-            var _total_job = main_page.data.status_total_job;
-            if (_total_job > CONFIG.max_mock_user_number) {
-                vm.$ons.notification.alert(i18n.t('Max mock user number is ') + CONFIG.max_mock_user_number);
+            var _total_job = main_page.data.config_job_number;
+            if (_total_job > CONFIG.max_job_number) {
+                vm.$ons.notification.alert(i18n.t('Max job number is ') + CONFIG.max_job_number);
                 return;
             }
             
             //console.log("run");
             //console.log(vm);
-            main_page.methods.results_clear();
+            main_page.methods.clear_results();
             
             main_page.data.status_running = true;
             
@@ -55,7 +58,7 @@ main_page = {
             var _completed_jobs = 0;
 
             var _next = function (_results, _callback) {
-                main_page.data.results.push(_results);
+                main_page.data.response_results.push(_results);
 
                 // ------------
 
@@ -66,7 +69,7 @@ main_page = {
                     main_page.data.status_failed_job++;
                 }
 
-                main_page.data.status_percent = Math.floor( (main_page.data.status_passed_job + main_page.data.status_failed_job) / main_page.data.status_total_job * 100 );
+                main_page.data.status_percent = Math.floor( (main_page.data.status_passed_job + main_page.data.status_failed_job) / main_page.data.config_job_number * 100 );
                 main_page.methods.stat_average_spend_time();
                 main_page.methods.update_title();
 
@@ -74,7 +77,7 @@ main_page = {
 
                 _completed_jobs++;
                 if (_completed_jobs === _total_job) {
-                    main_page.methods.job_stop();
+                    main_page.methods.stop_test();
                 }
                 else {
                     if (typeof(_callback) === "function") {
@@ -85,14 +88,14 @@ main_page = {
 
             if (main_page.data.config_execute_mode === "simultaneously") {
                 for (var _i = 0; _i < _total_job; _i++) {
-                    main_page.methods.run_request_jobs(function (_results) {
+                    main_page.methods.run_config_jobs(function (_results) {
                         _next(_results);
                     });
                 }
             }
             else if (main_page.data.config_execute_mode === "queue") {
                 var _loop = function () {
-                    main_page.methods.run_request_jobs(function (_results) {
+                    main_page.methods.run_config_jobs(function (_results) {
                         _next(_results, function () {
                             _loop();
                         });
@@ -106,8 +109,9 @@ main_page = {
             main_page.data.status_running = false;
         },
 
-        results_clear: function () {
-            main_page.data.results = [];
+        clear_results: function () {
+            main_page.data.response_results = [];
+            
             main_page.data.status_passed_job = 0;
             main_page.data.status_failed_job = 0;
             main_page.data.status_percent = 0;
@@ -116,13 +120,13 @@ main_page = {
 
         // ----------------------------------
         
-        run_request_jobs: function (_callback) {
+        run_config_jobs: function (_callback) {
             if (typeof(_callback) !== "function") {
                 return false;
             }
             
             var _start_time = PULI_UTILS.get_current_second();
-            var _jobs = main_page.data.request_jobs;
+            var _jobs = main_page.data.config_jobs;
             var _jobs_count = _jobs.length;
             var _results = {
                 "url": null,
@@ -264,12 +268,12 @@ main_page = {
 
         stat_average_spend_time: function () {
             var _total = 0;
-            for (var _i in main_page.data.results) {
-                _total = _total + main_page.data.results[_i].spend_time;
+            for (var _i in main_page.data.response_results) {
+                _total = _total + main_page.data.response_results[_i].spend_time;
             }
-            var _avg = Math.floor((_total / main_page.data.results.length) * 1000) / 1000;
+            var _avg = Math.floor((_total / main_page.data.response_results.length) * 1000) / 1000;
             
-            _avg = _avg / main_page.data.request_jobs.length;
+            _avg = _avg / main_page.data.config_jobs.length;
             
             main_page.data.status_average_spend_time = _avg;
             
@@ -319,7 +323,7 @@ main_page = {
         nav_request_config: function (_request_id) {
             //console.log("nav_request_config" + _request_id);
             request_config.data.request_id = _request_id;
-            request_config.data.request_config = main_page.data.request_jobs[_request_id];
+            request_config.data.request_config = main_page.data.config_jobs[_request_id];
             
             this.$emit('push-page', request_config);
         },
@@ -327,7 +331,7 @@ main_page = {
         add_request_job: function (_index) {
             //console.log(_index);
             
-            var _jobs = main_page.data.request_jobs;
+            var _jobs = main_page.data.config_jobs;
             //var _template = main_page.data.request_job_template;
             var _template = _jobs[_index];
             _template = JSON.parse(JSON.stringify(_template));
@@ -337,7 +341,7 @@ main_page = {
         remove_request_job: function (_index) {
             //console.log(_index);
             
-            var _jobs = main_page.data.request_jobs;
+            var _jobs = main_page.data.config_jobs;
             if (_jobs.length < 2 || _index >= _jobs.length || _index < 0) {
                 return false;
             }
@@ -353,7 +357,7 @@ main_page = {
         nav_result_detail: function (_result_id) {
             //console.log(_index);
             result_list.data.request_id = _result_id;
-            result_list.data.jobs_result = main_page.data.results[_result_id].jobs_result;
+            result_list.data.jobs_result = main_page.data.response_results[_result_id].jobs_result;
             
             this.$emit('push-page', result_list);
         },
@@ -390,10 +394,10 @@ main_page = {
             var _config = {
                 "global": {
                     "version": CONFIG.version,
-                    "mock user number": _data.status_total_job,
+                    "mock user number": _data.config_job_number,
                     "execute mode": _data.config_execute_mode
                 },
-                "request_jobs": _data.request_jobs
+                "config_jobs": _data.config_jobs
             };
             
             var _filename = 'loading_test_config_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
@@ -407,17 +411,17 @@ main_page = {
                 var _data = main_page.data;
                 
                 var _global = _config.global;
-                _data.status_total_job = _global["mock user number"];
+                _data.config_job_number = _global["mock user number"];
                 _data.config_execute_mode = _global["execute mode"];
                 
-                _data.request_jobs = _config.request_jobs;
+                _data.config_jobs = _config.config_jobs;
             });
         },
         
         // ------------------------
         
         save_results_details: function () {
-            var _results = main_page.data.results;
+            var _results = main_page.data.response_results;
             var _output = {
                 "results": []
             };
@@ -427,7 +431,7 @@ main_page = {
                 
                 for (var _j = 0; _j < _jobs_results.length; _j++) {
                     var _job_result = _jobs_results[_j];
-                    var _config = main_page.data.request_jobs[_j];
+                    var _config = main_page.data.config_jobs[_j];
                     
                     var _row = {
                         'request_id': _request_id,

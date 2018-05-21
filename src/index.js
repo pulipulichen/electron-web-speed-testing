@@ -160,7 +160,7 @@ ipcMain.on('save-file', (event, _filename, _filters, _content) => {
  * @deprecated 20180520 測試用
  */
 if (false) {
-    
+    // document.querySelector("html").innerHTML;
 ipcMain.on('open-second-window', (event, arg)=> {
     //dialog.showMessageBox({ type: 'info', buttons: ["OK"], message: JSON.stringify(arg)}
     //    , function (buttonIndex) {});
@@ -184,7 +184,7 @@ ipcMain.on('open-second-window', (event, arg)=> {
        _win.webContents.executeJavaScript('document.body.innerHTML', true, result => {
       console.log('callback result', result);
       event.sender.send('asynchronous-reply', result);
-    })
+    });
         
     });
 });

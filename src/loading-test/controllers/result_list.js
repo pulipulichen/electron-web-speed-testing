@@ -18,9 +18,9 @@ result_list = {
             result_data.data.result_id = _result_id + "-" + _job_id;
             result_data.data.uri = result_list.data.jobs_result[_job_id].uri;
             result_data.data.url = result_list.data.jobs_result[_job_id].url;
-            result_data.data.method = main_page.data.request_jobs[_job_id].method;
-            result_data.data.data_type = main_page.data.request_jobs[_job_id].data_type;
-            result_data.data.send_data = main_page.data.request_jobs[_job_id].send_data;
+            result_data.data.method = main_page.data.config_jobs[_job_id].method;
+            result_data.data.data_type = main_page.data.config_jobs[_job_id].data_type;
+            result_data.data.send_data = main_page.data.config_jobs[_job_id].send_data;
             result_data.data.status = result_list.data.jobs_result[_job_id].status;
             result_data.data.response = result_list.data.jobs_result[_job_id].data;
             result_data.data.passed = result_list.data.jobs_result[_job_id].passed;
@@ -41,7 +41,7 @@ result_list = {
             };
             for (var _j = 0; _j < _jobs_result.length; _j++) {
                 var _job_result = _jobs_result[_j];
-                var _config = main_page.data.request_jobs[_j];
+                var _config = main_page.data.config_jobs[_j];
 
                 var _row = {
                     'request_id': _request_id,

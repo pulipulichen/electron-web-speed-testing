@@ -6,8 +6,8 @@ vue_create_event = function () {
     
     setTimeout(function () {
         //vm.status_total_job = 10;
-        //vm.job_run();
-        main_page.methods.job_run();
+        //vm.start_test();
+        main_page.methods.start_test();
     }, 1000);
 
     setTimeout(function () {
