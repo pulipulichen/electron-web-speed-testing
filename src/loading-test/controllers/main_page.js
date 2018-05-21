@@ -15,7 +15,7 @@ main_page = {
 
         config_requests: [
             {
-                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.phpaaa",
+                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
                 "method": "POST",
                 "data_type" : "web", //  text, json , web
                 "send_data": '{d:3}'
@@ -266,7 +266,10 @@ main_page = {
             var _iframe = $('<iframe style="display: none;" name="' + _iframe_name + '" id="' + _iframe_name + '"></iframe>')
                     .appendTo("body");
             
-            _iframe.load(function () {
+            _iframe.load(function (_event) {
+                console.log(_event);
+                console.log(this);
+                return;
                 
                 //console.log($(this).find("html").html());
                 console.log("load");
@@ -274,6 +277,7 @@ main_page = {
                 var _iframe_document = this.contentDocument || this.contentWindow.document;
                 
                 console.log(_iframe_document.location.href);
+                console.log(_iframe_document.title);
                 if (_iframe_document.location.href === "about:blank") {
                     return;
                 }
@@ -286,17 +290,15 @@ main_page = {
                 //DOC = _iframe_document;
             });
             _iframe.attr("onerror", function () {
+                return;
                 //console.log("error");
                 var _iframe_document = this.contentDocument || this.contentWindow.document;
                 
-                if (_iframe_document.location.href === "about:blank") {
-                    return;
-                }
+                console.log(_iframe_document.location.href);
+                console.log(_iframe_document.title);
                 
                 _status = "Load failed";
             });
-            
-            _iframe.chang
             
             var _form = $('<form style="display:none;" action="' + _url + '" target="' + _iframe_name + '" method="' + _method + '"></form>')
                     .appendTo("body");
@@ -305,8 +307,24 @@ main_page = {
                         .appendTo(_form);
             }
             
+            _form.on("error", function() {
+            console.log( "Handler for .error() called." )
+          })
+          _iframe.on("error", function() {
+            console.log( "Handler for .error() called." )
+          });
+          
+          window.onerror = function(error, url, line) {
+                console.log("抓到錯誤了");
+            };
+            
             _start_time = PULI_UTILS.get_current_second();
-            _form.submit();
+            try {
+                _form.submit();
+            }
+            catch (e) {
+                console.log("error");
+            }
         },
         
         parse_json: function (_json) {
