@@ -3,3 +3,4 @@
 /src/webapp-wrapper-win32-x64/
 /src/node_modules/*
 /[[]test]/
+/node_modules/*

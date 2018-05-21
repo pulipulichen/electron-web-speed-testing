@@ -1,6 +1,5 @@
-const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain, session} = require('electron');
+const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain, session, shell} = require('electron');
 let fs = require('fs');
-let shell = require('shell');
 const osTmpdir = require('os-tmpdir');
 let mainWindow;
 
@@ -138,4 +137,49 @@ app.on('activate', function () {
 
 // ---------------------------------------------
 
-eval(fs.readFileSync('ipc-main.js')+'');
+ipcMain.on('save_file', (event, _filename, _filters, _content) => {
+    //var _filename = arg[0];
+    //var content = arg[1];
+    // You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
+    dialog.showSaveDialog({
+        defaultPath: _filename,
+        filters : JSON.parse(_filters)
+    },(fileName) => {
+        if (fileName === undefined) {
+            console.log("You didn't save the file");
+            return;
+        }
+
+        // fileName is a string that contains the path and filename created in the save file dialog.  
+        fs.writeFile(fileName, _content, 'base64');
+    });
+}); // ipcMain.on('save-file', (event, arg)=> {
+
+ipcMain.on('open_window', (event, _link) => {
+    shell.openExternal(_link);
+});
+
+ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _callback_id) => {
+    var _win = new BrowserWindow({show: false});
+    var _load_url_setting = {
+        //extraHeaders: 'Referer: http://www.google.com.twaaaaaa/'
+    };
+    
+    if (_method === "post") {
+        _load_url_setting["postData"] = [{
+            type: 'rawData',
+            bytes: Buffer.from(_send_data)
+        }];
+    }
+    
+    _win.loadURL(_url, _load_url_setting);
+    _win.webContents.once('did-finish-load', function () {
+        _win.webContents.executeJavaScript('document.querySelector("html").innerHTML', true, result => {
+            event.sender.send(_callback_id, result, 200);
+        });
+    });
+    
+    _win.webContents.once('did-fail-load', function () {
+        event.sender.send(_callback_id, "", "Load failed.");
+    });
+});
