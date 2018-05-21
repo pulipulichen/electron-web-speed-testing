@@ -51,7 +51,7 @@ ons-list-item ons-select {
 }
 
 .selectable {
-    -webkit-user-select: auto !important;
+    -webkit-user-select: text !important;
     cursor: auto !important;
 }
 

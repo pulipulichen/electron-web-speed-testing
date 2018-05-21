@@ -70,7 +70,7 @@ main_page = {
                 }
 
                 main_page.data.status_percent = Math.floor( (main_page.data.status_passed_job + main_page.data.status_failed_job) / main_page.data.config_job_number * 100 );
-                main_page.methods.stat_average_spent_time();
+                main_page.methods.stat_average_response_time();
                 main_page.methods.update_title();
 
                 // ------------
@@ -153,7 +153,7 @@ main_page = {
                 else {
                     var _end_time = PULI_UTILS.get_current_second();
                     var _spent_time = Math.floor(_end_time - _start_time) / 1000;
-                    _results.spent_time = _spent_time;
+                    _results.response_time = _spent_time;
                     _results.passed = (_results.passed_count === _jobs_count);
                     
                     var _first_result = _results.request_results[0];
@@ -216,12 +216,12 @@ main_page = {
                 }
                 
                 var _end_time = PULI_UTILS.get_current_second();
-                var _spent_time = Math.floor(_end_time - _start_time) / 1000;
+                var _response_time = Math.floor(_end_time - _start_time) / 1000;
 
                 var _uri = main_page.methods.shrink_uri(_url);
 
                 var _result = {
-                    spent_time: _spent_time,
+                    response_time: _response_time,
                     status: _status,
                     passed: _passed,
                     url: _url,
@@ -262,10 +262,10 @@ main_page = {
             return _uri;
         },
 
-        stat_average_spent_time: function () {
+        stat_average_response_time: function () {
             var _total = 0;
             for (var _i in main_page.data.response_results) {
-                _total = _total + main_page.data.response_results[_i].spent_time;
+                _total = _total + main_page.data.response_results[_i].response_time;
             }
             var _avg = Math.floor((_total / main_page.data.response_results.length) * 1000) / 1000;
             

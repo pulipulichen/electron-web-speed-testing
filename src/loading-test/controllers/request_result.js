@@ -10,7 +10,8 @@ request_result = {
         send_data: "",
         status: 200,
         passed: false,
-        response: "{}"
+        response: "{}",
+        response_time: 0
     },
     methods: {
         open_request: function () {

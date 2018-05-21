@@ -6,7 +6,7 @@ job_result = {
         request_results: [{
             response: "",
             passed: true,
-            spend_time: 0,
+            loading_time: 0,
             status: 200,
             uri: "http://localhost",
             url: "http://localhost",
@@ -27,8 +27,9 @@ job_result = {
             request_result.data.data_type = _request_config.data_type;
             request_result.data.send_data = _request_config.send_data;
             request_result.data.status = _request_result.status;
-            request_result.data.response = _request_result.data;
+            request_result.data.response = _request_result.response;
             request_result.data.passed = _request_result.passed;
+            request_result.data.response_time = _request_result.response_time;
             
             if (typeof(request_result.data.response) !== "string" 
                     && typeof(request_result.data.response) !== "number") {

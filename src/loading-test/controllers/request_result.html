@@ -48,7 +48,7 @@
             <label class="left">
                 {{ i18n.t("URL") }}
             </label>
-            <div class="center">
+            <div class="center selectable">
                 {{ request_result.data.url }}
             </div>
         </v-ons-list-item>
@@ -94,8 +94,8 @@
             <label class="left">
                 {{ i18n.t("Status") }}
             </label>
-            <div class="center">
-                <div class="list-item__title">
+            <div class="center selectable">
+                <div class="list-item__title selectable">
                     <ons-icon icon="fa-check-circle" 
                               style="color: green" 
                               v-show="request_result.data.passed"></ons-icon>
@@ -104,10 +104,21 @@
                               v-show="request_result.data.passed === false"></ons-icon>
                     {{ request_result.data.status }}
                 </div>
-                <span class="list-item__subtitle" 
+                <span class="list-item__subtitle selectable" 
                       v-show="PULI_UTILS.is_int(request_result.data.status)">
                     {{ status_code(request_result.data.status) }}
                 </span>
+            </div>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Response Time") }}
+            </label>
+            <div class="center selectable">
+                {{ request_result.data.response_time }}
+                {{ i18n.t("second") }}
+                
             </div>
         </v-ons-list-item>
 
@@ -125,7 +136,7 @@
                     </a>
                 </div>
                 <span class="list-item__subtitle ui form">
-                    <textarea readonly="readonly" style="max-height: calc(100vh - 34rem);">{{ request_result.data.response }}</textarea>
+                    <textarea readonly="readonly" style="max-height: calc(100vh - 36rem);">{{ request_result.data.response }}</textarea>
                 </span>
             </div>
         </v-ons-list-item>
