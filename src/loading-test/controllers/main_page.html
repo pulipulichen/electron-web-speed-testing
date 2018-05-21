@@ -39,20 +39,22 @@
 
 
         <div class="right">
-            <!--
-            <ons-toolbar-button @click="jump_to_config" v-show="main_page.data.response_results.length > 0">
-                <ons-icon icon="fa-cog"></ons-icon>
-            </ons-toolbar-button>
-            -->
-            <ons-toolbar-button v-if="main_page.data.status_running === false" @click="start_test">
-                <ons-icon icon="fa-play-circle"></ons-icon>
-            </ons-toolbar-button>
-            <ons-toolbar-button @click="stop_test" v-if="main_page.data.status_running === true">
+            <button class="circular ui icon primary button"
+                    v-if="main_page.data.status_running === false"
+                    @click="start_test">
+                <ons-icon icon="fa-play"></ons-icon>
+            </button>
+            
+            <button class="circular ui icon primary button"
+                    v-if="main_page.data.status_running === true"
+                    @click="stop_test">
                 <ons-icon icon="fa-pause"></ons-icon>
-            </ons-toolbar-button>
-            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page')">
-                <ons-icon icon="fa-question-circle"></ons-icon>
-            </ons-toolbar-button>
+            </button>
+            
+            <button class="circular ui icon primary button"
+                    @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page')">
+                <ons-icon icon="fa-question"></ons-icon>
+            </button>
             <!--
             <ons-toolbar-button @click="results_clear" v-show="main_page.data.response_results.length > 0">
                 <ons-icon icon="fa-trash"></ons-icon>
