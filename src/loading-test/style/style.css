@@ -3,6 +3,9 @@ ons-toolbar h1 {
     margin: 0;
     font-weight: bold;
 }
+ons-toolbar ons-toolbar-bottom {
+    cursor: pointer;
+}
 
 .panel {
     margin-top: 0.5em !important;

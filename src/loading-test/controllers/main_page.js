@@ -11,7 +11,7 @@ main_page = {
         status_failed_job: 0,
         
         status_percent: 0,
-        status_average_spent_time: 0,
+        status_average_response_time: 0,
 
         config_requests: [
             {
@@ -115,7 +115,7 @@ main_page = {
             main_page.data.status_passed_job = 0;
             main_page.data.status_failed_job = 0;
             main_page.data.status_percent = 0;
-            main_page.data.status_average_spent_time = 0;
+            main_page.data.status_average_response_time = 0;
         },
 
         // ----------------------------------
@@ -271,7 +271,7 @@ main_page = {
             
             _avg = _avg / main_page.data.config_requests.length;
             
-            main_page.data.status_average_spent_time = _avg;
+            main_page.data.status_average_response_time = _avg;
             
             var _comment = "Bad. The system is failed to keep the user.";
             if (_avg <= 0.1) {
@@ -283,17 +283,17 @@ main_page = {
             else if (_avg <= 10) {
                 _comment = "OK. The user's attention still focused on the system.";
             }
-            main_page.data.status_average_spent_time_comment = i18n.t(_comment, false);
+            main_page.data.status_average_response_time_comment = i18n.t(_comment, false);
         },
 
         update_title: function () {
             var _title = null;
 
             if (main_page.data.status_percent > 0 && main_page.data.status_percent < 100) {
-                _title = "(" + main_page.data.status_average_spent_time + "s) " + main_page.data.status_percent + "%";
+                _title = "(" + main_page.data.status_average_response_time + "s) " + main_page.data.status_percent + "%";
             }
             else if (main_page.data.status_percent === 100) {
-                _title = "(" + main_page.data.status_average_spent_time + "s) " + i18n.t(main_page.data.title);
+                _title = "(" + main_page.data.status_average_response_time + "s) " + i18n.t(main_page.data.title);
             }
             else {
                 _title = i18n.t(main_page.data.title);

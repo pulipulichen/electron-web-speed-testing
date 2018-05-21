@@ -10,9 +10,9 @@
                     </ons-toolbar-button>
                 </v-ons-col>
 
-                <v-ons-col v-show="main_page.data.status_average_spend_time > 0">
+                <v-ons-col v-show="main_page.data.status_average_response_time > 0">
                     <ons-icon icon="md-timer"></ons-icon>
-                    {{ main_page.data.status_average_spend_time }}
+                    {{ main_page.data.status_average_response_time }}
                 </v-ons-col>
                 <v-ons-col v-show="main_page.data.status_passed_job > 0">
                     <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
@@ -66,28 +66,28 @@
 
     <v-ons-list modifier="inset" id="panel_configuration" class="panel">
         <v-ons-list-header id="panel_configuration_header">
-            Job Configuration
+            {{ i18n.t("Job Configuration") }}
         </v-ons-list-header>
 
         <v-ons-list-item>
             <v-ons-col @click="load_config">
                 <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-folder-open"></ons-icon>
-                    LOAD CONFIG
+                    {{ i18n.t("LOAD CONFIG") }}
                 </v-ons-button>
             </v-ons-col>
             <v-ons-col width="10px"></v-ons-col>
             <v-ons-col @click="save_config">
                 <v-ons-button modifier="large" class='ui button'>
                     <ons-icon icon="fa-save"></ons-icon>
-                    SAVE CONFIG
+                    {{ i18n.t("SAVE CONFIG") }}
                 </v-ons-button>
             </v-ons-col>
         </v-ons-list-item>
 
         <v-ons-list-item>
             <label class="left" for="status_total_job">
-                Mock user number
+                {{ i18n.t("Job number") }}
                 <!--
                 <ons-icon icon="fa-question-circle"></ons-icon>
                 -->
@@ -104,7 +104,7 @@
                 <div class="list-item__subtitle align-right" 
                      v-show="main_page.data.config_job_number > CONFIG.max_job_number">
                     <span class="ui pointing red basic label">
-                        Max job number is {{ CONFIG.max_job_number }}.
+                        {{ i18n.t("Max job number is") }} {{ CONFIG.max_job_number }}.
                     </span>
                 </div>
             </div>
@@ -114,20 +114,20 @@
 
         <v-ons-list-item>
             <label class="left" for="switch_config_execute_mode">
-                Execute mode
+                {{ i18n.t("Execute mode") }}
             </label>
             <div class="center">
                 <v-ons-select v-model="main_page.config_execute_mode" 
                               id="switch_config_execute_mode"
                               :disabled="main_page.data.status_running">
-                    <option value="parallel">Parallel</option>
-                    <option value="queue">queue</option>
+                    <option value="parallel">{{ i18n.t("Parallel") }}</option>
+                    <option value="queue">{{ i18n.t("Queue") }}</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>
 
         <v-ons-list-header>
-            Request Configuration
+            {{ i18n.t("Request Configuration") }}
         </v-ons-list-header>
         <v-ons-list-item 
             v-for="(request, index) in main_page.data.config_requests"
@@ -160,20 +160,20 @@
         <v-ons-list-item v-if="main_page.data.status_running === false" @click="start_test">
             <v-ons-button modifier="large" class='ui primary button'>
                 <ons-icon icon="fa-play-circle"></ons-icon>
-                RUN
+                {{ i18n.t("START TEST") }}
             </v-ons-button>
         </v-ons-list-item>
         <v-ons-list-item v-if="main_page.data.status_running === true" @click="stop_test">
             <v-ons-button modifier="large" class='ui negative button'>
                 <ons-icon icon="fa-pause"></ons-icon>
-                STOP
+                {{ i18n.t("STOP TEST") }}
             </v-ons-button>
         </v-ons-list-item>
     </v-ons-list>
 
     <v-ons-list modifier="inset" v-show="main_page.data.response_results.length" class="panel panel_results" id="panel_results">
         <v-ons-list-header id="panel_results_header">
-            Results
+            {{ i18n.t("Job Results") }}
         </v-ons-list-header>
 
         <v-ons-list-item v-show="main_page.data.status_running === false" 
@@ -205,15 +205,15 @@
         </v-ons-list-item>
 
         <v-ons-list-item v-show="main_page.data.response_results.length > 0 && main_page.data.status_failed_job === 0">
-            <v-ons-row class="ui icon message" :class="{'negative': (main_page.data.status_average_spend_time > 10) }">
+            <v-ons-row class="ui icon message" :class="{'negative': (main_page.data.status_average_response_time > 10) }">
                 <ons-icon icon="md-timer" class="icon"></ons-icon>
                 <v-ons-col>
                     <v-ons-row class="header">
-                        {{ i18n.t("Avg. Time Spent: ") }}
-                        {{ main_page.data.status_average_spend_time }}
+                        {{ i18n.t("Avg. Response Time: ") }}
+                        {{ main_page.data.status_average_response_time }}
                     </v-ons-row>
                     <v-ons-row>
-                        {{ main_page.data.status_average_spend_time_comment }}
+                        {{ main_page.data.status_average_response_time_comment }}
                     </v-ons-row>
                 </v-ons-col>
             </v-ons-row>

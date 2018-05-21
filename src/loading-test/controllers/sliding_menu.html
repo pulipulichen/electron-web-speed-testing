@@ -13,13 +13,13 @@
 
 
         </v-ons-row>
-        <v-ons-row v-show="main_page.data.status_average_spend_time > 0">
+        <v-ons-row v-show="main_page.data.status_average_response_time > 0">
             <v-ons-col width='2rem'>
                 <ons-icon icon="md-timer"></ons-icon>
             </v-ons-col>
             <v-ons-col>
                 {{ i18n.t("Avg. Time Spent: ") }}
-                {{ main_page.data.status_average_spend_time }}
+                {{ main_page.data.status_average_response_time }}
             </v-ons-col>
         </v-ons-row>
         <v-ons-row v-show="main_page.data.status_passed_job > 0">
