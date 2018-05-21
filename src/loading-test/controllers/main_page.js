@@ -137,8 +137,11 @@ main_page = {
                 "response_time": -1,
                 "passed": false,
                 "passed_count": 0,
+                "failed_count": 0,
+                "failed_message": "",
                 "request_results": [],
             };
+            var _failed_url_list = [];
             
             var _loop = function (_j) {
                 if (main_page.data.status_running === false) {
@@ -153,6 +156,10 @@ main_page = {
                         //console.log(_result);
                         if (_result.passed === true) {
                             _results.passed_count++;
+                        }
+                        else {
+                            _results.failed_count++;
+                            _failed_url_list.push(main_page.methods.shrink_uri(_config.url));
                         }
                         _loop(_j+1);
                     };
@@ -185,6 +192,8 @@ main_page = {
                     var _first_result = _results.request_results[0];
                     _results.uri = _first_result.uri;
                     _results.url = _first_result.url;
+                    
+                    _results.failed_message = _failed_url_list.join(", ");
                     
                     _callback(_results);
                 }
@@ -362,6 +371,9 @@ main_page = {
                 if (main_page.data.status_running === true) {
                     _callback(_result);
                 }
+                
+                _iframe.remove();
+                _form.remove();
             };
             
             /*

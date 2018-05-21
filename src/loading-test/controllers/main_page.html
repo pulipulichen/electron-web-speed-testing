@@ -256,13 +256,16 @@
                 {{ result.response_time }}
             </v-ons-col>
             <v-ons-col width="4rem">
-                <ons-icon icon="fa-check-circle" v-show="result.passed" style="color: green"></ons-icon>
-                <ons-icon icon="fa-exclamation-triangle" v-show="result.passed === false" ></ons-icon>
-                <span v-show="result.passed === false">{{ result.status }}</span>
+                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+                {{ result.passed_count }}
             </v-ons-col>
-            <v-ons-col v-bind:title="result.url">
-                {{ result.uri }}
-            </v-ons-col>                
+            <v-ons-col width="4rem">
+                <ons-icon icon="fa-exclamation-triangle"></ons-icon>
+                {{ result.failed_count }}
+            </v-ons-col>
+            <v-ons-col class="text-overflow-ellipsis">
+                {{ result.failed_message }}
+            </v-ons-col>
         </v-ons-list-item>
     </v-ons-list>
 </v-ons-page>

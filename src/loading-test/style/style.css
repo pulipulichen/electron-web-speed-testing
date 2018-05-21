@@ -42,8 +42,9 @@ ons-list-item.failed {
 }
 ons-list-item.failed .button--quiet,
 ons-list-item.failed input,
+ons-list-item.failed ons-icon,
 ons-list-item.failed input:disabled {
-    color: white;
+    color: white !important;
 }
 
 ons-list-item.failed.list-item--chevron:before {
@@ -82,4 +83,8 @@ ons-list-item > .left.icon {
 
 .invisible.visible {
     visibility: visible;
+}
+
+.text-overflow-ellipsis {
+    text-overflow: ellipsis;
 }
