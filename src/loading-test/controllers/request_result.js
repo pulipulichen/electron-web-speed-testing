@@ -30,6 +30,9 @@ request_result = {
             //doc.open();
             _doc.write(_html);
             //doc.close();
+        },
+        edit_request_config: function () {
+            main_page.methods.nav_request_config(request_result.data.request_id);
         }
     }
 };

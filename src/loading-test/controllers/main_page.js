@@ -502,11 +502,15 @@ main_page = {
         // ---------------
         
         nav_request_config: function (_request_id) {
+            main_page.methods.nav_main_page();
+            
             //console.log("nav_request_config" + _request_id);
             request_config.data.job_id = _request_id;
             request_config.data.config_requests = main_page.data.config_requests[_request_id];
             request_config.methods.check_enable_data_type_web();
-            this.$emit('push-page', request_config);
+            //this.$emit('push-page', request_config);
+            
+            vm.$data.pageStack.push(request_config);
         },
         
         add_request: function (_index) {
