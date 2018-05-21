@@ -35,5 +35,19 @@ electron_helper = {
         var _uuid = this.uuid;
         this.uuid++;
         return _uuid;
+    },
+    set_item: function (_key, _value) {
+        if (typeof(_value) !== 'string' && typeof(_value) !== 'number') {
+            _value = JSON.stringify(_value);
+        }
+        ipcRenderer.send('set_item', _key, _value);
+    },
+    get_item: function (_key, _callback) {
+        var _callback_id = "get_item_callback_" + this.create_uuid();
+        ipcRenderer.on(_callback_id, function (event, _value){
+            _callback(_value);
+        });
+        
+        ipcRenderer.send('set_item', _key, _callback_id);
     }
 };

@@ -584,19 +584,29 @@ main_page = {
         },
         
         setup_config_auto_save: function () {
-            if (ELECTRON_ENABLE === false) {
-                $(window).unload(function () {
-                    var _config = main_page.methods.get_config();
-                    localStorage.setItem('loading_test_config', JSON.stringify(_config));
-                });
+            var _config;
+            var _key = 'loading_test_config';
+            $(window).unload(function () {
+                _config = main_page.methods.get_config();
+                _config = JSON.stringify(_config);
+                if (ELECTRON_ENABLE === false) {
+                    localStorage.setItem(_key, _config);
+                }
+                else {
+                    _config = electron_helper.set_item(_key, _config);
+                }
+            });
 
-                var _config = localStorage.getItem("loading_test_config");
+            if (ELECTRON_ENABLE === false) {
+                _config = localStorage.getItem("loading_test_config");
                 if (_config !== null && CONFIG.enable_auto_save === true) {
                     main_page.methods.set_config(_config);
                 }
             }
             else {
-                
+                electron_helper.get_item(_key, function (_config) {
+                    main_page.methods.set_config(_config);
+                });
             }
         },
         

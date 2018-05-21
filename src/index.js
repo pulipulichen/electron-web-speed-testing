@@ -135,6 +135,8 @@ app.on('activate', function () {
     }
 });
 
+fs.writeFile("test.txt", "test");
+
 // ---------------------------------------------
 
 ipcMain.on('save_file', (event, _filename, _filters, _content) => {
@@ -182,4 +184,24 @@ ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _callback_id) => {
     _win.webContents.once('did-fail-load', function () {
         event.sender.send(_callback_id, "", "Load failed.");
     });
+});
+
+ipcMain.on('set_item', (event, _key, _item) => {
+    var _file_name = "local_storage_" + _key + ".json";
+    fs.writeFile(_file_name, _item);
+});
+
+ipcMain.on('get_item', (event, _key, _callback_id) => {
+    var _file_name = "local_storage_" + _key + ".json";
+    fs.exists(_file_name, function (_is_exists) {
+        if (_is_exists === true) {
+            fs.readFile(_file_name, function (_err, _value) {
+                event.sender.send(_callback_id, _value);
+            });
+        }
+        else {
+            event.sender.send(_callback_id, null);
+        }
+    });
+    
 });
