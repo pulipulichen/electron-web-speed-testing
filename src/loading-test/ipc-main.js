@@ -27,11 +27,22 @@ ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _callback_id) => {
         //extraHeaders: 'Referer: http://www.google.com.twaaaaaa/'
     };
     
+    if (_method === "post") {
+        _load_url_setting["postData"] = [{
+            type: 'rawData',
+            bytes: Buffer.from(_send_data)
+        }];
+    }
+    
     _win.loadURL(_url, _load_url_setting);
     _win.webContents.once('did-finish-load', function () {
         _win.webContents.executeJavaScript('document.querySelector("html").innerHTML', true, result => {
-            event.sender.send('asynchronous-reply', result);
+            event.sender.send(_callback_id, result, 200);
         });
+    });
+    
+    _win.webContents.once('did-fail-load', function () {
+        event.sender.send(_callback_id, "", "Load failed.");
     });
 });
 

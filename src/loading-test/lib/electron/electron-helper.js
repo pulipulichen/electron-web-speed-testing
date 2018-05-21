@@ -16,9 +16,11 @@ electron_helper = {
             return false;
         }
         
-        if (typeof(_send_data) !== "string") {
-            _send_data = JSON.stringify(_send_data);
+        var _send_data_string = [];
+        for (var _key in _send_data) {
+            _send_data_string.push(_key + "=" + _send_data[_key]);
         }
+        _send_data_string = _send_data_string.join("&");
         
         var _callback_id = "retrieve_web_callback_" + this.create_uuid();
         
