@@ -3,7 +3,7 @@ main_page = {
     data: {
         title: "LOADING TEST",
         
-        config_job_number: 50,
+        config_job_number: 3,
         config_execute_mode: "parallel",  // parallel , queue
         
         status_running: false,
