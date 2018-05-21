@@ -78,6 +78,7 @@ var _loop = function (_i) {
     if (_i < _controllers_list.length) {
         var _name = _controllers_list[_i];
         PULI_UTILS.load_css("controllers/" + _name + ".css");
+        //console.log(_name);
         $.getScript("controllers/" + _name + ".js", function () {
             $.get("controllers/" + _name + ".html", function (_template) {
                 /*
@@ -116,7 +117,9 @@ var _loop = function (_i) {
         });
     }
     else {
+        //console.log("ok 1");
         _build_vue_setting(function (_vue_setting) {
+            //console.log("ok");
             _vue_ready(_vue_setting);
         });
     }

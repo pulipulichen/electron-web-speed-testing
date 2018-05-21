@@ -415,7 +415,7 @@ main_page = {
                 if (main_page.data.status_running === true) {
                     _callback(_result);
                 }
-            };
+            });
         },
         
         parse_json: function (_json) {
