@@ -11,7 +11,7 @@ electron_helper = {
             ipcRenderer.send('open_window', _link);
         }
     },
-    retrieve_web: function (_url, _method, _send_data, _callback) {
+    retrieve_web: function (_url, _method, _send_data, _referer, _callback) {
         if (typeof(_callback) !== "function") {
             return false;
         }
@@ -28,7 +28,7 @@ electron_helper = {
             _callback(_response, _status);
         });
         
-        ipcRenderer.send('retrieve_web', _url, _method, _send_data, _callback_id);
+        ipcRenderer.send('retrieve_web', _url, _method, _send_data, _referer, _callback_id);
     },
     uuid: 0,
     create_uuid: function () {

@@ -160,10 +160,10 @@ ipcMain.on('open_window', (event, _link) => {
     shell.openExternal(_link);
 });
 
-ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _callback_id) => {
+ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _referer, _callback_id) => {
     var _win = new BrowserWindow({show: false});
     var _load_url_setting = {
-        //extraHeaders: 'Referer: http://www.google.com.twaaaaaa/'
+        extraHeaders: 'Referer: ' + _referer
     };
     
     if (_method === "post") {

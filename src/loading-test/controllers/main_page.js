@@ -129,8 +129,8 @@ main_page = {
             }
             
             var _start_time = PULI_UTILS.get_current_second();
-            var _jobs = main_page.data.config_requests;
-            var _jobs_count = _jobs.length;
+            var _config_requests = main_page.data.config_requests;
+            var _requests_count = _config_requests.length;
             var _results = {
                 "url": null,
                 "uri": null,
@@ -149,8 +149,8 @@ main_page = {
                 }
                 
                 //console.log(_j);
-                if (_j < _jobs_count) {
-                    var _config = _jobs[_j];
+                if (_j < _requests_count) {
+                    var _config = _config_requests[_j];
                     var _request_callback = function (_result) {
                         _results.request_results.push(_result);
                         //console.log(_result);
@@ -176,6 +176,14 @@ main_page = {
                     }
                     else if (_data_type === "web") {
                         if (ELECTRON_ENABLE === true) {
+                            if (typeof(_config.referer) !== "string") {
+                                var _referer = _config.url;
+                                if (_j > 0) {
+                                    _referer = _config_requests[(_j-1)].url;
+                                }
+                                _config.referer = _referer;
+                            }
+                            
                             main_page.methods.run_web_request_electron(_config, _request_callback);
                         }
                         else {
@@ -187,7 +195,7 @@ main_page = {
                     var _end_time = PULI_UTILS.get_current_second();
                     var _response_time = Math.floor(_end_time - _start_time) / 1000;
                     _results.response_time = _response_time;
-                    _results.passed = (_results.passed_count === _jobs_count);
+                    _results.passed = (_results.passed_count === _requests_count);
                     
                     var _first_result = _results.request_results[0];
                     _results.uri = _first_result.uri;
@@ -410,11 +418,12 @@ main_page = {
             var _url = _config.url;
             var _method = _config.method;
             var _send_data = main_page.methods.parse_json(_config.send_data);
+            var _referer = _config.referer;
             //var _status = 200;
             
             _start_time = PULI_UTILS.get_current_second();
             
-            electron_helper.retrieve_web(_url, _method, _send_data, function (_response, _status) {
+            electron_helper.retrieve_web(_url, _method, _send_data, _referer, function (_response, _status) {
                 var _end_time = PULI_UTILS.get_current_second();
                 var _response_time = Math.floor(_end_time - _start_time) / 1000;
                 var _uri = main_page.methods.shrink_uri(_url);
@@ -544,14 +553,21 @@ main_page = {
         
         remove_request: function (_index) {
             //console.log(_index);
-            var _jobs = main_page.data.config_requests;
-            if (_jobs.length < 2 || _index >= _jobs.length || _index < 0) {
+            var _requests = main_page.data.config_requests;
+            if (_requests.length < 2 || _index >= _requests.length || _index < 0) {
                 return false;
             }
             else {
-                if (window.confirm("Are you sure to delete this reuqest #" + _index + " ?")) {
-                    _jobs.splice(_index, 1);
-                }
+                var _message = i18n.t("Are you sure to delete this reuqest") + " #" + (_index + 1) + "?";
+                vm.$ons.notification.confirm({
+                    message: _message,
+                    callback: function (_result) {
+                        //console.log(_result);
+                        if (_result === 1) {
+                            _requests.splice(_index, 1);
+                        }
+                    }
+                });
             }
         },
         
