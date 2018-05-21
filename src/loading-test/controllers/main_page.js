@@ -3,7 +3,7 @@ main_page = {
     data: {
         title: "LOADING TEST",
         
-        config_job_number: 1,
+        config_job_number: 3,
         config_execute_mode: "parallel",  // parallel , queue
         
         status_running: false,
@@ -16,11 +16,14 @@ main_page = {
         config_requests: [
             {
                 //"url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
-                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/relative.html",
-                // 
-                "method": "POST",
+                //"url": "http://localhost/nodejs-projects/electron-loading-test/[test]/relative.html",
+                //"url": "http://blog.pulipuli.info/",
+                //"url": "http://dlll.nccu.edu.tw/",
+                "url": "http://localhost/",
+                
+                "method": "GET", // GET, POST
                 "data_type" : "web", //  text, json , web
-                "send_data": '{d:3}'
+                "send_data": '{test:true}'
             },
             /*
             {
@@ -133,7 +136,7 @@ main_page = {
             var _results = {
                 "url": null,
                 "uri": null,
-                "spent_time": -1,
+                "response_time": -1,
                 "passed": false,
                 "passed_count": 0,
                 "request_results": [],
@@ -177,8 +180,8 @@ main_page = {
                 }
                 else {
                     var _end_time = PULI_UTILS.get_current_second();
-                    var _spent_time = Math.floor(_end_time - _start_time) / 1000;
-                    _results.response_time = _spent_time;
+                    var _response_time = Math.floor(_end_time - _start_time) / 1000;
+                    _results.response_time = _response_time;
                     _results.passed = (_results.passed_count === _jobs_count);
                     
                     var _first_result = _results.request_results[0];
@@ -201,7 +204,7 @@ main_page = {
             var _method = _config.method;
             var _send_data = main_page.methods.parse_json(_config.send_data);
 
-            var _status;
+            var _status = "Access-Control-Allow-Origin limit";
             var _ajax_complete = function (_s) {
                 _status = _s;
             };
