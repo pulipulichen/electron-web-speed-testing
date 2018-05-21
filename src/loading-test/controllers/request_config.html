@@ -26,6 +26,18 @@
     </v-ons-toolbar>
 
     <v-ons-list modifier="inset" id="request_config" class="panel">
+        <v-ons-list-item modifier="nodivider"
+                         @click="open_request">
+            <v-ons-row>
+                <v-ons-col>
+                    <v-ons-button modifier="large" class='ui primary button'>
+                        <ons-icon icon="fa-external-link-square"></ons-icon>
+                        {{ i18n.t("OPEN REQUEST") }}
+                    </v-ons-button>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
         <v-ons-list-item>
             <label class="left" for="request_config_url">
                 {{ i18n.t('Request URL') }}
