@@ -71,3 +71,11 @@ ons-list-item > .left.icon {
 .align-right {
     text-align: right;
 }
+
+.invisible {
+    visibility: hidden;
+}
+
+.invisible.visible {
+    visibility: visible;
+}

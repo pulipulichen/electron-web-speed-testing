@@ -3,7 +3,7 @@ main_page = {
     data: {
         title: "LOADING TEST",
         
-        config_job_number: 3,
+        config_job_number: 50,
         config_execute_mode: "parallel",  // parallel , queue
         
         status_running: false,
@@ -303,28 +303,19 @@ main_page = {
         },
 
         /**
-         * @TODO 還要做一個切回這個頁面再跳轉的功能嗎？
          * @returns true
          */
         jump_to_config: function () {
-            // @TODO 還要做一個切回這個頁面再跳轉的功能嗎？
-
-            document.getElementById('panel_configuration_header').scrollIntoView({
-                behavior: 'smooth'
-            });
-            return true;
+            main_page.methods.nav_main_page();
+            return PULI_UTILS.scroll_to("panel_configuration_header");
         },
         
         /**
-         * @TODO 還要做一個切回這個頁面再跳轉的功能嗎？
          * @returns true
          */
         jump_to_results: function () {
-
-            document.getElementById('panel_results_header').scrollIntoView({
-                behavior: 'smooth'
-            });
-            return true;
+            main_page.methods.nav_main_page();
+            return PULI_UTILS.scroll_to("panel_results_header");
         },
         
         // ---------------
@@ -371,6 +362,13 @@ main_page = {
         nav_about: function () {
             //_vue_setting.data.stacks.$emit('push-page', about);
             vm.$data.pageStack.push(about);
+        },
+        
+        nav_main_page: function () {
+            //_vue_setting.data.stacks.$emit('push-page', about);
+            while (vm.$data.pageStack.length > 1) {
+                vm.$data.pageStack.pop();
+            }
         },
         
         // ----------------

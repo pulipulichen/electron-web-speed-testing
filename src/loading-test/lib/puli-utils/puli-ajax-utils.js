@@ -120,3 +120,33 @@ PULI_UTILS.parse_uri = function (_url) {
     }
     return _uri;
 };
+
+PULI_UTILS.scroll_to = function (_id, _callback) {
+    var _retry_limit = 3;
+    var _retry_interval = 100;
+    
+    var _loop = function (_i) {
+        if (_i === _retry_limit) {
+            return;
+        }
+        
+        if ($('#' + _id + ":visible").length === 0) {
+            setTimeout(function () {
+                _i++;
+                _loop(_i);
+            }, _retry_interval);
+        }
+        else {
+            var _target = document.getElementById(_id);
+            document.getElementById('panel_results_header').scrollIntoView({
+                behavior: 'smooth'
+            });
+            if (typeof(_callback) === "function") {
+                _callback();
+            }
+        }
+    };
+    _loop(0);
+    
+    return true;
+};

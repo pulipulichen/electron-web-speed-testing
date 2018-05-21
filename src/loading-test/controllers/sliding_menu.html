@@ -13,7 +13,8 @@
 
 
         </v-ons-row>
-        <v-ons-row v-show="main_page.data.status_average_response_time > 0">
+        <v-ons-row class="invisible" 
+                   :class="{'visible': (main_page.data.status_average_response_time > 0)}">
             <v-ons-col width='2rem'>
                 <ons-icon icon="md-timer"></ons-icon>
             </v-ons-col>
@@ -22,7 +23,9 @@
                 {{ main_page.data.status_average_response_time }}
             </v-ons-col>
         </v-ons-row>
-        <v-ons-row v-show="main_page.data.status_passed_job > 0">
+        
+        <v-ons-row class="invisible" 
+                   :class="{'visible': (main_page.data.status_passed_job > 0)}">
             <v-ons-col width='2rem'>
                 <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
             </v-ons-col>
@@ -31,7 +34,9 @@
                 {{ main_page.data.status_passed_job }}
             </v-ons-col>
         </v-ons-row>
-        <v-ons-row v-show="main_page.data.status_failed_job > 0">
+        
+        <v-ons-row class="invisible" 
+                   :class="{'visible': (main_page.data.status_failed_job > 0)}">
             <v-ons-col width='2rem'>
                 <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
             </v-ons-col>
@@ -51,6 +56,17 @@
             <div class="center">Results</div>
           </v-ons-list-item>
             -->
+            <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.jump_to_config">
+                <div class="center">
+                    {{ i18n.t('Configuration') }}
+                </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.jump_to_results">
+                <div class="center">
+                    {{ i18n.t('Results') }}
+                </div>
+            </v-ons-list-item>
+            
             <v-ons-list-item tappable modifier="chevron" 
                              @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help')">
                 {{ i18n.t('Help') }}
