@@ -188,14 +188,14 @@ ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _callback_id) => {
 
 ipcMain.on('set_item', (event, _key, _item) => {
     var _file_name = "local_storage_" + _key + ".json";
-    fs.writeFile(_file_name, _item);
+    fs.writeFile(_file_name, _item, "utf8");
 });
 
 ipcMain.on('get_item', (event, _key, _callback_id) => {
     var _file_name = "local_storage_" + _key + ".json";
     fs.exists(_file_name, function (_is_exists) {
         if (_is_exists === true) {
-            fs.readFile(_file_name, function (_err, _value) {
+            fs.readFile(_file_name, "utf8", function (_err, _value) {
                 event.sender.send(_callback_id, _value);
             });
         }
@@ -203,5 +203,4 @@ ipcMain.on('get_item', (event, _key, _callback_id) => {
             event.sender.send(_callback_id, null);
         }
     });
-    
 });

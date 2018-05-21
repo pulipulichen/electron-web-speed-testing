@@ -491,6 +491,7 @@ main_page = {
          */
         jump_to_config: function () {
             main_page.methods.nav_main_page();
+            sliding_menu.methods.close();
             return PULI_UTILS.scroll_to("panel_configuration_header");
         },
         
@@ -499,6 +500,7 @@ main_page = {
          */
         jump_to_results: function () {
             main_page.methods.nav_main_page();
+            sliding_menu.methods.close();
             return PULI_UTILS.scroll_to("panel_results_header");
         },
         
@@ -551,6 +553,7 @@ main_page = {
         nav_about: function () {
             //_vue_setting.data.stacks.$emit('push-page', about);
             vm.$data.pageStack.push(about);
+            sliding_menu.methods.close();
         },
         
         nav_main_page: function () {
@@ -599,13 +602,17 @@ main_page = {
 
             if (ELECTRON_ENABLE === false) {
                 _config = localStorage.getItem("loading_test_config");
-                if (_config !== null && CONFIG.enable_auto_save === true) {
+                if (_config !== null && CONFIG.enable_config_auto_save === true) {
                     main_page.methods.set_config(_config);
                 }
             }
             else {
+                //console.log("check");
                 electron_helper.get_item(_key, function (_config) {
-                    main_page.methods.set_config(_config);
+                    //console.log(_config);
+                    if (_config !== null && CONFIG.enable_config_auto_save === true) {
+                        main_page.methods.set_config(_config);
+                    }
                 });
             }
         },
@@ -648,7 +655,7 @@ main_page = {
             var _data = main_page.data;
                 
             var _global = _config.global;
-            _data.config_job_number = _global["job number"];
+            _data.config_job_number = parseInt(_global["job number"], 10);
             _data.config_execute_mode = _global["execute mode"];
 
             _data.config_requests = _config.config_requests;

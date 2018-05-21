@@ -21,6 +21,9 @@ sliding_menu = {
         open: function () {
             sliding_menu.data.opened = true;
         },
+        close: function () {
+            sliding_menu.data.opened = false;
+        },
         /*
         ready: function () {
             var _mode = $('#sliding_menu').attr('mode');

@@ -45,9 +45,10 @@ electron_helper = {
     get_item: function (_key, _callback) {
         var _callback_id = "get_item_callback_" + this.create_uuid();
         ipcRenderer.on(_callback_id, function (event, _value){
+            //console.log("有回來嗎");
             _callback(_value);
         });
-        
-        ipcRenderer.send('set_item', _key, _callback_id);
+        //console.log([_callback_id, _key]);
+        ipcRenderer.send('get_item', _key, _callback_id);
     }
 };
