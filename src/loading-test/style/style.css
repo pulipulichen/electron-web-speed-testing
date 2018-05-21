@@ -64,6 +64,10 @@ ons-list-item > .left {
     width: 9rem;
 }
 
+ons-list-item > .left.icon {
+    width: auto;
+}
+
 .align-right {
     text-align: right;
 }
