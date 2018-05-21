@@ -13,5 +13,4 @@ echo Delete files
 rmdir /S /Q .\webapp-wrapper-win32-x64
 del ".\loading test.exe"
 
-
 pause
