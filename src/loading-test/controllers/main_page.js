@@ -15,7 +15,9 @@ main_page = {
 
         config_requests: [
             {
-                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
+                //"url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
+                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/relative.html",
+                // 
                 "method": "POST",
                 "data_type" : "web", //  text, json , web
                 "send_data": '{d:3}'

@@ -23,8 +23,9 @@ request_result = {
             var _html = request_result.data.response;
             
             // 想辦法加入<base>
-            _html = _html + '<base href="' + _url + '" />';
+            _html = '<base href="' + _url + '" />' + _html;
             //document.getElementById("response_iframe").content
+            console.log(_html);
             var _doc = document.getElementById('response_iframe').contentWindow.document;
             //doc.open();
             _doc.write(_html);

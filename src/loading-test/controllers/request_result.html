@@ -43,7 +43,7 @@
                 </v-ons-col>
             </v-ons-row>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 {{ i18n.t("URL") }}
@@ -110,7 +110,7 @@
                 </span>
             </div>
         </v-ons-list-item>
-        
+
         <v-ons-list-item>
             <label class="left">
                 {{ i18n.t("Response Time") }}
@@ -118,7 +118,7 @@
             <div class="center selectable">
                 {{ request_result.data.response_time }}
                 {{ i18n.t("second") }}
-                
+
             </div>
         </v-ons-list-item>
 
@@ -138,11 +138,11 @@
                 <span class="list-item__subtitle ui form">
                     <textarea readonly="readonly" 
                               v-show="request_result.data.data_type === 'text' || request_result.data.data_type === 'json'"
-                              style="max-height: calc(100vh - 36rem);">{{ request_result.data.response }}</textarea>
-                              <iframe id='response_iframe'
-                                      v-show="request_result.data.data_type === 'web'"
-                                      style="max-height: calc(100vh - 36rem);"
-                                      ></iframe>
+                              id="response_textarea">{{ request_result.data.response }}</textarea>
+                    <iframe id='response_iframe'
+                            v-show="request_result.data.data_type === 'web'"
+                            style="max-height: calc(100vh - 36rem);"
+                            ></iframe>
                 </span>
             </div>
         </v-ons-list-item>
