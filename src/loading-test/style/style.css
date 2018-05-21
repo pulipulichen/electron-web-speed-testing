@@ -7,6 +7,11 @@ ons-toolbar ons-toolbar-bottom {
     cursor: pointer;
 }
 
+ons-list-item label.vertical-top {
+    display: inline;
+    padding-top: 1rem;
+}
+
 .panel {
     margin-top: 0.5em !important;
 }

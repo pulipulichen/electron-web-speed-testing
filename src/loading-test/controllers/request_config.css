@@ -7,8 +7,9 @@
 
 #request_config_send_data {
     width: 100%;
-    max-height: calc(100vh - 25rem);
-    height: calc(100vh - 25rem);
+    max-height: calc(100vh - 26.5rem);
+    height: calc(100vh - 26.5rem);
+    min-height: 3rem;
 }
 
 #request_config ons-list-item div.right {

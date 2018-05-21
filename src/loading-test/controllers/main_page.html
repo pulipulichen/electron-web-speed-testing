@@ -94,14 +94,21 @@
                 <ons-icon icon="fa-question-circle"></ons-icon>
                 -->
             </label>
-            <div class="center">
+            <div class="center ui form">
 
                 <span class="list-item__title">
+                    <!--
                     <v-ons-input placeholder="Job count" float 
                                  v-model="main_page.data.config_job_number" 
                                  :disabled="main_page.data.status_running"
                                  type="number" 
                                  class="text-right" id="status_total_job"></v-ons-input>
+                    -->
+                    <input placeholder="Job count" float 
+                           v-model="main_page.data.config_job_number" 
+                           :disabled="main_page.data.status_running"
+                           type="number" 
+                           class="text-right" id="status_total_job" />
                 </span>
                 <div class="list-item__subtitle align-right" 
                      v-show="main_page.data.config_job_number > CONFIG.max_job_number">
@@ -147,10 +154,15 @@
             <v-ons-col width="3rem">
                 # {{ index+1 }}
             </v-ons-col>
-            <v-ons-col class='base-url'>
+            <v-ons-col class='base-url ui form'>
+                <!--
                 <v-ons-input placeholder="http://localhost/" float 
                              v-model="request.url" id="base_url"
                              :disabled="main_page.data.status_running"></v-ons-input>
+                -->
+                <input placeholder="http://localhost/" float 
+                             v-model="request.url" id="base_url"
+                             :disabled="main_page.data.status_running" />
             </v-ons-col>
             <v-ons-col class="text-right" 
                        width="8rem"
