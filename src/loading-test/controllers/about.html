@@ -11,60 +11,35 @@
     </v-ons-toolbar>
 
     <div class="profile-card">
-
-        <img src="img/author_icon.svg" class="profile-image" />
+        <img src="img/pudding-icon.svg" class="profile-image" />
+        
         <div class="profile-name">
-            CCC
-        </div>
-        <div class="profile-id">
-            BBB
+            布丁布丁吃布丁
         </div>
         <div class="profile-desc">
-            AA
+            我不是在實驗室，就是在前往實驗室的路上。
         </div>
     </div>
     
     
-    <hr />
     
     
-    
-    <ons-card>
-        <div style="text-align: center;
-              display: block;
-              width: 290px;
-              margin: 0 auto;
-              ">
-            <div class="ui card">
-                <div class="image">
-                    <img src="img/author_icon.svg">
-                </div>
-                <div class="content">
-                    <a class="header">
-                        布丁布丁吃布丁
-                    </a>
-                    <div class="description">
-                        我不是在實驗室，就是在前往實驗室的路上。
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="content" @click="electron_helper.open_window('http://blog.pulipuli.info/p/donation.html', 'donate')">
-            <v-ons-list-item>
-                <v-ons-row class="ui icon positive message">
-                    <ons-icon icon="fa-coffee" class="icon"></ons-icon>
-                    <v-ons-col>
-                        <v-ons-row class="header">
-                            {{ i18n.t("Donate ") }}
-                        </v-ons-row>
-                        <v-ons-row>
-                            {{ i18n.t("If you like this APP. Please donate for the author! Thank You!") }}
-                        </v-ons-row>
-                    </v-ons-col>
-                </v-ons-row>
-            </v-ons-list-item>
-            <v-ons-list>
+    <v-ons-list  modifier="inset" class='panel'>
+        <v-ons-list-item modifier="nodivider"
+               @click="electron_helper.open_window('http://blog.pulipuli.info/p/donation.html', 'donate')">
+            <v-ons-row class="ui icon positive message">
+        <ons-icon icon="fa-coffee" class="icon"></ons-icon>
+        <v-ons-col>
+            <v-ons-row class="header">
+                {{ i18n.t("Donate ") }}
+            </v-ons-row>
+            <v-ons-row>
+                {{ i18n.t("If you like this APP. Please donate for the author! Thank You!") }}
+            </v-ons-row>
+        </v-ons-col>
+    </v-ons-row>
+        </v-ons-list-item>
+        
                 <v-ons-list-item modifier="chevron" 
                                  @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test', 'github')">
                     {{ i18n.t('Source code (GitHub)') }}
@@ -78,8 +53,4 @@
                     {{ i18n.t('布丁布丁吃什麼？ (Blog)') }}
                 </v-ons-list-item>
             </v-ons-list>
-        </div>
-    </ons-card>
-
-
 </v-ons-page>
