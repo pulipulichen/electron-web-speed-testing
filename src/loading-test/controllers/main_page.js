@@ -3,7 +3,7 @@ main_page = {
     data: {
         title: "LOADING TEST",
         
-        config_job_number: 3,
+        config_job_number: 1,
         config_execute_mode: "parallel",  // parallel , queue
         
         status_running: false,
@@ -15,9 +15,9 @@ main_page = {
 
         config_requests: [
             {
-                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.php",
+                "url": "http://localhost/nodejs-projects/electron-loading-test/[test]/wait.phpaaa",
                 "method": "POST",
-                "data_type" : "text", //  text, json , web
+                "data_type" : "web", //  text, json , web
                 "send_data": '{d:3}'
             },
             /*
@@ -138,17 +138,28 @@ main_page = {
             };
             
             var _loop = function (_j) {
+                if (main_page.data.status_running === false) {
+                    return;
+                }
+                
                 //console.log(_j);
                 if (_j < _jobs_count) {
                     var _config = _jobs[_j];
-                    main_page.methods.run_text_request(_config, function (_result) {
+                    var _request_callback = function (_result) {
                         _results.request_results.push(_result);
                         //console.log(_result);
                         if (_result.passed === true) {
                             _results.passed_count++;
                         }
                         _loop(_j+1);
-                    });
+                    };
+                    
+                    if (_config.data_type === "text" || _config.data_type === "json") {
+                        main_page.methods.run_text_request(_config, _request_callback);
+                    }
+                    else if (_config.data_type === "web") {
+                        main_page.methods.run_web_request(_config, _request_callback);
+                    }
                 }
                 else {
                     var _end_time = PULI_UTILS.get_current_second();
@@ -167,25 +178,14 @@ main_page = {
         },
 
         run_text_request: function (_config, _callback) {
-            if (typeof(_callback) !== "function" 
-                    || main_page.data.status_running === false) {
+            if (typeof(_callback) !== "function") {
                 return;
             }
 
             var _start_time = null;
             var _url = _config.url;
             var _method = _config.method;
-            var _data = undefined;
-            //console.log(_config);
-            try {
-                //_data = JSON.parse(_config.data);
-                eval("_data = " + _config.send_data);
-                //console.log(_data);
-                if (typeof(_data) !== "object") {
-                    _data = undefined;
-                }
-            }
-            catch (_e) {};
+            var _send_data = main_page.methods.parse_json(_config.send_data);
 
             var _status;
             var _ajax_complete = function (_s) {
@@ -237,7 +237,7 @@ main_page = {
             var _ajax_setting = {
                 url: _url,
                 method: _method,
-                data: _data,
+                data: _send_data,
                 beforeSend: function () {
                     _start_time = PULI_UTILS.get_current_second();
                 },
@@ -249,6 +249,78 @@ main_page = {
             };
 
             $.ajax(_ajax_setting).always(_ajax_always);
+        },
+        
+        run_web_request: function (_config, _callback) {
+            if (typeof(_callback) !== "function") {
+                return;
+            }
+
+            var _start_time = null;
+            var _url = _config.url;
+            var _method = _config.method;
+            var _send_data = main_page.methods.parse_json(_config.send_data);
+            var _status = 200;
+            
+            var _iframe_name = "run_web_request_iframe_" + PULI_UTILS.create_uuid();
+            var _iframe = $('<iframe style="display: none;" name="' + _iframe_name + '" id="' + _iframe_name + '"></iframe>')
+                    .appendTo("body");
+            
+            _iframe.load(function () {
+                
+                //console.log($(this).find("html").html());
+                console.log("load");
+                
+                var _iframe_document = this.contentDocument || this.contentWindow.document;
+                
+                console.log(_iframe_document.location.href);
+                if (_iframe_document.location.href === "about:blank") {
+                    return;
+                }
+                
+                var _html = _iframe_document.querySelector("html").innerHTML;
+                _html = '<html>' + _html + '</html>';
+                //console.log($(_iframe_document).html());
+                console.log(_html);
+                console.log(_status);
+                //DOC = _iframe_document;
+            });
+            _iframe.attr("onerror", function () {
+                //console.log("error");
+                var _iframe_document = this.contentDocument || this.contentWindow.document;
+                
+                if (_iframe_document.location.href === "about:blank") {
+                    return;
+                }
+                
+                _status = "Load failed";
+            });
+            
+            _iframe.chang
+            
+            var _form = $('<form style="display:none;" action="' + _url + '" target="' + _iframe_name + '" method="' + _method + '"></form>')
+                    .appendTo("body");
+            for (var _name in _send_data) {
+                $('<input name="' + _name + '" value="' + _send_data[_name] + '" />')
+                        .appendTo(_form);
+            }
+            
+            _start_time = PULI_UTILS.get_current_second();
+            _form.submit();
+        },
+        
+        parse_json: function (_json) {
+            var _output = {};
+            try {
+                //_data = JSON.parse(_config.data);
+                eval("_output = " + _json);
+                //console.log(_data);
+                if (typeof(_output) !== "object") {
+                    _output = undefined;
+                }
+            }
+            catch (_e) {};
+            return _output;
         },
         
         shrink_uri: function (_url) {
