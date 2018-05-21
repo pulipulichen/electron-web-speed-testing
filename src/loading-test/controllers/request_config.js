@@ -18,10 +18,8 @@ request_config = {
             }
             else {
                 //request_config.data.enable_data_type_web = true;
-                var _current_origin = PULI_UTILS.parse_url(location.href).origin;
-                var _target_origin = PULI_UTILS.parse_url(request_config.data.config_requests.url).origin;
-                //console.log([_current_origin, _target_origin]);
-                request_config.data.enable_data_type_web = (_current_origin === _target_origin);
+                var _url = request_config.data.config_requests.url;
+                request_config.data.enable_data_type_web = PULI_UTILS.is_same_origin(_url);
                 if (request_config.data.enable_data_type_web === false 
                         && request_config.data.config_requests.data_type === "web") {
                     request_config.data.config_requests.data_type = "text";

@@ -121,6 +121,15 @@ PULI_UTILS.parse_uri = function (_url) {
     return _uri;
 };
 
+PULI_UTILS.is_same_origin = function (_url1, _url2) {
+    if (_url2 === undefined) {
+        _url2 = location.href;
+    }
+    var _current_origin = PULI_UTILS.parse_url(_url1).origin;
+    var _target_origin = PULI_UTILS.parse_url(_url2).origin;
+    return (_current_origin === _target_origin);
+};
+
 PULI_UTILS.scroll_to = function (_id, _callback) {
     var _retry_limit = 3;
     var _retry_interval = 100;

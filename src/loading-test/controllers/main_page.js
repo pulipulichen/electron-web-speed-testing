@@ -154,10 +154,17 @@ main_page = {
                         _loop(_j+1);
                     };
                     
-                    if (_config.data_type === "text" || _config.data_type === "json") {
+                    var _data_type = _config.data_type;
+                    if (typeof(electron) === "undefined") {
+                        if (_data_type === "web" && PULI_UTILS.is_same_origin(_config.url) === false) {
+                            _data_type = "text";
+                        }
+                    }
+                    
+                    if (_data_type === "text" || _data_type === "json") {
                         main_page.methods.run_text_request(_config, _request_callback);
                     }
-                    else if (_config.data_type === "web") {
+                    else if (_data_type === "web") {
                         main_page.methods.run_web_request(_config, _request_callback);
                     }
                 }
@@ -261,34 +268,50 @@ main_page = {
             var _method = _config.method;
             var _send_data = main_page.methods.parse_json(_config.send_data);
             var _status = 200;
+            var _loading = true;
+            var _response = "";
+            
+            var _timeout_timer = setTimeout(function () {
+                _status = "Timeout";
+                _loading = false;
+                _complete();
+            }, CONFIG.web_load_limit * 1000);
             
             var _iframe_name = "run_web_request_iframe_" + PULI_UTILS.create_uuid();
             var _iframe = $('<iframe style="display: none;" name="' + _iframe_name + '" id="' + _iframe_name + '"></iframe>')
                     .appendTo("body");
             
-            _iframe.load(function (_event) {
-                console.log(_event);
-                console.log(this);
-                return;
+            _iframe.load(function () {
+                if (_loading === false) {
+                    return;
+                }
+                clearTimeout(_timeout_timer);
+                //console.log(_event);
+                //console.log(this);
+                //return;
                 
                 //console.log($(this).find("html").html());
-                console.log("load");
+                //console.log("load");
                 
                 var _iframe_document = this.contentDocument || this.contentWindow.document;
                 
-                console.log(_iframe_document.location.href);
-                console.log(_iframe_document.title);
+                //console.log(_iframe_document.location.href);
+                //console.log(_iframe_document.title);
                 if (_iframe_document.location.href === "about:blank") {
                     return;
                 }
                 
                 var _html = _iframe_document.querySelector("html").innerHTML;
                 _html = '<html>' + _html + '</html>';
+                _response = _html;
+                _complete();
+                
                 //console.log($(_iframe_document).html());
-                console.log(_html);
-                console.log(_status);
+                //console.log(_html);
+                //console.log(_status);
                 //DOC = _iframe_document;
             });
+            /*
             _iframe.attr("onerror", function () {
                 return;
                 //console.log("error");
@@ -299,6 +322,7 @@ main_page = {
                 
                 _status = "Load failed";
             });
+            */
             
             var _form = $('<form style="display:none;" action="' + _url + '" target="' + _iframe_name + '" method="' + _method + '"></form>')
                     .appendTo("body");
@@ -307,6 +331,27 @@ main_page = {
                         .appendTo(_form);
             }
             
+            var _complete = function () {
+                var _end_time = PULI_UTILS.get_current_second();
+                var _response_time = Math.floor(_end_time - _start_time) / 1000;
+                var _uri = main_page.methods.shrink_uri(_url);
+                var _passed = (_status === 200);
+                
+                var _result = {
+                    response_time: _response_time,
+                    status: _status,
+                    passed: _passed,
+                    url: _url,
+                    uri: _uri,
+                    response: _response
+                };
+                
+                if (main_page.data.status_running === true) {
+                    _callback(_result);
+                }
+            };
+            
+            /*
             _form.on("error", function() {
             console.log( "Handler for .error() called." )
           })
@@ -317,14 +362,18 @@ main_page = {
           window.onerror = function(error, url, line) {
                 console.log("抓到錯誤了");
             };
+            */
             
             _start_time = PULI_UTILS.get_current_second();
+            /*
             try {
                 _form.submit();
             }
             catch (e) {
                 console.log("error");
             }
+            */
+            _form.submit();
         },
         
         parse_json: function (_json) {
