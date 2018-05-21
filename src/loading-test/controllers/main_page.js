@@ -579,10 +579,38 @@ main_page = {
         //        main_page.data.ui_sliding_menu_mode = document.getElementById("sliding_menu").mode;
         //    }
         //},
+        ready: function () {
+            main_page.methods.setup_config_auto_save();
+        },
+        
+        setup_config_auto_save: function () {
+            if (ELECTRON_ENABLE === false) {
+                $(window).unload(function () {
+                    var _config = main_page.methods.get_config();
+                    localStorage.setItem('loading_test_config', JSON.stringify(_config));
+                });
+
+                var _config = localStorage.getItem("loading_test_config");
+                if (_config !== null && CONFIG.enable_auto_save === true) {
+                    main_page.methods.set_config(_config);
+                }
+            }
+            else {
+                
+            }
+        },
         
         // --------------------
         
         save_config: function () {
+            var _config = main_page.methods.get_config();
+            
+            var _filename = 'loading_test_config_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
+            
+            xlsx_helper_download("ods", _filename, _config);
+        },
+        
+        get_config: function () {
             var _data = main_page.data;
             var _config = {
                 "global": {
@@ -592,23 +620,28 @@ main_page = {
                 },
                 "config_requests": _data.config_requests
             };
-            
-            var _filename = 'loading_test_config_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
-            
-            xlsx_helper_download("ods", _filename, _config);
+            return _config;
         },
         
         load_config: function () {
             xlsx_helper_open(function (_config) {
                 //console.log(_config);
-                var _data = main_page.data;
-                
-                var _global = _config.global;
-                _data.config_job_number = _global["job number"];
-                _data.config_execute_mode = _global["execute mode"];
-                
-                _data.config_requests = _config.config_requests;
+                main_page.methods.set_config(_config);
             });
+        },
+        
+        set_config: function (_config) {
+            if (typeof(_config) === "string") {
+                _config = JSON.parse(_config);
+            }
+            
+            var _data = main_page.data;
+                
+            var _global = _config.global;
+            _data.config_job_number = _global["job number"];
+            _data.config_execute_mode = _global["execute mode"];
+
+            _data.config_requests = _config.config_requests;
         },
         
         // ------------------------
