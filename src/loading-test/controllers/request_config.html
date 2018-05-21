@@ -50,7 +50,9 @@
                 -->
                 <input placeholder="Request URL" float 
                              v-model="request_config.data.config_requests.url" 
-                             class="text-right" id="request_config_url" />
+                             class="text-right" 
+                             id="request_config_url"
+                             @change="check_enable_data_type_web"/>
             </div>
         </v-ons-list-item>
 
@@ -93,7 +95,7 @@
                         id="request_config_data_type">
                     <option value="text" selected="selected">{{ i18n.t('Text') }}</option>
                     <option value="json">{{ i18n.t('JSON') }}</option>
-                    <option value="web" :disabled="ELECTRON_ENABLE === false" 
+                    <option value="web" :disabled="enable_data_type_web" 
                             :title="i18n.t('Only work in Electron or same-domain.')">{{ i18n.t('Web') }}</option>
                 </select>
             </div>
