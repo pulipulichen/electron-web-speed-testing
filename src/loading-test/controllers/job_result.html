@@ -6,10 +6,13 @@
             </v-ons-back-button>
         </div>
         <div class="center">
-            <h1> #{{ job_result.data.result_id+1 }} Results</h1>
+            <h1>
+                #{{ job_result.data.result_id+1 }} 
+                {{ i18n.t('Results') }}
+            </h1>
         </div>
         <div class="right">
-            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#results-detail-list')">
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#job-result')">
                 <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>

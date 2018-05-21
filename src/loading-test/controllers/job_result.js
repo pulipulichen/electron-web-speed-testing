@@ -74,7 +74,10 @@ job_result = {
             }
             //console.log(_output);
             
-            var _filename = 'loading_test_job-' + _job_id + '_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
+            var _filename = 'loading_test_' 
+                    + 'job-' + _job_id + '_' 
+                    + PULI_UTILS.get_yyyymmdd_hhmm() 
+                    + ".ods";
             
             xlsx_helper_download("ods", _filename, _output);
         }

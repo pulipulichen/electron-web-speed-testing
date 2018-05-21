@@ -18,7 +18,7 @@
                 <ons-icon icon="fa-external-link-square"></ons-icon>
                 {{ i18n.t("Test Open") }}
             </ons-toolbar-button>
-            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#result-detail')">
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#response-result')">
                 <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>
@@ -27,7 +27,7 @@
     <v-ons-list modifier="inset" id="job_result" class="panel panel_results">
         <v-ons-list-item>
             <label class="left">
-                URL
+                {{ i18n.t("URL") }}
             </label>
             <div class="center">
                 {{ request_result.data.url }}
@@ -36,7 +36,7 @@
 
         <v-ons-list-item>
             <label class="left">
-                Method
+                {{ i18n.t("Method") }}
             </label>
             <div class="center">
                 {{ request_result.data.method }}
@@ -45,7 +45,7 @@
 
         <v-ons-list-item>
             <label class="left vertical-top">
-                Send Data
+                {{ i18n.t("Send Data") }}
             </label>
             <div class="center">
                 <div class="list-item__title ui form">
@@ -56,7 +56,7 @@
                     <a class="ui pointing red basic label"
                        target="_blank" 
                        v-bind:href="'https://jsonlint.com/?json='+ request_result.data.send_data">
-                        Send data should be valid JSON format. Check it!
+                        {{ i18n.t("Send data should be valid JSON format. Check it!", false) }}
                     </a>
                 </span>
             </div>
@@ -64,16 +64,16 @@
 
         <v-ons-list-item>
             <label class="left">
-                Data Type
+                {{ i18n.t("Data Type") }}
             </label>
             <div class="center">
-                {{ request_result.data.data_type }}
+                {{ i18n.t(request_result.data.data_type) }}
             </div>
         </v-ons-list-item>
 
         <v-ons-list-item>
             <label class="left">
-                Status
+                {{ i18n.t("Status") }}
             </label>
             <div class="center">
                 <div class="list-item__title">
@@ -89,7 +89,7 @@
 
         <v-ons-list-item>
             <label class="left">
-                Response
+                {{ i18n.t("Response") }}
             </label>
             <div class="center selectable">
                 <div class="list-item__title" 
@@ -97,7 +97,7 @@
                     <a class="ui pointing below red basic label" 
                        target="_blank" 
                        v-bind:href="'https://jsonlint.com/?json='+ request_result.data.response">
-                        Responsed text is invalid JSON format. Check it!
+                        {{ i18n.t("Responsed text is invalid JSON format. Check it!", false) }}
                     </a>
                 </div>
                 <span class="list-item__subtitle ui form">
