@@ -7,8 +7,12 @@
         </div>
         <div class="center" v-bind:title="request_result.data.url">
             <h1> 
-                <ons-icon icon="fa-check-circle" style="color: green" v-show="request_result.data.passed"></ons-icon>
-                <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="request_result.data.passed === false"></ons-icon>
+                <ons-icon icon="fa-check-circle" 
+                          style="color: green" 
+                          v-show="request_result.data.passed"></ons-icon>
+                <ons-icon icon="fa-exclamation-triangle" 
+                          style="color: red" 
+                          v-show="request_result.data.passed === false"></ons-icon>
                 #{{ request_result.data.job_id }}-{{ request_result.data.request_id }}
                 {{ request_result.data.uri }}
             </h1>
@@ -18,7 +22,8 @@
                 <ons-icon icon="fa-external-link-square"></ons-icon>
                 {{ i18n.t("Test Open") }}
             </ons-toolbar-button>
-            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#response-result')">
+            <ons-toolbar-button 
+                @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#response-result')">
                 <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>
@@ -77,11 +82,16 @@
             </label>
             <div class="center">
                 <div class="list-item__title">
-                    <ons-icon icon="fa-check-circle" style="color: green" v-show="request_result.data.passed"></ons-icon>
-                    <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="request_result.data.passed === false"></ons-icon>
+                    <ons-icon icon="fa-check-circle" 
+                              style="color: green" 
+                              v-show="request_result.data.passed"></ons-icon>
+                    <ons-icon icon="fa-exclamation-triangle" 
+                              style="color: red" 
+                              v-show="request_result.data.passed === false"></ons-icon>
                     {{ request_result.data.status }}
                 </div>
-                <span class="list-item__subtitle" v-show="PULI_UTILS.is_int(request_result.data.status)">
+                <span class="list-item__subtitle" 
+                      v-show="PULI_UTILS.is_int(request_result.data.status)">
                     {{ status_code(request_result.data.status) }}
                 </span>
             </div>
