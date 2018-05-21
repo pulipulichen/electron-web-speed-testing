@@ -51,10 +51,9 @@
             <div class="center">Results</div>
           </v-ons-list-item>
             -->
-            <v-ons-list-item tappable modifier="chevron">
-                <a class="center" href="https://github.com/pulipulichen/electron-loading-test/wiki/Help" target="_blank">
-                    Help
-                </a>
+            <v-ons-list-item tappable modifier="chevron" 
+                             @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help')">
+                {{ i18n.t('Help') }}
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.nav_about()">
                 <!--
@@ -62,7 +61,7 @@
                     About
                 </a>
                 -->
-                About
+                {{ i18n.t('About') }}
             </v-ons-list-item>
         </v-ons-list>
     </v-ons-page>
