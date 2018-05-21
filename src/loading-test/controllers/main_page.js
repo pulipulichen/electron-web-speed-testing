@@ -167,7 +167,12 @@ main_page = {
                         main_page.methods.run_text_request(_config, _request_callback);
                     }
                     else if (_data_type === "web") {
-                        main_page.methods.run_web_request(_config, _request_callback);
+                        if (ELECTRON_ENABLE === true) {
+                            main_page.methods.run_web_request_electron(_config, _request_callback);
+                        }
+                        else {
+                            main_page.methods.run_web_request(_config, _request_callback);
+                        }
                     }
                 }
                 else {
@@ -376,6 +381,41 @@ main_page = {
             }
             */
             _form.submit();
+        },
+        
+        run_web_request_electron: function (_config, _callback) {
+            if (typeof(_callback) !== "function") {
+                return;
+            }
+
+            var _start_time = null;
+            var _url = _config.url;
+            var _method = _config.method;
+            var _send_data = main_page.methods.parse_json(_config.send_data);
+            //var _status = 200;
+            
+            _start_time = PULI_UTILS.get_current_second();
+            
+            electron_helper.retrieve_web(_url, _method, _send_data, function (_response, _status) {
+                var _end_time = PULI_UTILS.get_current_second();
+                var _response_time = Math.floor(_end_time - _start_time) / 1000;
+                var _uri = main_page.methods.shrink_uri(_url);
+                
+                var _passed = (_status === 200);
+                
+                var _result = {
+                    response_time: _response_time,
+                    status: _status,
+                    passed: _passed,
+                    url: _url,
+                    uri: _uri,
+                    response: _response
+                };
+                
+                if (main_page.data.status_running === true) {
+                    _callback(_result);
+                }
+            };
         },
         
         parse_json: function (_json) {
