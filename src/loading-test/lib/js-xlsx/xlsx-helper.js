@@ -46,7 +46,7 @@ var xlsx_helper_download = function (type, filename, data) {
                 extensions: ["ods"]
             }
         ];
-        ipcRenderer.send('save-file', filename, JSON.stringify(_filters), XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'}));
+        ipcRenderer.send('save_file', filename, JSON.stringify(_filters), XLSX.write(wb, {bookType: type, bookSST: true, type: 'base64'}));
     }
 };
 

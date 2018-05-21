@@ -1,5 +1,6 @@
 const {app, BrowserWindow, dialog, Menu, Tray, globalShortcut, ipcMain, session} = require('electron');
 let fs = require('fs');
+let shell = require('shell');
 const osTmpdir = require('os-tmpdir');
 let mainWindow;
 
@@ -137,7 +138,7 @@ app.on('activate', function () {
 
 // ---------------------------------------------
 
-ipcMain.on('save-file', (event, _filename, _filters, _content) => {
+ipcMain.on('save_file', (event, _filename, _filters, _content) => {
     //var _filename = arg[0];
     //var content = arg[1];
     // You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
@@ -155,6 +156,9 @@ ipcMain.on('save-file', (event, _filename, _filters, _content) => {
     });
 }); // ipcMain.on('save-file', (event, arg)=> {
 
+ipcMain.on('open_window', (event, _link) => {
+    shell.openExternal(_link)
+});
 
 /**
  * @deprecated 20180520 測試用
