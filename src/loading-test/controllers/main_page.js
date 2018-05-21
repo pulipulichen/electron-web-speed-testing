@@ -4,7 +4,7 @@ main_page = {
         title: "LOADING TEST",
         
         config_job_number: 3,
-        config_execute_mode: "queue",  // parallel , queue
+        config_execute_mode: "parallel",  // parallel , queue
         
         status_running: false,
         status_passed_job: 0,
@@ -86,7 +86,7 @@ main_page = {
                 }
             };
 
-            if (main_page.data.config_execute_mode === "simultaneously") {
+            if (main_page.data.config_execute_mode === "parallel") {
                 for (var _i = 0; _i < _total_job; _i++) {
                     main_page.methods.run_job(function (_results) {
                         _next(_results);
