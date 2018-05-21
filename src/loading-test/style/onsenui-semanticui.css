@@ -7,3 +7,8 @@ ons-toolbar .circular.ui.icon.button {
     height: 2.2rem;
     padding: 0;
 }
+
+ons-button.ui.button ons-icon {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
