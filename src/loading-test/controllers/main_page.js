@@ -360,10 +360,10 @@ main_page = {
         
         // ---------------
         
-        nav_result_detail: function (_result_id) {
+        nav_job_result: function (_job_id) {
             //console.log(_index);
-            job_result.data.request_id = _result_id;
-            job_result.data.request_results = main_page.data.response_results[_result_id].request_results;
+            job_result.data.job_id = _job_id;
+            job_result.data.request_results = main_page.data.response_results[_job_id].request_results;
             
             this.$emit('push-page', job_result);
         },
@@ -426,7 +426,7 @@ main_page = {
         
         // ------------------------
         
-        save_results_details: function () {
+        save_response_results: function () {
             var _results = main_page.data.response_results;
             var _output = {
                 "results": []

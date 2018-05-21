@@ -38,7 +38,7 @@ job_result = {
             this.$emit('push-page', request_result);
         },
         
-        save_results_details: function () {
+        save_job_result: function () {
             var _request_results = job_result.data.request_results;
             var _job_id = job_result.data.job_id + 1;
             var _output = {

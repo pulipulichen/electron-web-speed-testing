@@ -180,7 +180,7 @@
 
         <v-ons-list-item v-show="main_page.data.status_running === false" 
                          modifier="nodivider"
-                         @click="save_results_details">
+                         @click="save_response_results">
             <v-ons-row>
                 <v-ons-col>
                     <v-ons-button modifier="large" class='ui button'>
@@ -223,7 +223,7 @@
 
         <v-ons-list-item v-for="(result, index) in main_page.data.response_results" 
                          class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
-                         @click="nav_result_detail(index)"
+                         @click="nav_job_result(index)"
                          modifier="chevron">
             <v-ons-col width="4rem">
                 # {{ index + 1 }}
