@@ -61,6 +61,10 @@ main_page = {
             var _completed_jobs = 0;
 
             var _next = function (_results, _callback) {
+                if (_completed_jobs === _total_job || _completed_jobs > _total_job) {
+                    return;
+                }
+                
                 main_page.data.response_results.push(_results);
 
                 // ------------
@@ -79,7 +83,7 @@ main_page = {
                 // ------------
 
                 _completed_jobs++;
-                if (_completed_jobs === _total_job) {
+                if (_completed_jobs === _total_job || _completed_jobs > _total_job) {
                     main_page.methods.stop_test();
                 }
                 else {
@@ -558,7 +562,7 @@ main_page = {
                 return false;
             }
             else {
-                var _message = i18n.t("Are you sure to delete this reuqest") + " #" + (_index + 1) + "?";
+                var _message = i18n.t("Are you sure to delete reuqest") + " #" + (_index + 1) + "?";
                 vm.$ons.notification.confirm({
                     message: _message,
                     callback: function (_result) {

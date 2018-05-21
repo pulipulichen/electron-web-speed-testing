@@ -10,15 +10,15 @@
                     </ons-toolbar-button>
                 </v-ons-col>
 
-                <v-ons-col v-show="main_page.data.status_average_response_time > 0">
+                <v-ons-col v-show="main_page.data.status_average_response_time > 0" style="margin-right: 0.5rem">
                     <ons-icon icon="md-timer"></ons-icon>
                     {{ main_page.data.status_average_response_time }}
                 </v-ons-col>
-                <v-ons-col v-show="main_page.data.status_passed_job > 0">
+                <v-ons-col v-show="main_page.data.status_passed_job > 0" style="margin-right: 0.5rem">
                     <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
                     {{ main_page.data.status_passed_job }}
                 </v-ons-col>
-                <v-ons-col v-show="main_page.data.status_failed_job > 0">
+                <v-ons-col v-show="main_page.data.status_failed_job > 0" style="margin-right: 0.5rem">
                     <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
                     {{ main_page.data.status_failed_job }}
                 </v-ons-col>
@@ -45,13 +45,13 @@
                 <ons-icon icon="fa-play"></ons-icon>
             </button>
             
-            <button class="circular ui icon primary button"
+            <button class="circular ui icon negative button"
                     v-if="main_page.data.status_running === true"
                     @click="stop_test">
                 <ons-icon icon="fa-pause"></ons-icon>
             </button>
             
-            <button class="circular ui icon primary button"
+            <button class="circular ui icon button"
                     @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page')">
                 <ons-icon icon="fa-question"></ons-icon>
             </button>
