@@ -31,38 +31,33 @@
             </div>
         </div>
 
-        <div class="content">
-            <a href="http://blog.pulipuli.info/p/donation.html" target="donate">
-                <v-ons-list-item>
-                    <v-ons-row class="ui icon positive message">
-                        <ons-icon icon="fa-coffee" class="icon"></ons-icon>
-                        <v-ons-col>
-                            <v-ons-row class="header">
-                                {{ i18n.t("Donate ") }}
-                            </v-ons-row>
-                            <v-ons-row>
-                                {{ i18n.t("If you like this APP. Please donate for the author! Thank You!") }}
-                            </v-ons-row>
-                        </v-ons-col>
-                    </v-ons-row>
-                </v-ons-list-item>
-            </a>
+        <div class="content" @click="electron_helper.open_window('http://blog.pulipuli.info/p/donation.html', 'donate')">
+            <v-ons-list-item>
+                <v-ons-row class="ui icon positive message">
+                    <ons-icon icon="fa-coffee" class="icon"></ons-icon>
+                    <v-ons-col>
+                        <v-ons-row class="header">
+                            {{ i18n.t("Donate ") }}
+                        </v-ons-row>
+                        <v-ons-row>
+                            {{ i18n.t("If you like this APP. Please donate for the author! Thank You!") }}
+                        </v-ons-row>
+                    </v-ons-col>
+                </v-ons-row>
+            </v-ons-list-item>
             <v-ons-list>
-                <a href="https://github.com/pulipulichen/electron-loading-test" target="github">
-                    <v-ons-list-item modifier="chevron">
-                        {{ i18n.t('Source code (GitHub)') }}
-                    </v-ons-list-item>
-                </a>
-                <a href="https://github.com/pulipulichen/electron-loading-test/issues" target="github_issues">
-                    <v-ons-list-item modifier="chevron">
-                        {{ i18n.t('Error report (Issues)') }}
-                    </v-ons-list-item>
-                </a>
-                <a href="http://blog.pulipuli.info" target="blog">
-                    <v-ons-list-item modifier="chevron nodivider">
-                        {{ i18n.t('布丁布丁吃什麼？ (Blog)') }}
-                    </v-ons-list-item>
-                </a>
+                <v-ons-list-item modifier="chevron" 
+                                 @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test', 'github')">
+                    {{ i18n.t('Source code (GitHub)') }}
+                </v-ons-list-item>
+                <v-ons-list-item modifier="chevron"
+                                 @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/issues', 'github_issues')">
+                    {{ i18n.t('Error report (Issues)') }}
+                </v-ons-list-item>
+                <v-ons-list-item modifier="chevron nodivider"
+                                 @click="electron_helper.open_window('http://blog.pulipuli.info', 'blog')">
+                    {{ i18n.t('布丁布丁吃什麼？ (Blog)') }}
+                </v-ons-list-item>
             </v-ons-list>
         </div>
     </ons-card>

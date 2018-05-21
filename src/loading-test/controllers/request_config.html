@@ -1,10 +1,15 @@
 <v-ons-page>
     <v-ons-toolbar>
         <div class="left">
-            <v-ons-back-button>Back</v-ons-back-button>
+            <v-ons-back-button>
+                {{ i18n.t('Back') }}
+            </v-ons-back-button>
         </div>
         <div class="center">
-            <h1> #{{ request_config.data.request_id+1 }} Request Configuration</h1>
+            <h1> 
+                #{{ request_config.data.request_id+1 }} 
+                {{ i18n.t('Request Configuration') }}
+            </h1>
         </div>
         <div class="right">
             <ons-toolbar-button @click='request_open'>
@@ -19,46 +24,47 @@
         </div>
     </v-ons-toolbar>
 
-    <v-ons-list modifier="inset" id="request_configuration" class="panel">
+    <v-ons-list modifier="inset" id="request_config" class="panel">
         <v-ons-list-item>
             <label class="left" for="request_config_url">
-                Request URL
+                {{ i18n.t('Request URL') }}
             </label>
             <div class="center">
                 <v-ons-input placeholder="Request URL" float 
-                             v-model="request_config.data.config_requests.url" class="text-right" id="request_config_url"></v-ons-input>
+                             v-model="request_config.data.config_requests.url" 
+                             class="text-right" id="request_config_url"></v-ons-input>
             </div>
         </v-ons-list-item>
 
         <v-ons-list-item>
             <label class="left" for="request_config_method">
-                Method
+                {{ i18n.t('Method') }}
             </label>
             <div class="center">
                 <v-ons-select v-model="request_config.data.config_requests.method" id="request_config_method">
-                    <option value="GET">GET</option>
-                    <option value="POST">POST</option>
+                    <option value="GET">{{ i18n.t('GET') }}</option>
+                    <option value="POST">{{ i18n.t('POST') }}</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>
 
         <v-ons-list-item>
             <label class="left" for="request_config_data_type">
-                Data Type
+                {{ i18n.t('Data Type') }}                
             </label>
             <div class="center">
                 <v-ons-select v-model="request_config.data.config_requests.data_type" id="request_config_data_type">
-                    <option value="text">Text</option>
-                    <option value="json">JSON</option>
+                    <option value="text">{{ i18n.t('Text') }}</option>
+                    <option value="json">{{ i18n.t('JSON') }}</option>
                     <option value="web" :disabled="ELECTRON_ENABLE === false" 
-                            :title="i18n.t('Only work in Electron or same-domain.')">Web</option>
+                            :title="i18n.t('Only work in Electron or same-domain.')">{{ i18n.t('Web') }}</option>
                 </v-ons-select>
             </div>
         </v-ons-list-item>
 
         <v-ons-list-item class="request_config_data_list_item" >
             <label class="left" for="request_config_send_data">
-                Send Data
+                {{ i18n.t('Send Data') }}
             </label>
             <div class="center ui form">
 
@@ -67,13 +73,13 @@
                     <a class="ui pointing below red basic label" 
                        target="_blank" 
                        v-bind:href="'https://jsonlint.com/?json='+ request_config.data.config_requests.send_data">
-                        Send data should be valid JSON format. Check it!
+                        {{ i18n.t('Send data should be valid JSON format. Check it!', false) }}
                     </a>
                 </span>
                 <span class="list-item__title" 
                       v-show="PULI_UTILS.is_json(request_config.data.config_requests.send_data, false)">
                     <span class="ui pointing below basic label">
-                        Send data is valid JSON format.
+                        {{ i18n.t('Send data is valid JSON format.', false) }}
                     </span>
                 </span>
                 <div class="list-item__subtitle ui form">
@@ -81,8 +87,6 @@
                               v-model="request_config.data.config_requests.send_data"
                               placeholder="Request Data"></textarea>
                 </div>
-
-
             </div>
         </v-ons-list-item>
     </v-ons-list>

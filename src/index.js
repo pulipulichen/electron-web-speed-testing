@@ -157,7 +157,7 @@ ipcMain.on('save_file', (event, _filename, _filters, _content) => {
 }); // ipcMain.on('save-file', (event, arg)=> {
 
 ipcMain.on('open_window', (event, _link) => {
-    shell.openExternal(_link)
+    shell.openExternal(_link);
 });
 
 /**

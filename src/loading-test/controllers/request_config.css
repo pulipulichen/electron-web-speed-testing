@@ -9,11 +9,11 @@
     height: calc(100vh - 21rem);
 }
 
-#request_configuration ons-list-item div.right {
+#request_config ons-list-item div.right {
     width: calc(100% - 9rem);
 }
 
-#request_configuration ons-list-item div.right ons-select,
-#request_configuration ons-list-item div.right ons-input {
+#request_config ons-list-item div.right ons-select,
+#request_config ons-list-item div.right ons-input {
     width: 100%;
 }

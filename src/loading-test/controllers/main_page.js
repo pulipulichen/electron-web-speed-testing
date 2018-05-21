@@ -166,7 +166,7 @@ main_page = {
             _loop(0);
         },
 
-        run_text_job: function (_config, _callback) {
+        run_text_request: function (_config, _callback) {
             if (typeof(_callback) !== "function" 
                     || main_page.data.status_running === false) {
                 return;

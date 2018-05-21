@@ -44,16 +44,14 @@
                 <ons-icon icon="fa-cog"></ons-icon>
             </ons-toolbar-button>
             -->
-            <ons-toolbar-button v-if="main_page.data.status_running === false" @click="job_run">
+            <ons-toolbar-button v-if="main_page.data.status_running === false" @click="start_test">
                 <ons-icon icon="fa-play-circle"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button @click="job_stop" v-if="main_page.data.status_running === true">
+            <ons-toolbar-button @click="stop_test" v-if="main_page.data.status_running === true">
                 <ons-icon icon="fa-pause"></ons-icon>
             </ons-toolbar-button>
-            <ons-toolbar-button>
-                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page" target="_blank">
-                    <ons-icon icon="fa-question-circle"></ons-icon>
-                </a>
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page')">
+                <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
             <!--
             <ons-toolbar-button @click="results_clear" v-show="main_page.data.response_results.length > 0">
@@ -159,13 +157,13 @@
 
 
 
-        <v-ons-list-item v-if="main_page.data.status_running === false" @click="job_run">
+        <v-ons-list-item v-if="main_page.data.status_running === false" @click="start_test">
             <v-ons-button modifier="large" class='ui primary button'>
                 <ons-icon icon="fa-play-circle"></ons-icon>
                 RUN
             </v-ons-button>
         </v-ons-list-item>
-        <v-ons-list-item v-if="main_page.data.status_running === true" @click="job_stop">
+        <v-ons-list-item v-if="main_page.data.status_running === true" @click="stop_test">
             <v-ons-button modifier="large" class='ui negative button'>
                 <ons-icon icon="fa-pause"></ons-icon>
                 STOP
