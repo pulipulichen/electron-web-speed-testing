@@ -25,15 +25,13 @@ main_page = {
                 "data_type" : "web", //  text, json , web
                 "send_data": '{test:true}'
             },
-            /*
             {
                 //"url": "http://www.google.com.tw",
-                "url": "http://localhost",
+                "url": "http://blog.pulipuli.info/",
                 "method": "POST",
-                "data_type" : "text", //  application/json , text/html
+                "data_type" : "web", //  application/json , text/html
                 "send_data": "{q: 'test'}"
             },
-            */
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         
@@ -204,8 +202,13 @@ main_page = {
             var _method = _config.method;
             var _send_data = main_page.methods.parse_json(_config.send_data);
 
-            var _status = "Access-Control-Allow-Origin limit";
+            //var _status = "Deny Access-Control-Allow-Origin";
+            var _status;
             var _ajax_complete = function (_s) {
+                if (_s === 0) {
+                    _s = "Deny Access-Control-Allow-Origin";
+                }
+                    
                 _status = _s;
             };
             

@@ -1,7 +1,7 @@
 {
     "URL": "http://blog.pulipuli.info/",
-    "width": 800, 
-    "height": 600, 
+    "width": 480, 
+    "height": 800, 
     "skipTaskbar": false, 
     "frame": true,
     "kiosk": false,
@@ -14,5 +14,5 @@
         "allowRunningInsecureContent": true,
         "nodeIntegration": true
     },
-    "openDevTools": true
+    "openDevTools": false
 }

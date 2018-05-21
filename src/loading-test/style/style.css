@@ -7,6 +7,10 @@ ons-toolbar ons-toolbar-bottom {
     cursor: pointer;
 }
 
+ons-list-item[modifier="chevron"] {
+    cursor: pointer;
+}
+
 ons-list-item label.vertical-top {
     display: inline;
     padding-top: 1rem;
