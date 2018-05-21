@@ -6,18 +6,16 @@
             </v-ons-back-button>
         </div>
         <div class="center">
-            <h1> #{{ result_list.data.result_id+1 }} Results</h1>
+            <h1> #{{ job_result.data.result_id+1 }} Results</h1>
         </div>
         <div class="right">
-            <ons-toolbar-button>
-                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#results-detail-list" target="_blank">
-                    <ons-icon icon="fa-question-circle"></ons-icon>
-                </a>
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#results-detail-list')">
+                <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>
     </v-ons-toolbar>
 
-    <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
+    <v-ons-list modifier="inset" id="job_result" class="panel panel_results">
         <v-ons-list-item v-show="main_page.data.status_running === false" 
                          modifier="nodivider"
                          @click="save_results_details">
@@ -31,12 +29,12 @@
             </v-ons-row>
         </v-ons-list-item>
 
-        <v-ons-list-item v-for="(result, index) in result_list.data.request_results" 
+        <v-ons-list-item v-for="(result, index) in job_result.data.request_results" 
                          class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
-                         @click="nav_result_data(result_list.data.result_id, index)"
+                         @click="nav_request_result(job_result.data.result_id, index)"
                          modifier="chevron">
             <v-ons-col width="4rem">
-                #{{ result_list.data.result_id+1 }}-{{ index + 1 }}
+                #{{ job_result.data.result_id+1 }}-{{ index + 1 }}
             </v-ons-col>
             <v-ons-col width="5rem">
                 <ons-icon icon="md-timer"></ons-icon>

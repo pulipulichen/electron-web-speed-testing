@@ -362,10 +362,10 @@ main_page = {
         
         nav_result_detail: function (_result_id) {
             //console.log(_index);
-            result_list.data.request_id = _result_id;
-            result_list.data.request_results = main_page.data.response_results[_result_id].request_results;
+            job_result.data.request_id = _result_id;
+            job_result.data.request_results = main_page.data.response_results[_result_id].request_results;
             
-            this.$emit('push-page', result_list);
+            this.$emit('push-page', job_result);
         },
         
         nav_about: function () {

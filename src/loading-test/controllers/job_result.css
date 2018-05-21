@@ -1,13 +1,13 @@
-#result_list div.right {
+#job_result div.right {
     width: calc(100% - 9rem);
 }
 
-#result_list label {
+#job_result label {
     vertical-align: top;
     display: inline-block;
 }
 
-#result_list textarea {
+#job_result textarea {
     width: 100%;
     height: calc(100vh - 5.5rem);
 }

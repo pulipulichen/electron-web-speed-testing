@@ -5,11 +5,12 @@
                 {{ i18n.t('Back') }}
             </v-ons-back-button>
         </div>
-        <div class="center" v-bind:title="result_data.data.url">
+        <div class="center" v-bind:title="request_result.data.url">
             <h1> 
-                <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
-                <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
-                #{{ result_data.data.result_id }} {{ result_data.data.uri }}
+                <ons-icon icon="fa-check-circle" style="color: green" v-show="request_result.data.passed"></ons-icon>
+                <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="request_result.data.passed === false"></ons-icon>
+                #{{ request_result.data.job_id }}-{{ request_result.data.request_id }}
+                {{ request_result.data.uri }}
             </h1>
         </div>
         <div class="right">
@@ -17,21 +18,19 @@
                 <ons-icon icon="fa-external-link-square"></ons-icon>
                 {{ i18n.t("Test Open") }}
             </ons-toolbar-button>
-            <ons-toolbar-button>
-                <a href="https://github.com/pulipulichen/electron-loading-test/wiki/Help#result-detail" target="_blank">
-                    <ons-icon icon="fa-question-circle"></ons-icon>
-                </a>
+            <ons-toolbar-button @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#result-detail')">
+                <ons-icon icon="fa-question-circle"></ons-icon>
             </ons-toolbar-button>
         </div>
     </v-ons-toolbar>
 
-    <v-ons-list modifier="inset" id="result_list" class="panel panel_results">
+    <v-ons-list modifier="inset" id="job_result" class="panel panel_results">
         <v-ons-list-item>
             <label class="left">
                 URL
             </label>
             <div class="center">
-                {{ result_data.data.url }}
+                {{ request_result.data.url }}
             </div>
         </v-ons-list-item>
 
@@ -40,7 +39,7 @@
                 Method
             </label>
             <div class="center">
-                {{ result_data.data.method }}
+                {{ request_result.data.method }}
             </div>
         </v-ons-list-item>
 
@@ -50,13 +49,13 @@
             </label>
             <div class="center">
                 <div class="list-item__title ui form">
-                    <textarea readonly="readonly" style="height: 3rem;">{{ result_data.data.send_data }}</textarea>
+                    <textarea readonly="readonly" style="height: 3rem;">{{ request_result.data.send_data }}</textarea>
                 </div>
                 <span class="list-item__subtitle" 
-                      v-show="PULI_UTILS.is_json(result_data.data.send_data, false) === false">
+                      v-show="PULI_UTILS.is_json(request_result.data.send_data, false) === false">
                     <a class="ui pointing red basic label"
                        target="_blank" 
-                       v-bind:href="'https://jsonlint.com/?json='+ result_data.data.send_data">
+                       v-bind:href="'https://jsonlint.com/?json='+ request_result.data.send_data">
                         Send data should be valid JSON format. Check it!
                     </a>
                 </span>
@@ -68,7 +67,7 @@
                 Data Type
             </label>
             <div class="center">
-                {{ result_data.data.data_type }}
+                {{ request_result.data.data_type }}
             </div>
         </v-ons-list-item>
 
@@ -78,12 +77,12 @@
             </label>
             <div class="center">
                 <div class="list-item__title">
-                    <ons-icon icon="fa-check-circle" style="color: green" v-show="result_data.data.passed"></ons-icon>
-                    <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="result_data.data.passed === false"></ons-icon>
-                    {{ result_data.data.status }}
+                    <ons-icon icon="fa-check-circle" style="color: green" v-show="request_result.data.passed"></ons-icon>
+                    <ons-icon icon="fa-exclamation-triangle" style="color: red" v-show="request_result.data.passed === false"></ons-icon>
+                    {{ request_result.data.status }}
                 </div>
-                <span class="list-item__subtitle" v-show="PULI_UTILS.is_int(result_data.data.status)">
-                    {{ status_code(result_data.data.status) }}
+                <span class="list-item__subtitle" v-show="PULI_UTILS.is_int(request_result.data.status)">
+                    {{ status_code(request_result.data.status) }}
                 </span>
             </div>
         </v-ons-list-item>
@@ -94,15 +93,15 @@
             </label>
             <div class="center selectable">
                 <div class="list-item__title" 
-                     v-show="result_data.data.data_type === 'json' && PULI_UTILS.is_json(result_data.data.response) === false">
+                     v-show="request_result.data.data_type === 'json' && PULI_UTILS.is_json(request_result.data.response) === false">
                     <a class="ui pointing below red basic label" 
                        target="_blank" 
-                       v-bind:href="'https://jsonlint.com/?json='+ result_data.data.response">
+                       v-bind:href="'https://jsonlint.com/?json='+ request_result.data.response">
                         Responsed text is invalid JSON format. Check it!
                     </a>
                 </div>
                 <span class="list-item__subtitle ui form">
-                    <textarea readonly="readonly" style="max-height: calc(100vh - 34rem);">{{ result_data.data.response }}</textarea>
+                    <textarea readonly="readonly" style="max-height: calc(100vh - 34rem);">{{ request_result.data.response }}</textarea>
                 </span>
             </div>
         </v-ons-list-item>

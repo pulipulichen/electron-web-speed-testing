@@ -1,7 +1,8 @@
-result_data = {
-    key: "result_data",
+request_result = {
+    key: "request_result",
     data: {
-        result_id: "",
+        job_id: 1,
+        request_id: 1,
         uri: "",
         url: "",
         method: "",
@@ -13,7 +14,7 @@ result_data = {
     },
     methods: {
         open_request: function () {
-            var _config = result_data.data;
+            var _config = request_result.data;
             PULI_UTILS.window_popup(_config);
         }
     }
