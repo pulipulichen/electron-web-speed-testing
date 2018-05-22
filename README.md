@@ -1,5 +1,5 @@
 # electron-loading-test
-A client loading test webpage tool
+A client loading test webpage tool.
 
 ISSUES: https://github.com/pulipulichen/electron-loading-test/issues
 

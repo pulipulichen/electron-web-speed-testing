@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<!-- Configuration Start: Please customize following configuration -->
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="phonegap-web-template.pulipuli.info" version="1.0.0">
+    
+    <name>LOADING TEST</name>
+    <description>
+        A client loading test webpage tool.
+    </description>
+    <author href="http://blog.pulipuli.info" email="pulipuli.chen@gmail.com">布丁布丁吃布丁</author>
+    <!-- Configuration End -->
+  
+    <!--  allows access to any external resource. -->
+    <access origin="*"/>
+    <allow-navigation href="*" />
+  
+    <content src="src/loading-test/index.html"/>
+    <icon src="src/loading-test/img/icon.png"/>
+  
+    <!-- https://build.phonegap.com/current-support -->
+    <preference name="phonegap-version" value="cli-6.5.0" />
+    
+    <!-- 防止太多權限 -->
+    <preference name="permissions" value="none" />
+    
+    <!-- 只保留最低的權限 -->
+    <feature name="http://api.phonegap.com/1.0/network" />
+    
+    <!-- 外掛 -->
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+    <plugin name="cordova-plugin-network-information" spec="~1.3.3" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
+</widget>
