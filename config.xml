@@ -14,7 +14,7 @@
     <access origin="*"/>
     <allow-navigation href="*" />
   
-    <content src="index.html"/>
+    <content src="loading-test/index.html"/>
     <icon src="icon.png"/>
   
     <!-- https://build.phonegap.com/current-support -->
