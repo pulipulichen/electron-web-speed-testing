@@ -14,8 +14,8 @@
     <access origin="*"/>
     <allow-navigation href="*" />
   
-    <content src="src/loading-test/index.html"/>
-    <icon src="src/loading-test/img/icon.png"/>
+    <content src="./src/loading-test/index.html"/>
+    <icon src="./src/loading-test/img/icon.png"/>
   
     <!-- https://build.phonegap.com/current-support -->
     <preference name="phonegap-version" value="cli-6.5.0" />
