@@ -28,7 +28,7 @@ main_page = {
             {
                 //"url": "http://www.google.com.tw",
                 "url": "http://blog.pulipuli.info/",
-                "method": "POST",
+                "method": "GET",
                 "data_type" : "web", //  application/json , text/html
                 "send_data": "{q: 'test'}"
             },
