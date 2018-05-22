@@ -1,1 +1,0 @@
-https://github.com/essoduke/javascript-i18n-core

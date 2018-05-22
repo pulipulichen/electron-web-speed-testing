@@ -1,11 +1,11 @@
 cd %~dp0
 cd ../dist
 
-del "..\src\webapp-wrapper-win32-x64\resources\app\cache\local_storage_loading_test_config.json"
+del "..\www\webapp-wrapper-win32-x64\resources\app\cache\local_storage_loading_test_config.json"
 del ".\electron-loading-test-dist.7z"
 
 echo Copy webapp-wrapper-win32-x64
-xcopy /s/y/D ..\src\webapp-wrapper-win32-x64\* ..\dist\electron-loading-test\webapp-wrapper-win32-x64\*
+xcopy /s/y/D ..\www\webapp-wrapper-win32-x64\* ..\dist\electron-loading-test\webapp-wrapper-win32-x64\*
 
 echo Copy loading test.exe
 copy "..\autoit\electron-loading-test.exe" .\electron-loading-test\
