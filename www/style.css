@@ -1,0 +1,129 @@
+body {
+    padding:0;
+    margin:0;
+    font-family: "微軟正黑體", "Lato",Helvetica,sans-serif;
+    background-image: url(pattern5.png);
+}
+
+#masthead {
+    margin-top: 0;
+    height: 82px;
+    background: #222222;
+    margin-bottom: 50px;
+    /*left: 0;
+    position: fixed;
+    top: 0;*/
+    width: 100%;
+    z-index: 999;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+h1.title {
+    font-size: 30px;
+    margin: 0;
+}
+
+.descriptionwrapper {
+    font-size: 14px;
+}
+
+.description {
+    margin: 0;
+}
+
+.container {
+     margin: 0 auto;
+     max-width: 790px;
+}
+
+.navbar-inner {
+    margin-left: 20px;
+    margin-top: 10px;
+    max-width: 100%;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+@media (max-width: 460px) {
+    .titlewrapper {
+        margin-top: 10px;
+    }
+    
+    .descriptionwrapper {
+        display: none;
+    }
+    
+    #footer {
+        /*display:none;*/
+    }
+}
+
+@media (min-width: 1200px) {
+    .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 1170px;
+    }
+}
+/***************************/
+
+#content {
+    display: block;
+    margin-top: 25%;
+    overflow: hidden;
+    max-width: 790px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#content .content-container {
+    margin: 20px;
+    padding: 25px;
+    /*background: white;*/
+    text-align: center;
+    border-radius: 5px;
+    /*box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;*/
+    line-height: 7vw;
+    font-size: 1em;
+}
+
+#content .content-container h1 {
+    margin-bottom: 0;
+    line-height: 1.5em;
+    font-size: 8vw;
+}
+#content .content-container div {
+    font-size: 5vw;
+}
+
+#content img {
+    max-width: 100%;
+    min-width: 150px;
+    height: auto;
+    width: 30%;
+}
+
+#content img.offline {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 0px 30px 14px rgba(255,255,255,1);
+}
+
+#footer {
+    line-height: 30px;
+    padding: 10px 0 0px 0;
+    /*background-color: #1a1a1a;*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /*color:white;*/
+    text-align: center;
+    font-size: 3vw;
+}
+
+#footer a {
+    /*color: #F57676;*/
+    color: black;
+}
