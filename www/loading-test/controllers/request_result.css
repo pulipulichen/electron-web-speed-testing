@@ -1,0 +1,13 @@
+#response_textarea {
+    max-height: calc(100vh - 38rem);
+    height: calc(100vh - 38rem);
+    min-height: 10rem;
+}
+
+#response_iframe {
+    height: calc(100vh - 38rem);
+    width: 100%;
+    border: 1px solid rgba(34,36,38,.15);
+    border-radius: .28571429rem;
+    min-height: 10rem;
+}

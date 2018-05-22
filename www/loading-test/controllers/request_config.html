@@ -1,0 +1,132 @@
+<v-ons-page>
+    <v-ons-toolbar>
+        <div class="left">
+            <v-ons-back-button>
+                {{ i18n.t('Back') }}
+            </v-ons-back-button>
+        </div>
+        <div class="center">
+            <h1> 
+                #{{ request_config.data.request_id+1 }} 
+                {{ i18n.t('Request Configuration') }}
+            </h1>
+        </div>
+        <div class="right">
+            <!--
+            <ons-toolbar-button @click='open_request'>
+                <ons-icon icon="fa-external-link-square"></ons-icon>
+                {{ i18n.t("Test Open") }}
+            </ons-toolbar-button>
+            -->
+            <button class="circular ui icon button"
+                    @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#request-configuration')">
+                <ons-icon icon="fa-question"></ons-icon>
+            </button>
+        </div>
+    </v-ons-toolbar>
+
+    <v-ons-list modifier="inset" id="request_config" class="panel">
+        <v-ons-list-item modifier="nodivider"
+                         @click="open_request">
+            <v-ons-row>
+                <v-ons-col>
+                    <v-ons-button modifier="large" class='ui primary button'>
+                        <ons-icon icon="fa-external-link-square"></ons-icon>
+                        {{ i18n.t("OPEN REQUEST") }}
+                    </v-ons-button>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
+        <v-ons-list-item>
+            <label class="left" for="request_config_url">
+                {{ i18n.t('Request URL') }}
+            </label>
+            <div class="center ui form">
+                <!--
+                <v-ons-input placeholder="Request URL" float 
+                             v-model="request_config.data.config_requests.url" 
+                             class="text-right" id="request_config_url"></v-ons-input>
+                -->
+                <input placeholder="Request URL" float 
+                             v-model="request_config.data.config_requests.url" 
+                             class="text-right" 
+                             id="request_config_url"
+                             @change="check_enable_data_type_web"/>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left" for="request_config_method">
+                {{ i18n.t('Method') }}
+            </label>
+            <div class="center ui form">
+                <!--
+                <v-ons-select v-model="request_config.data.config_requests.method" 
+                              id="request_config_method">
+                    <option value="GET">{{ i18n.t('GET') }}</option>
+                    <option value="POST">{{ i18n.t('POST') }}</option>
+                </v-ons-select>
+                -->
+                <select class='ui fluid dropdown'
+                        v-model="request_config.data.config_requests.method" 
+                        id="request_config_method">
+                    <option value="GET" selected="selected">{{ i18n.t('GET') }}</option>
+                    <option value="POST">{{ i18n.t('POST') }}</option>
+                </select>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left" for="request_config_data_type">
+                {{ i18n.t('Data Type') }}                
+            </label>
+            <div class="center ui form">
+                <!--
+                <v-ons-select v-model="request_config.data.config_requests.data_type" id="request_config_data_type">
+                    <option value="text">{{ i18n.t('Text') }}</option>
+                    <option value="json">{{ i18n.t('JSON') }}</option>
+                    <option value="web" :disabled="ELECTRON_ENABLE === false" 
+                            :title="i18n.t('Only work in Electron or same-domain.')">{{ i18n.t('Web') }}</option>
+                </v-ons-select>
+                -->
+                <select class='ui fluid dropdown'
+                        v-model="request_config.data.config_requests.data_type" 
+                        id="request_config_data_type">
+                    <option value="text" selected="selected">{{ i18n.t('Text') }}</option>
+                    <option value="json">{{ i18n.t('JSON') }}</option>
+                    <option value="web" :disabled="request_config.data.enable_data_type_web === false" 
+                            :title="i18n.t('Only work in Electron or same-domain.')">{{ i18n.t('Web') }}</option>
+                </select>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item class="request_config_data_list_item" >
+            <label class="left vertical-top" for="request_config_send_data">
+                {{ i18n.t('Send Data') }}
+            </label>
+            <div class="center ui form">
+
+                <span class="list-item__title" 
+                      v-show="PULI_UTILS.is_json(request_config.data.config_requests.send_data, false) === false">
+                    <a class="ui pointing below red basic label" 
+                       target="_blank" 
+                       v-bind:href="'https://jsonlint.com/?json='+ request_config.data.config_requests.send_data">
+                        {{ i18n.t('Send data should be valid JSON format. Check it!', false) }}
+                    </a>
+                </span>
+                <span class="list-item__title" 
+                      v-show="PULI_UTILS.is_json(request_config.data.config_requests.send_data, false)">
+                    <span class="ui pointing below basic label">
+                        {{ i18n.t('Send data is valid JSON format.', false) }}
+                    </span>
+                </span>
+                <div class="list-item__subtitle ui form">
+                    <textarea id="request_config_send_data" 
+                              v-model="request_config.data.config_requests.send_data"
+                              placeholder="Request Data"></textarea>
+                </div>
+            </div>
+        </v-ons-list-item>
+    </v-ons-list>
+</v-ons-page>

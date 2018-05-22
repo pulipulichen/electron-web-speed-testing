@@ -1,0 +1,23 @@
+#sliding_menu {
+    border-right: 1px solid #ccc;
+}
+#sliding_menu.opened {
+    box-shadow: 2px 0px 5px 0px #333;
+}
+
+#sliding_menu h1 {
+    padding-left: 13px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+#sliding_menu ons-row {
+    padding-left: 13px;
+    margin-bottom: 10px;
+}
+
+#sliding_menu a {
+    color: black;
+}
+#sliding_menu ons-list-item {
+    cursor: pointer;
+}

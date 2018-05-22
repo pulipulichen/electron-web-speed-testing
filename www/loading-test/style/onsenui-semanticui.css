@@ -1,0 +1,14 @@
+.toolbar__title h1 {
+    line-height: 44px;
+}
+
+ons-toolbar .circular.ui.icon.button {
+    width: 2.2rem !important;
+    height: 2.2rem;
+    padding: 0;
+}
+
+ons-button.ui.button ons-icon {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}

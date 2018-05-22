@@ -1,0 +1,70 @@
+<v-ons-page id="about">
+    <v-ons-toolbar>
+        <div class="left">
+            <v-ons-back-button>
+                {{ i18n.t('Back') }}
+            </v-ons-back-button>
+        </div>
+        <div class="center">
+            <h1> {{ i18n.t("About Author")}} </h1>
+        </div>
+    </v-ons-toolbar>
+
+    <div class="profile-card">
+        <img src="img/pudding-icon.svg" class="profile-image" />
+
+        <div class="profile-name">
+            布丁布丁吃布丁
+        </div>
+        <div class="profile-desc">
+            我不是在實驗室，就是在前往實驗室的路上。
+        </div>
+    </div>
+
+    <v-ons-list  modifier="inset" class='panel'>
+        <v-ons-list-item modifier="nodivider"
+                         class="cursor-pointer"
+                         @click="electron_helper.open_window('http://blog.pulipuli.info/p/donation.html', 'donate')">
+            <v-ons-row class="ui icon positive message">
+                <ons-icon icon="fa-coffee" class="icon"></ons-icon>
+                <v-ons-col>
+                    <v-ons-row class="header">
+                        {{ i18n.t("Donate ") }}
+                    </v-ons-row>
+                    <v-ons-row>
+                        {{ i18n.t("If you like this APP. Please donate for the author! Thank You!") }}
+                    </v-ons-row>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+
+        <v-ons-list-item modifier="chevron" 
+                         @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test', 'github')">
+            <div class="left icon">
+                <v-ons-icon icon="fa-github" class="list-item__icon"></v-ons-icon>
+            </div>
+            <div class="center">
+                {{ i18n.t('GitHub: Source code') }}
+            </div>
+        </v-ons-list-item>
+        <v-ons-list-item modifier="chevron"
+                         @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/issues', 'github_issues')">
+            <div class="left icon">
+                <v-ons-icon icon="fa-flag" class="list-item__icon"></v-ons-icon>
+            </div>
+            <div class="center">
+                {{ i18n.t('Issues: Error report') }}
+            </div>
+        </v-ons-list-item>
+        <v-ons-list-item modifier="chevron nodivider"
+                         class="cursor-pointer"
+                         @click="electron_helper.open_window('http://blog.pulipuli.info', 'blog')">
+            <div class="left icon">
+                <v-ons-icon icon="md-blogger" class="list-item__icon"></v-ons-icon>
+            </div>
+            <div class="center">
+                {{ i18n.t('Blog: 布丁布丁吃什麼？') }}
+            </div>
+        </v-ons-list-item>
+    </v-ons-list>
+</v-ons-page>

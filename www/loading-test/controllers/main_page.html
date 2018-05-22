@@ -1,0 +1,270 @@
+<v-ons-page id="main_page" v-bind:class="{ wait: (main_page.data.status_running)}">
+    <v-ons-toolbar>
+        <div class="left">
+            <v-ons-row>
+                <v-ons-col @click='sliding_menu.methods.open()' 
+                            class="sliding-menu-open-button">
+                    <ons-toolbar-button>
+                        <v-ons-icon icon="fa-navicon"></v-ons-icon>
+                    </ons-toolbar-button>
+                </v-ons-col>
+
+                <v-ons-col v-show="main_page.data.status_average_response_time > 0" style="margin-right: 0.5rem">
+                    <ons-icon icon="md-timer"></ons-icon>
+                    {{ main_page.data.status_average_response_time }}
+                </v-ons-col>
+                <v-ons-col v-show="main_page.data.status_passed_job > 0" style="margin-right: 0.5rem">
+                    <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+                    {{ main_page.data.status_passed_job }}
+                </v-ons-col>
+                <v-ons-col v-show="main_page.data.status_failed_job > 0" style="margin-right: 0.5rem">
+                    <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
+                    {{ main_page.data.status_failed_job }}
+                </v-ons-col>
+            </v-ons-row>
+        </div>
+
+        <div class="center">
+            <v-ons-row>
+                <v-ons-col v-show="main_page.data.status_percent > 0 && main_page.data.status_percent < 100">
+                    {{ main_page.data.status_percent }}
+                    %
+                </v-ons-col>
+                <v-ons-col v-show="main_page.data.status_percent === 0 || main_page.data.status_percent === 100">
+                    <h1>{{ i18n.t("LOADING TEST") }}</h1>
+                </v-ons-col>
+            </v-ons-row>
+        </div>
+
+
+        <div class="right">
+            <button class="circular ui icon primary button"
+                    v-if="main_page.data.status_running === false"
+                    @click="start_test">
+                <ons-icon icon="fa-play"></ons-icon>
+            </button>
+            
+            <button class="circular ui icon negative button"
+                    v-if="main_page.data.status_running === true"
+                    @click="stop_test">
+                <ons-icon icon="fa-pause"></ons-icon>
+            </button>
+            
+            <button class="circular ui icon button"
+                    @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#main-page')">
+                <ons-icon icon="fa-question"></ons-icon>
+            </button>
+            <!--
+            <ons-toolbar-button @click="results_clear" v-show="main_page.data.response_results.length > 0">
+                <ons-icon icon="fa-trash"></ons-icon>
+            </ons-toolbar-button>
+            -->
+        </div>
+    </v-ons-toolbar>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Configuration -->
+
+    <v-ons-list modifier="inset" id="panel_configuration" class="panel">
+        <v-ons-list-header id="panel_configuration_header">
+            {{ i18n.t("Job Configuration") }}
+        </v-ons-list-header>
+
+        <v-ons-list-item>
+            <v-ons-col @click="load_config">
+                <v-ons-button modifier="large" class='ui button'>
+                    <ons-icon icon="fa-folder-open"></ons-icon>
+                    {{ i18n.t("LOAD CONFIG") }}
+                </v-ons-button>
+            </v-ons-col>
+            <v-ons-col width="10px"></v-ons-col>
+            <v-ons-col @click="save_config">
+                <v-ons-button modifier="large" class='ui button'>
+                    <ons-icon icon="fa-save"></ons-icon>
+                    {{ i18n.t("SAVE CONFIG") }}
+                </v-ons-button>
+            </v-ons-col>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left" for="status_total_job">
+                {{ i18n.t("Job number") }}
+                <!--
+                <ons-icon icon="fa-question-circle"></ons-icon>
+                -->
+            </label>
+            <div class="center ui form">
+
+                <span class="list-item__title">
+                    <!--
+                    <v-ons-input placeholder="Job count" float 
+                                 v-model="main_page.data.config_job_number" 
+                                 :disabled="main_page.data.status_running"
+                                 type="number" 
+                                 class="text-right" id="status_total_job"></v-ons-input>
+                    -->
+                    <input placeholder="Job count" float 
+                           v-model="main_page.data.config_job_number" 
+                           :disabled="main_page.data.status_running"
+                           type="number" 
+                           class="text-right" id="status_total_job" />
+                </span>
+                <div class="list-item__subtitle align-right" 
+                     v-show="main_page.data.config_job_number > CONFIG.max_job_number">
+                    <span class="ui pointing red basic label">
+                        {{ i18n.t("Max job number is") }} {{ CONFIG.max_job_number }}.
+                    </span>
+                </div>
+            </div>
+
+
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left" for="switch_config_execute_mode">
+                {{ i18n.t("Execute mode") }}
+            </label>
+            <div class="center ui form">
+                <!--
+                <v-ons-select v-model="main_page.data.config_execute_mode" 
+                              id="switch_config_execute_mode"
+                              :disabled="main_page.data.status_running"
+                              class='ui fluid dropdown'>
+                    <option value="parallel">{{ i18n.t("Parallel") }}</option>
+                    <option value="queue">{{ i18n.t("Queue") }}</option>
+                </v-ons-select>
+                -->
+                <select class='ui fluid dropdown'
+                        id="switch_config_execute_mode"
+                        v-model="main_page.data.config_execute_mode"
+                        :disabled="main_page.data.status_running">
+                    <option value="parallel" selected="selected">{{ i18n.t("Parallel") }}</option>
+                    <option value="queue">{{ i18n.t("Queue") }}</option>
+                </select>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-header>
+            {{ i18n.t("Request Configuration") }}
+        </v-ons-list-header>
+        <v-ons-list-item 
+            v-for="(request, index) in main_page.data.config_requests"
+            v-bind:class="{ failed: (PULI_UTILS.is_json(request.send_data, false) === false)}">
+            <v-ons-col width="3rem">
+                # {{ index+1 }}
+            </v-ons-col>
+            <v-ons-col class='base-url ui form'>
+                <!--
+                <v-ons-input placeholder="http://localhost/" float 
+                             v-model="request.url" id="base_url"
+                             :disabled="main_page.data.status_running"></v-ons-input>
+                -->
+                <input placeholder="http://localhost/" float 
+                             v-model="request.url" id="base_url"
+                             :disabled="main_page.data.status_running" />
+            </v-ons-col>
+            <v-ons-col class="text-right" 
+                       width="8rem"
+                       v-show="main_page.data.status_running === false">
+                <v-ons-button modifier="quiet" @click="add_request(index)">
+                    <ons-icon icon="md-plus-circle"></ons-icon>
+                </v-ons-button>
+                <v-ons-button modifier="quiet" @click="remove_request(index)">
+                    <ons-icon icon="md-minus-circle"></ons-icon>
+                </v-ons-button>
+                <v-ons-button modifier="quiet" @click="nav_request_config(index)">
+                    <ons-icon icon="fa-cog"></ons-icon>
+                </v-ons-button>
+            </v-ons-col>
+        </v-ons-list-item>
+
+
+
+        <v-ons-list-item v-if="main_page.data.status_running === false" @click="start_test">
+            <v-ons-button modifier="large" class='ui primary button'>
+                <ons-icon icon="fa-play-circle"></ons-icon>
+                {{ i18n.t("START TEST") }}
+            </v-ons-button>
+        </v-ons-list-item>
+        <v-ons-list-item v-if="main_page.data.status_running === true" @click="stop_test">
+            <v-ons-button modifier="large" class='ui negative button'>
+                <ons-icon icon="fa-pause"></ons-icon>
+                {{ i18n.t("STOP TEST") }}
+            </v-ons-button>
+        </v-ons-list-item>
+    </v-ons-list>
+
+    <v-ons-list modifier="inset" v-show="main_page.data.response_results.length" class="panel panel_results" id="panel_results">
+        <v-ons-list-header id="panel_results_header">
+            {{ i18n.t("Job Results") }}
+        </v-ons-list-header>
+
+        <v-ons-list-item v-show="main_page.data.response_results.length > 0 && main_page.data.status_failed_job > 0">
+            <v-ons-row class="ui icon negative message">
+                <ons-icon icon="fa-exclamation-triangle" class="icon"></ons-icon>
+                <v-ons-col>
+                    <v-ons-row class="header">
+                        {{ i18n.t("Failed: ") }}
+                        {{ main_page.data.status_failed_job }}
+                    </v-ons-row>
+                    <v-ons-row>
+                        {{ i18n.t("Opss! Something wrong!") }}
+                    </v-ons-row>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
+        <v-ons-list-item v-show="main_page.data.response_results.length > 0 && main_page.data.status_failed_job === 0">
+            <v-ons-row class="ui icon message" :class="{'negative': (main_page.data.status_average_response_time > 10) }">
+                <ons-icon icon="md-timer" class="icon"></ons-icon>
+                <v-ons-col>
+                    <v-ons-row class="header">
+                        {{ i18n.t("Avg. Response Time: ") }}
+                        {{ main_page.data.status_average_response_time }}
+                    </v-ons-row>
+                    <v-ons-row>
+                        {{ main_page.data.status_average_response_time_comment }}
+                    </v-ons-row>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+        
+        
+        <v-ons-list-item v-show="main_page.data.status_running === false" 
+                         modifier="nodivider"
+                         @click="save_response_results">
+            <v-ons-row>
+                <v-ons-col>
+                    <v-ons-button modifier="large" class='ui button'>
+                        <ons-icon icon="fa-save"></ons-icon>
+                        {{ i18n.t("SAVE RESULTS") }}
+                    </v-ons-button>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+
+        <v-ons-list-item v-for="(result, index) in main_page.data.response_results" 
+                         class="cursor-pointer" v-bind:class="{ failed: (result.passed === false)}"
+                         @click="nav_job_result(index)"
+                         modifier="chevron">
+            <v-ons-col width="4rem">
+                # {{ index + 1 }}
+            </v-ons-col>
+            <v-ons-col width="5rem">
+                <ons-icon icon="md-timer"></ons-icon>
+                {{ result.response_time }}
+            </v-ons-col>
+            <v-ons-col width="4rem">
+                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+                {{ result.passed_count }}
+            </v-ons-col>
+            <v-ons-col width="4rem">
+                <ons-icon icon="fa-exclamation-triangle"></ons-icon>
+                {{ result.failed_count }}
+            </v-ons-col>
+            <v-ons-col class="text-overflow-ellipsis">
+                {{ result.failed_message }}
+            </v-ons-col>
+        </v-ons-list-item>
+    </v-ons-list>
+</v-ons-page>

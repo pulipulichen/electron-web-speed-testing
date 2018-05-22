@@ -1,0 +1,40 @@
+#main_page h1 {
+    font-size: 1em;
+    margin: 0;
+    font-weight: bold;
+}
+
+#main_page .toolbar__left {
+    padding-left: 10px;
+}
+
+#main_page #base_url {
+    width: 100%;
+}
+
+#main_page ons-toolbar-button {
+    cursor: pointer;
+}
+
+
+/* --------------------------------------- */
+
+#main_page .text-right, #main_page .text-right input {
+    text-align: right;
+}
+
+#main_page .text-center, #main_page .text-center input {
+    text-align: center;
+}
+
+#main_page.wait, 
+#main_page.wait ons-toolbar, 
+#main_page.wait ons-list-header, 
+#main_page.wait ons-list-item,
+#main_page.wait ons-list-item label {
+    cursor: wait;
+}
+
+ons-splitter-content#main_content.split .sliding-menu-open-button {
+    display: none;
+}

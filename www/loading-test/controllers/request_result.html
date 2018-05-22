@@ -1,0 +1,155 @@
+<v-ons-page id="request_result">
+    <v-ons-toolbar>
+        <div class="left">
+            <v-ons-back-button>
+                {{ i18n.t('Back') }}
+            </v-ons-back-button>
+        </div>
+        <div class="center" v-bind:title="request_result.data.url">
+            <h1> 
+                <ons-icon icon="fa-check-circle" 
+                          style="color: green" 
+                          v-show="request_result.data.passed"></ons-icon>
+                <ons-icon icon="fa-exclamation-triangle" 
+                          style="color: red" 
+                          v-show="request_result.data.passed === false"></ons-icon>
+                #{{ request_result.data.job_id+1 }}-{{ request_result.data.request_id+1 }}
+                {{ request_result.data.uri }}
+            </h1>
+        </div>
+        <div class="right">
+            <!--
+            <ons-toolbar-button @click='open_request'>
+                <ons-icon icon="fa-external-link-square"></ons-icon>
+                {{ i18n.t("Test Open") }}
+            </ons-toolbar-button>
+            -->
+            <button class="circular ui icon primary button"
+                    v-show="main_page.data.status_running === false"
+                    @click="edit_request_config">
+                <ons-icon icon="fa-cog"></ons-icon>
+            </button>
+            <button class="circular ui icon button"
+                    @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help#response-result')">
+                <ons-icon icon="fa-question"></ons-icon>
+            </button>
+        </div>
+    </v-ons-toolbar>
+
+    <v-ons-list modifier="inset" id="job_result" class="panel panel_results">
+        <v-ons-list-item modifier="nodivider"
+                         @click="open_request">
+            <v-ons-row>
+                <v-ons-col>
+                    <v-ons-button modifier="large" class='ui primary button'>
+                        <ons-icon icon="fa-external-link-square"></ons-icon>
+                        {{ i18n.t("OPEN REQUEST") }}
+                    </v-ons-button>
+                </v-ons-col>
+            </v-ons-row>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("URL") }}
+            </label>
+            <div class="center selectable">
+                {{ request_result.data.url }}
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Method") }}
+            </label>
+            <div class="center">
+                {{ request_result.data.method }}
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left vertical-top">
+                {{ i18n.t("Send Data") }}
+            </label>
+            <div class="center">
+                <div class="list-item__title ui form">
+                    <textarea readonly="readonly" style="height: 3rem;">{{ request_result.data.send_data }}</textarea>
+                </div>
+                <span class="list-item__subtitle" 
+                      v-show="PULI_UTILS.is_json(request_result.data.send_data, false) === false">
+                    <a class="ui pointing red basic label"
+                       target="_blank" 
+                       v-bind:href="'https://jsonlint.com/?json='+ request_result.data.send_data">
+                        {{ i18n.t("Send data should be valid JSON format. Check it!", false) }}
+                    </a>
+                </span>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Data Type") }}
+            </label>
+            <div class="center">
+                {{ i18n.t(request_result.data.data_type) }}
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Status") }}
+            </label>
+            <div class="center selectable">
+                <div class="list-item__title selectable">
+                    <ons-icon icon="fa-check-circle" 
+                              style="color: green" 
+                              v-show="request_result.data.passed"></ons-icon>
+                    <ons-icon icon="fa-exclamation-triangle" 
+                              style="color: red" 
+                              v-show="request_result.data.passed === false"></ons-icon>
+                    {{ request_result.data.status }}
+                </div>
+                <span class="list-item__subtitle selectable" 
+                      v-show="PULI_UTILS.is_int(request_result.data.status)">
+                    {{ status_code(request_result.data.status) }}
+                </span>
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Response Time") }}
+            </label>
+            <div class="center selectable">
+                {{ request_result.data.response_time }}
+                {{ i18n.t("second") }}
+
+            </div>
+        </v-ons-list-item>
+
+        <v-ons-list-item>
+            <label class="left">
+                {{ i18n.t("Response") }}
+            </label>
+            <div class="center selectable">
+                <div class="list-item__title" 
+                     v-show="request_result.data.data_type === 'json' && PULI_UTILS.is_json(request_result.data.response) === false">
+                    <a class="ui pointing below red basic label" 
+                       target="_blank" 
+                       v-bind:href="'https://jsonlint.com/?json='+ request_result.data.response">
+                        {{ i18n.t("Responsed text is invalid JSON format. Check it!", false) }}
+                    </a>
+                </div>
+                <span class="list-item__subtitle ui form">
+                    <textarea readonly="readonly" 
+                              v-show="request_result.data.data_type === 'text' || request_result.data.data_type === 'json'"
+                              id="response_textarea">{{ request_result.data.response }}</textarea>
+                    <iframe id='response_iframe'
+                            v-show="request_result.data.data_type === 'web'"
+                            style="max-height: calc(100vh - 36rem);"
+                            ></iframe>
+                </span>
+            </div>
+        </v-ons-list-item>
+    </v-ons-list>
+</v-ons-page>

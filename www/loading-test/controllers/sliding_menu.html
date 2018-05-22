@@ -1,0 +1,79 @@
+<v-ons-splitter-side
+    width="300px" collapse="portrait" side="left"
+    id="sliding_menu"
+    swipeable
+    v-bind:class="{opened: sliding_menu.data.opened}"
+    @modechange="sliding_menu.methods.modechange(event.mode)"
+    :open.sync="sliding_menu.data.opened">
+    <v-ons-page>
+        <h1>
+            <img src="img/icon.png" style="height: 25px; width: auto;padding-top: 2px;" />
+            {{ i18n.t("LOADING TEST") }}
+        </h1>
+        <v-ons-row class="invisible" 
+                   :class="{'visible': (main_page.data.status_average_response_time > 0)}">
+            <v-ons-col width='2rem'>
+                <ons-icon icon="md-timer"></ons-icon>
+            </v-ons-col>
+            <v-ons-col>
+                {{ i18n.t("Avg. Response Time: ") }}
+                {{ main_page.data.status_average_response_time }}
+            </v-ons-col>
+        </v-ons-row>
+        
+        <v-ons-row>
+            <v-ons-col width='2rem'>
+                <ons-icon icon="fa-check-circle" style="color: green"></ons-icon>
+            </v-ons-col>
+            <v-ons-col>
+                {{ i18n.t("Passed: ") }}
+                {{ main_page.data.status_passed_job }}
+            </v-ons-col>
+        </v-ons-row>
+        
+        <v-ons-row>
+            <v-ons-col width='2rem'>
+                <ons-icon icon="fa-exclamation-triangle" style="color: red"></ons-icon>
+            </v-ons-col>
+            <v-ons-col>
+                {{ i18n.t("Failed: ") }}
+                {{ main_page.data.status_failed_job }}
+            </v-ons-col>
+        </v-ons-row>
+        <v-ons-list>
+            <!--
+          <v-ons-list-item tappable modifier="chevron" @click="jump_to_config">
+            <div class="center">Job Configuration</div>
+          </v-ons-list-item>
+          <v-ons-list-item tappable modifier="chevron" 
+                           @click="jump_to_results"
+                           v-show="main_page.data.response_results.length">
+            <div class="center">Results</div>
+          </v-ons-list-item>
+            -->
+            <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.jump_to_config">
+                <div class="center">
+                    {{ i18n.t('Configuration') }}
+                </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.jump_to_results">
+                <div class="center">
+                    {{ i18n.t('Results') }}
+                </div>
+            </v-ons-list-item>
+            
+            <v-ons-list-item tappable modifier="chevron" 
+                             @click="electron_helper.open_window('https://github.com/pulipulichen/electron-loading-test/wiki/Help')">
+                {{ i18n.t('Help') }}
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" @click="main_page.methods.nav_about()">
+                <!--
+                <a class="center" href="https://github.com/pulipulichen/electron-loading-test" target="_blank">
+                    About
+                </a>
+                -->
+                {{ i18n.t('About') }}
+            </v-ons-list-item>
+        </v-ons-list>
+    </v-ons-page>
+</v-ons-splitter-side>

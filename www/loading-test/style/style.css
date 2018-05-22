@@ -1,0 +1,90 @@
+ons-toolbar h1 {
+    font-size: 1em;
+    margin: 0;
+    font-weight: bold;
+}
+ons-toolbar ons-toolbar-bottom {
+    cursor: pointer;
+}
+
+ons-list-item[modifier="chevron"] {
+    cursor: pointer;
+}
+
+ons-list-item label.vertical-top {
+    display: inline;
+    padding-top: 1rem;
+}
+
+.panel {
+    margin-top: 0.5em !important;
+}
+
+.cursor-pointer, ons-button {
+    cursor: pointer !important;
+}
+
+ons-list-item ons-input {
+    width: 100%;
+}
+
+ons-list-item ons-select {
+    text-align: right;
+}
+
+ons-list-item ons-select > select {
+    width: auto;
+}
+
+ons-list-item.failed {
+    background-color: #F3969A;
+    color: white;
+}
+ons-list-item.failed .button--quiet,
+ons-list-item.failed input,
+ons-list-item.failed ons-icon,
+ons-list-item.failed input:disabled {
+    color: white !important;
+}
+
+ons-list-item.failed.list-item--chevron:before {
+    border-color: white;
+}
+
+ons-list-item ons-select {
+    width: 100%;
+}
+
+.selectable {
+    -webkit-user-select: text !important;
+    cursor: auto !important;
+}
+
+.vertical-top {
+    vertical-align: top !important;
+}
+
+ons-list-item > .left {
+    border-bottom: 1px solid #ccc;
+    width: 9rem;
+}
+
+ons-list-item > .left.icon {
+    width: auto;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.invisible.visible {
+    visibility: visible;
+}
+
+.text-overflow-ellipsis {
+    text-overflow: ellipsis;
+}
