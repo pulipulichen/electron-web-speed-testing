@@ -1,5 +1,12 @@
 vue_create_event = function () {
     document.title = i18n.t("LOADING TEST");
+
+    //xlsx_helper_open_url("tmp2/aaaaloading_test_config_20180531_2044.ods", function (_d) {
+    //    console.log(_d);
+    //});
+			//xw(data, process_wb, function (d) {
+                        //    console.log(d);
+                        //});
     
     // ------------------
     // 以下是測試
