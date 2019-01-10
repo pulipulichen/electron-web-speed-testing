@@ -18,7 +18,8 @@
     <icon src="icon.png"/>
   
     <!-- https://build.phonegap.com/current-support -->
-    <preference name="phonegap-version" value="cli-6.5.0" />
+    <!-- <preference name="phonegap-version" value="cli-6.5.0" /> -->
+    <preference name="phonegap-version" value="cli-8.0.0" />
     
     <!-- 防止太多權限 -->
     <preference name="permissions" value="none" />

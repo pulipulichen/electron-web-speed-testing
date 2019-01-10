@@ -58,6 +58,8 @@ http://qqboxy.blogspot.com/2016/06/electron-javascript-windows.html
 # Reference
 - Hourglass Icon http://www.iconninja.com/hourglass-time-timer-icon-5949
 - https://gist.github.com/svagi/aa59e96e4b6a9885f28e Universal JSON dictionary of HTTP status codes. http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html 
+- Privacy Policy Generator: https://www.freeprivacypolicy.com/
+- Privacy Policy: https://pulipulichen.github.io/electron-loading-test/privacy-policy.html
 
 # OnsenUI ICON
 - fa https://fontawesome.com/icons?d=gallery
