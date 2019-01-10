@@ -25,6 +25,7 @@ main_page = {
                 "data_type" : "web", //  text, json , web
                 "send_data": '{test:true}'
             },
+            /*
             {
                 //"url": "http://www.google.com.tw",
                 "url": "http://blog.pulipuli.info/",
@@ -32,6 +33,7 @@ main_page = {
                 "data_type" : "web", //  application/json , text/html
                 "send_data": "{q: 'test'}"
             },
+            */
         ],
         //config_base_url: "http://localhost/?a=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         
