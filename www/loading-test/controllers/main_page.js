@@ -19,7 +19,7 @@ main_page = {
                 //"url": "http://localhost/nodejs-projects/electron-loading-test/[test]/relative.html",
                 //"url": "http://blog.pulipuli.info/",
                 //"url": "http://dlll.nccu.edu.tw/",
-                "url": "http://localhost/",
+                "url": "http://blog.pulipuli.info/",
                 
                 "method": "GET", // GET, POST
                 "data_type" : "web", //  text, json , web

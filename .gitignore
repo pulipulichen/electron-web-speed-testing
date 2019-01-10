@@ -6,3 +6,4 @@
 /node_modules/*
 /www/loading-test/tmp/
 /www/loading-test/tmp2/
+/www/npm-debug.log*

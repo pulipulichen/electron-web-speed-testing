@@ -1,5 +1,5 @@
 CONFIG = {
-    version: "20180521",
+    version: "20190110",
     locate: "zh-tw",
     max_job_number: 100,
     max_request_number: 15,
