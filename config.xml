@@ -3,7 +3,7 @@
 <!-- Configuration Start: Please customize following configuration -->
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="phonegap-loading-test.pulipuli.info" version="1.0.0">
     
-    <name>LOADING TEST</name>
+    <name>WEB SPEED TESTING</name>
     <description>
         A client loading test webpage tool.
     </description>
