@@ -147,7 +147,7 @@ PULI_UTILS.scroll_to = function (_id, _callback) {
         }
         else {
             var _target = document.getElementById(_id);
-            document.getElementById('panel_results_header').scrollIntoView({
+            document.getElementById(_id).scrollIntoView({
                 behavior: 'smooth'
             });
             if (typeof(_callback) === "function") {

@@ -25,6 +25,8 @@ electron_helper = {
         var _callback_id = "retrieve_web_callback_" + this.create_uuid();
         
         ipcRenderer.on(_callback_id, function (event, _response, _status){
+            //console.log(_url)
+            //console.log(_response)
             _callback(_response, _status);
         });
         

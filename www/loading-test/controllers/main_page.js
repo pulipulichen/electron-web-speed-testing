@@ -147,6 +147,7 @@ main_page = {
             };
             var _failed_url_list = [];
             
+            //var _tmp_lock_failed_url = null
             var _loop = function (_j) {
                 if (main_page.data.status_running === false) {
                     return;
@@ -154,18 +155,36 @@ main_page = {
                 
                 //console.log(_j);
                 if (_j < _requests_count) {
+                    // 還在要執行的範疇內
+                  
                     var _config = _config_requests[_j];
                     var _request_callback = function (_result) {
-                        _results.request_results.push(_result);
+                        if (typeof(_result) === 'object' 
+                                && typeof(_result.status) !== 'undefined') {
+                          //setTimeout(function () {
+                          //  _loop(_j+1)
+                          //}, 0)
+                          //if (_tmp_lock_failed_url !== _result.url) {
+                            _results.request_results.push(_result);
+                          //}
+                          //else {
+                          //  _tmp_lock_failed_url = null
+                          //}
+                          //return
+                        }
+                        
                         //console.log(_result);
                         if (_result.passed === true) {
                             _results.passed_count++;
                         }
                         else {
                             _results.failed_count++;
-                            _failed_url_list.push(main_page.methods.shrink_uri(_config.url));
+                            _failed_url_list.push(main_page.methods.shrink_uri(_result.url));
+                            //_tmp_lock_failed_url = _result.url
                         }
-                        _loop(_j+1);
+                        setTimeout(function () {
+                          _loop(_j+1)
+                        }, 0)
                     };
                     
                     var _data_type = _config.data_type;
@@ -195,14 +214,14 @@ main_page = {
                         }
                     }
                 }
-                else {
+                else if (_j === _requests_count) {
                     var _end_time = PULI_UTILS.get_current_second();
                     var _response_time = Math.floor(_end_time - _start_time) / 1000;
                     _results.response_time = _response_time;
                     _results.passed = (_results.passed_count === _requests_count);
                     
                     var _first_result = _results.request_results[0];
-                    _results.uri = _first_result.uri;
+                    _results.uri = _first_result.uri; // 這個是uri
                     _results.url = _first_result.url;
                     
                     _results.failed_message = _failed_url_list.join(", ");
@@ -210,7 +229,9 @@ main_page = {
                     _callback(_results);
                 }
             };
-            _loop(0);
+            setTimeout(function () {
+              _loop(0)
+            }, 0)
         },
 
         run_text_request: function (_config, _callback) {
@@ -483,7 +504,7 @@ main_page = {
             
             _avg = _avg / main_page.data.config_requests.length;
             
-            main_page.data.status_average_response_time = _avg;
+            main_page.data.status_average_response_time = main_page.methods.float_style(_avg);
             
             var _comment = "Bad. The system is failed to keep the user.";
             if (_avg <= 0.1) {
@@ -741,6 +762,11 @@ main_page = {
             var _filename = 'loading_test_response_' + PULI_UTILS.get_yyyymmdd_hhmm() + ".ods";
             
             xlsx_helper_download("ods", _filename, _output);
+        },
+        
+        float_style: function (_float) {
+          var _setting = 1000
+          return Math.floor(_float * _setting) / _setting
         }
     }
 };

@@ -174,13 +174,28 @@ ipcMain.on('retrieve_web', (event, _url, _method, _send_data, _referer, _callbac
     }
     
     _win.loadURL(_url, _load_url_setting);
+    var _loaded = false
+    
     _win.webContents.once('did-finish-load', function () {
+        if (_loaded === true) {
+          return
+        }
+        else {
+          _loaded = true
+        }
+      
         _win.webContents.executeJavaScript('document.querySelector("html").innerHTML', true, result => {
             event.sender.send(_callback_id, result, 200);
         });
     });
     
     _win.webContents.once('did-fail-load', function () {
+        if (_loaded === true) {
+          return
+        }
+        else {
+          _loaded = true
+        }
         event.sender.send(_callback_id, "", "Load failed.");
     });
 });
