@@ -1,6 +1,7 @@
 # electron-loading-test
 A client loading test webpage tool.
 
+GitHub: https://github.com/pulipulichen/electron-loading-test
 ISSUES: https://github.com/pulipulichen/electron-loading-test/issues
 
 # 編譯檔成果下載
