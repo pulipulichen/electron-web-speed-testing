@@ -93,10 +93,11 @@
                 <select class='ui fluid dropdown'
                         v-model="request_config.data.config_requests.data_type" 
                         id="request_config_data_type">
-                    <option value="text" selected="selected">{{ i18n.t('Text') }}</option>
-                    <option value="json">{{ i18n.t('JSON') }}</option>
                     <option value="web" :disabled="request_config.data.enable_data_type_web === false" 
                             :title="i18n.t('Only work in Electron or same-domain.')">{{ i18n.t('Web') }}</option>
+                    <option value="text" selected="selected">{{ i18n.t('Text') }}</option>
+                    <option value="json">{{ i18n.t('JSON') }}</option>
+                    
                 </select>
             </div>
         </v-ons-list-item>

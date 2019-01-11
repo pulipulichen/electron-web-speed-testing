@@ -46,6 +46,6 @@ status_code = function (_status) {
         return STATUS_CODE[_status];
     }
     else {
-        return _status;
+        return i18n.t(_status);
     }
 };

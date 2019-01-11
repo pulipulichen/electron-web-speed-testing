@@ -47,7 +47,7 @@ main_page = {
             //var _url = main_page_vm.config_base_url;
             var _total_job = main_page.data.config_job_number;
             if (_total_job > CONFIG.max_job_number) {
-                vm.$ons.notification.alert(i18n.t('Max job number is ') + CONFIG.max_job_number);
+                vm.$ons.notification.alert(i18n.t('Max job number is') + ' ' + CONFIG.max_job_number);
                 return;
             }
             
@@ -273,8 +273,12 @@ main_page = {
                 if (_config.data_type === "json") {
                     if (PULI_UTILS.is_json(_url_return, true) === false) {
                         _passed = false;
-                        _status = "Responsed data type is not JSON";
+                        _status = i18n.t("Responsed data type is not JSON");
                     }
+                }
+                
+                if (_status === 'Load failed.') {
+                  _status = i18n.t('Load failed.')
                 }
                 
                 var _end_time = PULI_UTILS.get_current_second();
@@ -327,7 +331,7 @@ main_page = {
             var _response = "";
             
             var _timeout_timer = setTimeout(function () {
-                _status = "Timeout";
+                _status = i18n.t("Timeout");
                 _loading = false;
                 _complete();
             }, CONFIG.web_load_limit * 1000);
@@ -454,6 +458,10 @@ main_page = {
                 var _uri = main_page.methods.shrink_uri(_url);
                 
                 var _passed = (_status === 200);
+                
+                if (_status === 'Load failed.') {
+                  _status = i18n.t('Load failed.')
+                }
                 
                 var _result = {
                     response_time: _response_time,

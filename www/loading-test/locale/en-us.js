@@ -10,5 +10,5 @@
     "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     "longDays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     
-    "LOADING TEST": "LOADING TEST",
+    "LOADING TEST": "WEB SPEED TEST",
 }
